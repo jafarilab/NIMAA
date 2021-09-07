@@ -1,0 +1,47 @@
+Package: NIMAA
+Title: Nominal Data Mining Analysis
+Version: 0.1.0
+Authors@R: c(
+ person("Mohieddin", "Jafari", role = c("aut"),email = "mohieddin.jafari@helsinki.fi"),
+ person("Cheng", "Chen", role = c("aut","cre"),email = "cheng.chen@helsinki.fi")
+ )
+Description: Using bipartite graphs for nominal data mining, selecting sub-matrices with no missing values inside, then using the matrices to generate a bipartite graph and clustering on two projections. In addition, it can also impute the missing data, validate and score the imputations according to the previous clustering results.
+License: GPL (>= 3)
+URL: https://github.com/chendebiao/NIMAA
+BugReports: https://github.com/chendebiao/NIMAA/issues
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Suggests: 
+    knitr,
+    utils,
+    rmarkdown,
+    htmltools,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    plotly,
+    tidyr,
+    bipartite,
+    crayon,
+    dplyr,
+    ggplot2,
+    igraph,
+    purrr,
+    skimr,
+    bnstruct,
+    RColorBrewer,
+    fpc,
+    mice,
+    missMDA,
+    networkD3,
+    scales,
+    softImpute,
+    tibble,
+    tidytext,
+    visNetwork,
+    stats
+VignetteBuilder: knitr
+Depends: 
+    R (>= 3.5.0)
