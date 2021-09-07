@@ -17,8 +17,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/NIMAA)](https://cran.r-project.org/package=NIMAA)
-[![GitHub Release](https://img.shields.io/github/release/chendebiao/NIMAA?style=flat)](https://github.com/chendebiao/NIMAA/releases)
-[![Github All Releases](https://img.shields.io/github/downloads/chendebiao/NIMAA/total.svg?style=flat)](https://github.com/chendebiao/NIMAA)
+[![GitHub Release](https://img.shields.io/github/release/jafarilab/NIMAA?style=flat)](https://github.com/jafarilab/NIMAA/releases)
+[![Github All Releases](https://img.shields.io/github/downloads/jafarilab/NIMAA/total.svg?style=flat)](https://github.com/jafarilab/NIMAA)
 <!-- badges: end -->
 
 The goal of NIMAA is to use bipartite graphs for nominal data mining. 
@@ -37,7 +37,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("chendebiao/NIMAA")
+devtools::install_github("jafarilab/NIMAA")
 ```
 ## Example
 

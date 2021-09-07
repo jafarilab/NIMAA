@@ -1,16 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# NIMAA <a href='https://github.com/chendebiao/NIMAA'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# NIMAA <a href='https://github.com/jafarilab/NIMAA'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/NIMAA)](https://cran.r-project.org/package=NIMAA)
 [![GitHub
-Release](https://img.shields.io/github/release/chendebiao/NIMAA?style=flat)](https://github.com/chendebiao/NIMAA/releases)
+Release](https://img.shields.io/github/release/jafarilab/NIMAA?style=flat)](https://github.com/jafarilab/NIMAA/releases)
 [![Github All
-Releases](https://img.shields.io/github/downloads/chendebiao/NIMAA/total.svg?style=flat)](https://github.com/chendebiao/NIMAA)
+Releases](https://img.shields.io/github/downloads/jafarilab/NIMAA/total.svg?style=flat)](https://github.com/jafarilab/NIMAA)
 <!-- badges: end -->
 
 The goal of NIMAA is to use bipartite graphs for nominal data mining.
@@ -35,7 +35,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("chendebiao/NIMAA")
+devtools::install_github("jafarilab/NIMAA")
 ```
 
 ## Example
