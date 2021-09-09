@@ -34,16 +34,14 @@ package \code{softImpute}, 'CA', 'PCA' and 'FAMD' are from package
 \code{missMDA}, others are from the famous \code{mice}.
 }
 \examples{
-\dontrun{
-# load beatAML data
-data <- beatAML
+# load part of beatAML data
+data <- NIMAA::beatAML[1:10000,]
 
 # convert to incidence matrix
-inc_mat <- plotINput(data)
+inc_mat <- el2IncMatrix(data, print_skim = FALSE)
 
 # impute
 imputeMissingValue(inc_mat)
-}
 }
 \seealso{
 \code{\link[bnstruct]{knn.impute}},

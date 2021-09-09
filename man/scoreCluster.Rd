@@ -23,29 +23,26 @@ distance matrix to analyze, mainly using the cluster.stats function in the
 fpc package, in addition, it also calculates a ‘coverage’ indicator.
 }
 \examples{
-\dontrun{
-# load the beatAML data and get the incidence matrix
-beatAML_data <- NIMAA::beatAML
-beatAML_incidence_matrix <- plotInput(beatAML_data)
+# load part of the beatAML data
+data <- NIMAA::beatAML[1:1000,]
+# convert to incidence matrix
+inc_mat <- el2IncMatrix(data, print_skim = FALSE)
 
-# extract the sub-matrix
-sub_matrices <- extractSubMatrix(
-beatAML_incidence_matrix,
-shape = c("Square") # the shapes you want to extract
+# run findCluster() to do clustering
+cls <- findCluster(
+  inc_mat,
+  dim = 1,
+  method = "infomap",
+  normalization = FALSE,
+  rm_weak_edges = TRUE,
+  comparison = FALSE
 )
-
-# do clustering
-cls2 <- findCluster(
-sub_matrices$Rectangular_element_max, # the sub-matrix
-dim = 2 # set to 2 to use the other part of graph
-)
-
 # get the scoring result
-scoring_result <- scoreCluster(
-community = cls2$infomap,
-graph = cls2$graph,
-distance_matrix = cls2$distance_matrix)
-}
+scoreCluster(
+  community = cls$infomap,
+  graph = cls$graph,
+  distance_matrix = cls$distance_matrix
+)
 }
 \seealso{
 \code{\link[fpc]{cluster.stats}}, \code{\link{findCluster}}

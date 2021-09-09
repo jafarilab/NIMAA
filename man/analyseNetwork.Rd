@@ -24,14 +24,12 @@ analyze the input \href{https://igraph.org/r/}{igraph} graph object, and
 summarize the indices as a result.
 }
 \examples{
-\dontrun{
-  # generate a graph
-  g <- igraph::make_graph(c(1,2,3,4,1,3),directed = F)
-  V(g)$name <- c('n1','n2','n3','n4')
+# generate a graph
+g <- igraph::make_graph(c(1, 2, 3, 4, 1, 3), directed = FALSE)
+igraph::V(g)$name <- c("n1", "n2", "n3", "n4")
 
-  # run analyseNetwork
-  analyseNetwork(g)
-}
+# run analyseNetwork
+analyseNetwork(g)
 }
 \seealso{
 \code{\link[igraph]{vcount}}, \code{\link[igraph]{ecount}},

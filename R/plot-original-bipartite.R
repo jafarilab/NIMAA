@@ -33,16 +33,14 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' # load the beatAML data
-#' beatAML_data <- NIMAA::beatAML
+#' # load part of the beatAML data
+#' beatAML_data <- NIMAA::beatAML[1:1000,]
 #'
 #' # plot beatAML data and convert to incidence matrix
-#' beatAML_incidence_matrix <- plotInput(beatAML_data)
+#' beatAML_incidence_matrix <- el2IncMatrix(beatAML_data, print_skim = FALSE)
 #'
 #' # plot with the vertex label showing
-#' plotBipartite(inc_mat = beatAML_incidence_matrix,vertex.label.display = T)
-#' }
+#' plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.display = TRUE)
 plotBipartite <- function(inc_mat, dim = 0, verbose = FALSE,
                           vertex.label.display = FALSE,
                           layout = layout.bipartite,
@@ -52,7 +50,6 @@ plotBipartite <- function(inc_mat, dim = 0, verbose = FALSE,
                           vertex.size = 4,
                           edge.width = 0.4,
                           edge.color = "pink") {
-
   G <- createBipartiteGrpahWithigraph(inc_mat)
   igraph::V(G)$shape <- vertex.shape[igraph::V(G)$type + 1]
   igraph::V(G)$color <- vertix.color[igraph::V(G)$type + 1]

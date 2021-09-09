@@ -36,15 +36,14 @@ right parts are two projections, and in each projection, a node corresponds
 to a group in the clustering result.
 }
 \examples{
-\dontrun{
-# load the beatAML data and get the incidence matrix
-beatAML_data <- NIMAA::beatAML
-beatAML_incidence_matrix <- plotInput(beatAML_data)
+# load part of the beatAML data and get the incidence matrix
+beatAML_data <- NIMAA::beatAML[1:1000,]
+beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
 
 # extract the sub-matrix
 sub_matrices <- extractSubMatrix(
 beatAML_incidence_matrix,
-shape = c("Square") # the shapes you want to extract
+shape = c("Rectangular_element_max") # the shapes you want to extract
 )
 
 # do clustering
@@ -53,18 +52,17 @@ sub_matrices$Rectangular_element_max, # the sub-matrix
 dim = 1
 )
 
-#' cls2 <- findCluster(
+cls2 <- findCluster(
 sub_matrices$Rectangular_element_max, # the sub-matrix
 dim = 2
 )
 
 visualClusterInBipartite(
 data = beatAML_data,
-community_left = cls$leading_eigen,
-community_right = cls2$fast_greedy,
+community_left = cls2$leading_eigen,
+community_right = cls$fast_greedy,
 name_left = 'patient_id',
 name_right = 'inhibitor')
-}
 }
 \seealso{
 \code{\link[plotly]{plot_ly}}

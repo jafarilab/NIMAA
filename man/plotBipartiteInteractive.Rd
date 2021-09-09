@@ -24,15 +24,13 @@ graph layout, in which two parts use different colors and shapes to
 represent nodes.
 }
 \examples{
-\dontrun{
-# load the beatAML data
-beatAML_data <- NIMAA::beatAML
+# load part of the beatAML data
+beatAML_data <- NIMAA::beatAML[1:1000,]
 
 # plot beatAML data and convert to incidence matrix
-beatAML_incidence_matrix <- plotInput(beatAML_data)
+beatAML_incidence_matrix <- el2IncMatrix(beatAML_data, print_skim = FALSE)
 
 plotBipartiteInteractive(inc_mat = beatAML_incidence_matrix)
-}
 }
 \seealso{
 \code{\link[visNetwork]{visNetwork}}

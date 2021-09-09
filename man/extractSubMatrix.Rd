@@ -67,11 +67,20 @@ missing values) in the four dimensions, output the result and print the
 visualization.
 }
 \examples{
-\dontrun{
-  data <- NIMAA::beatAML
-  inc_mat <- NIMAA::el2IncMatrix(data,print_skim = F)
-  sub_matrices <- extractSubMatrix(inc_mat,print_skim = F)
-}
+# load some data from beatAML dataset
+data <- NIMAA::beatAML[1:10000,]
+
+# convert to incidence matrix
+inc_mat <- NIMAA::el2IncMatrix(data, print_skim = FALSE)
+
+# extract sub-matricess without missing value
+sub_matrices <- extractSubMatrix(
+inc_mat,
+print_skim = FALSE,
+col.vars = "patient_id",
+row.vars = "inhibitor",
+verbose = FALSE
+)
 }
 \seealso{
 \code{\link[dplyr]{arrange}}, \code{\link[dplyr]{arrange_if}}

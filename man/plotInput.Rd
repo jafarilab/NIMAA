@@ -55,12 +55,10 @@ matrix data and visualize it. In addition, it will also calculate some
 basic matrix properties and the proportion of missing data.
 }
 \examples{
-\dontrun{
-# load the beatAML data
-beatAML_data <- NIMAA::beatAML
+# load part of the beatAML data
+beatAML_data <- NIMAA::beatAML[1:1000,]
 
-beatAML_incidence_matrix <- plotInput(beatAML_data)
-}
+beatAML_incidence_matrix <- plotInput(beatAML_data,index_numeric=3)
 }
 \seealso{
 \code{\link{el2IncMatrix}}

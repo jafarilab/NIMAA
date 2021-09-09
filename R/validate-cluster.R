@@ -15,25 +15,32 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' # load the beatAML data and get the incidence matrix
-#' beatAML_data <- NIMAA::beatAML
-#' beatAML_incidence_matrix <- plotInput(beatAML_data)
+#' # load part of the beatAML data
+#' data <- NIMAA::beatAML
+#' # convert to incidence matrix
+#' inc_mat <- el2IncMatrix(data, print_skim = FALSE)
 #'
-#' # extract the sub-matrix
-#' sub_matrices <- extractSubMatrix(
-#' beatAML_incidence_matrix,
-#' shape = c("Square") # the shapes you want to extract
-#' )
-#'
-#' # do clustering
+#' # run findCluster() to do clustering
 #' cls <- findCluster(
-#' sub_matrices$Rectangular_element_max, # the sub-matrix
-#' dim = 1
-#' )
+#' inc_mat,
+#' dim = 1,
+#' method = c('infomap','walktrap'),
+#' normalization = FALSE,
+#' rm_weak_edges = TRUE,
+#' comparison = FALSE)
 #'
-#' validateCluster(dist_mat = cls$distance_matrix,community = cls$leading_eigen)
-#' }
+#' # generate some external_feature
+#' external_feature <- data.frame(row.names = cls$infomap$names)
+#' external_feature[,'membership'] <- paste('group',
+#' sample(c(1,2,3,4),
+#' nrow(external_feature),
+#' replace = TRUE))
+#'
+#' # validation
+#' validateCluster(dist_mat = cls$distance_matrix,
+#' community = cls$walktrap,
+#' extra_feature = external_feature)
+
 validateCluster <- function(dist_mat,
                             extra_feature,
                             community) {

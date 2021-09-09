@@ -30,17 +30,15 @@ relationship) to a matrix (columns and rows stand for two parts, values in
 the matrix are the 'relationship')
 }
 \examples{
-\dontrun{
-  # generate a edgelist
-  el <- data.frame(
-  A=c(1,2,3,4,5,6),
-  B=c('a','b','c','e','f','g'),
-  m=c(1,2,1,2,1,2)
-  )
+# generate a edgelist
+el <- data.frame(
+  A = c(1, 2, 3, 4, 5, 6),
+  B = c("a", "b", "c", "e", "f", "g"),
+  m = c(1, 2, 1, 2, 1, 2)
+)
 
-  # run el2IncMatrix
-  inc_mat <- el2IncMatrix(el,print_skim = F)
-}
+# run el2IncMatrix() to convert edgelist to incidence matrix
+inc_mat <- el2IncMatrix(el, print_skim = FALSE)
 }
 \seealso{
 \code{\link[tidyr]{pivot_wider}},

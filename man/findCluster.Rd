@@ -74,27 +74,18 @@ external features (prior knowledge), the function will also compare the
 clustering results obtained with external features regard similarity.
 }
 \examples{
-\dontrun{
-  # generate a incidence matrix
-  data <- matrix(c(1,1,1,0,1,0,1,1,1,0,1,0,1,1,1), nrow=3)
-  colnames(data) <- letters[1:5]
-  rownames(data) <- LETTERS[1:3]
+# generate a incidence matrix
+data <- matrix(c(1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1), nrow = 3)
+colnames(data) <- letters[1:5]
+rownames(data) <- LETTERS[1:3]
 
-  # run findCluster()
-  cls <- findCluster(
+# run findCluster() to do clustering
+cls <- findCluster(
   data,
   dim = 1,
-  method='all',
-  normalization = F,
-  rm_weak_edges = T,
-  comparison = F)
-
-\dontrun{
-# using beatAML dataset
-data <- beatAML
-inc_mat <- el2IncMatrix(data)
-
-findCluster(inc_mat)
-}
-}
+  method = "all",
+  normalization = FALSE,
+  rm_weak_edges = TRUE,
+  comparison = FALSE
+)
 }
