@@ -68,7 +68,7 @@ beatAML_incidence_matrix <- plotInput(
   index_numeric = 3,  # the third column inumeric data
   print_skim = FALSE, # if you want to check the skim output, set this as TRUE(Default)
   plot_weight = TRUE, # when plotting the figure, show the weights
-  verbose = T # save the figures to local folder
+  verbose = FALSE # NOT save the figures to local folder
   )
 ```
 ```{r, echo=FALSE, out.width="100%", fig.cap="beatAML dataset as incidence matrix"}
@@ -135,9 +135,9 @@ sub_matrices <- extractSubMatrix(
   shape = c("Square", "Rectangular_element_max"), # the shapes wanted
   row.vars = "patient_id",
   col.vars = "inhibitor",
-  plot_weight = T,
-  verbose = T,
-  print_skim = F # just to reduce the length of vignette
+  plot_weight = TRUE,
+  verbose = FALSE,
+  print_skim = TRUE # just to reduce the length of vignette
   )
 ```
 

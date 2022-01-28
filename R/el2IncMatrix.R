@@ -21,17 +21,15 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#'   # generate a edgelist
-#'   el <- data.frame(
-#'   A=c(1,2,3,4,5,6),
-#'   B=c('a','b','c','e','f','g'),
-#'   m=c(1,2,1,2,1,2)
-#'   )
+#' # generate a edgelist
+#' el <- data.frame(
+#'   A = c(1, 2, 3, 4, 5, 6),
+#'   B = c("a", "b", "c", "e", "f", "g"),
+#'   m = c(1, 2, 1, 2, 1, 2)
+#' )
 #'
-#'   # run el2IncMatrix
-#'   inc_mat <- el2IncMatrix(el,print_skim = F)
-#' }
+#' # run el2IncMatrix() to convert edgelist to incidence matrix
+#' inc_mat <- el2IncMatrix(el, print_skim = FALSE)
 el2IncMatrix <- function(el, index_nominal = c(1, 2), # el = edgelist; 2 = to; IncMatrix = Incidence Matrix.
                          index_numeric = 3,
                          print_skim = TRUE) {
@@ -42,7 +40,7 @@ el2IncMatrix <- function(el, index_nominal = c(1, 2), # el = edgelist; 2 = to; I
     tibble::column_to_rownames(var = cn[index_nominal[2]]) %>%
     as.matrix()
   # inc_mat[is.na(inc_mat)] <- 0
-  if (print_skim){
+  if (print_skim) {
     print(skimr::skim(inc_mat))
   }
   return(inc_mat)

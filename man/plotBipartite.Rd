@@ -61,14 +61,12 @@ This function converts the input incidence matrix into a
 bipartite graph, and uses the igraph package to draw an figure.
 }
 \examples{
-\dontrun{
-# load the beatAML data
-beatAML_data <- NIMAA::beatAML
+# load part of the beatAML data
+beatAML_data <- NIMAA::beatAML[1:1000,]
 
 # plot beatAML data and convert to incidence matrix
-beatAML_incidence_matrix <- plotInput(beatAML_data)
+beatAML_incidence_matrix <- el2IncMatrix(beatAML_data, print_skim = FALSE)
 
 # plot with the vertex label showing
-plotBipartite(inc_mat = beatAML_incidence_matrix,vertex.label.display = T)
-}
+plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.display = TRUE)
 }

@@ -22,17 +22,15 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#'   # generate a graph
-#'   g <- igraph::make_graph(c(1,2,3,4,1,3),directed = F)
-#'   V(g)$name <- c('n1','n2','n3','n4')
+#' # generate a graph
+#' g <- igraph::make_graph(c(1, 2, 3, 4, 1, 3), directed = FALSE)
+#' igraph::V(g)$name <- c("n1", "n2", "n3", "n4")
 #'
-#'   # run analyseNetwork
-#'   analyseNetwork(g)
-#' }
+#' # run analyseNetwork
+#' analyseNetwork(g)
 analyseNetwork <- function(graph) {
   vertices <- data.frame(row.names = igraph::V(graph)$name)
-  edges <- data.frame(row.names = paste0(igraph::as_edgelist(graph)[,1],' - ',igraph::as_edgelist(graph)[,2]))
+  edges <- data.frame(row.names = paste0(igraph::as_edgelist(graph)[, 1], " - ", igraph::as_edgelist(graph)[, 2]))
   general_stats <- list()
   result <- list()
 
@@ -49,26 +47,26 @@ analyseNetwork <- function(graph) {
   general_stats$components_number <- igraph::count_components(graph)
 
   # degree
-  vertices[,'degree'] <- igraph::degree(graph)
+  vertices[, "degree"] <- igraph::degree(graph)
 
   # betweenness(), Vertex betweenness centrality
-  vertices[,'betweenness_centrality'] <- igraph::betweenness(graph,directed = FALSE)
+  vertices[, "betweenness_centrality"] <- igraph::betweenness(graph, directed = FALSE)
 
   # edge_betweenness()	Edge betweenness centrality
-  edges[,'betweenness_centrality'] <- igraph::edge_betweenness(graph,directed = FALSE)
+  edges[, "betweenness_centrality"] <- igraph::edge_betweenness(graph, directed = FALSE)
 
-  #weights
-  edges[,'weights'] <- igraph::E(graph)$weight
+  # weights
+  edges[, "weights"] <- igraph::E(graph)$weight
 
   # closeness()	Closeness centrality of vertices
-  vertices[,'closeness_centrality'] <- igraph::closeness(graph)
+  vertices[, "closeness_centrality"] <- igraph::closeness(graph)
 
   # eigen_centrality	Find Eigenvector Centrality Scores of Network Positions
-  vertices[,'eigen_centrality'] <- igraph::eigen_centrality(graph)$vector
+  vertices[, "eigen_centrality"] <- igraph::eigen_centrality(graph)$vector
   general_stats$eigen_centrality_value <- igraph::eigen_centrality(graph)$value
 
   # hub_score	Kleinberg's hub centrality scores.
-  vertices[,'hub_score'] <- igraph::hub_score(graph)$vector
+  vertices[, "hub_score"] <- igraph::hub_score(graph)$vector
   general_stats$hub_score_value <- igraph::hub_score(graph)$value
 
   result$vertices <- vertices

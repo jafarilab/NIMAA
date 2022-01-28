@@ -38,12 +38,10 @@
 #' @import ggplot2
 #' @export
 #' @examples
-#' \dontrun{
-#' # load the beatAML data
-#' beatAML_data <- NIMAA::beatAML
+#' # load part of the beatAML data
+#' beatAML_data <- NIMAA::beatAML[1:1000,]
 #'
-#' beatAML_incidence_matrix <- plotInput(beatAML_data)
-#' }
+#' beatAML_incidence_matrix <- plotInput(beatAML_data,index_numeric=3)
 plotInput <- function(x,
                       index_nominal = c(1, 2),
                       index_numeric = NULL,

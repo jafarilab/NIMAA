@@ -22,26 +22,24 @@ and igraph graph objects with membership properties. Different memberships
 will be represented by dots of different colors.
 }
 \examples{
-\dontrun{
-# load the beatAML data and get the incidence matrix
-beatAML_data <- NIMAA::beatAML
-beatAML_incidence_matrix <- plotInput(beatAML_data)
+# generate a incidence matrix
+data <- matrix(c(0, 1, 0, 1, 0,
+1, 0, 0, 0, 0,
+1, 0, 1, 1, 1), nrow = 3,byrow = TRUE)
+colnames(data) <- letters[1:5]
+rownames(data) <- LETTERS[1:3]
 
-# extract the sub-matrix
-sub_matrices <- extractSubMatrix(
-beatAML_incidence_matrix,
-shape = c("Square") # the shapes you want to extract
+# run findCluster() to do clustering
+cls <- findCluster(
+  data,
+  dim = 1,
+  method = "all",
+  normalization = FALSE,
+  rm_weak_edges = FALSE,
+  comparison = FALSE
 )
-
-# do clustering
-cls2 <- findCluster(
-sub_matrices$Rectangular_element_max, # the sub-matrix
-dim = 2 # set to 2 to use the other part of graph
-)
-
-
-plotCluster(graph=cls2$graph,cluster = cls2$louvain)
-}
+# plot the cluster
+plotCluster(graph = cls$graph, cluster = cls$louvain)
 }
 \seealso{
 \code{\link[networkD3]{forceNetwork}}

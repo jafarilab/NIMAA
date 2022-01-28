@@ -19,15 +19,13 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' # load the beatAML data
-#' beatAML_data <- NIMAA::beatAML
+#' # load part of the beatAML data
+#' beatAML_data <- NIMAA::beatAML[1:1000,]
 #'
 #' # plot beatAML data and convert to incidence matrix
-#' beatAML_incidence_matrix <- plotInput(beatAML_data)
+#' beatAML_incidence_matrix <- el2IncMatrix(beatAML_data, print_skim = FALSE)
 #'
 #' plotBipartiteInteractive(inc_mat = beatAML_incidence_matrix)
-#' }
 plotBipartiteInteractive <- function(inc_mat) {
   G <- createBipartiteGrpahWithigraph(inc_mat)
   igraph::V(G)$Group <- ifelse(igraph::V(G)$type == TRUE, ## if type is True, give it a 'Group' 1
@@ -77,5 +75,5 @@ plotBipartiteInteractive <- function(inc_mat) {
       timestep = 0.25
     )
 
-  return (vis_plot)
+  return(vis_plot)
 }

@@ -5,10 +5,10 @@ Authors@R: c(
  person("Mohieddin", "Jafari", role = c("aut"),email = "mohieddin.jafari@helsinki.fi"),
  person("Cheng", "Chen", role = c("aut","cre"),email = "cheng.chen@helsinki.fi")
  )
-Description: Using bipartite graphs for nominal data mining, selecting sub-matrices with no missing values inside, then using the matrices to generate a bipartite graph and clustering on two projections. In addition, it can also impute the missing data, validate and score the imputations according to the previous clustering results.
+Description: Functions for nominal data mining based on bipartite graphs, which build a pipeline for analysis and missing values imputation. Methods are mainly from the paper: Jafari, Mohieddin, et al. (2021) <doi:10.1101/2021.03.18.436040>, some new ones are also included.
 License: GPL (>= 3)
-URL: https://github.com/chendebiao/NIMAA
-BugReports: https://github.com/chendebiao/NIMAA/issues
+URL: https://github.com/jafarilab/NIMAA
+BugReports: https://github.com/jafarilab/NIMAA/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

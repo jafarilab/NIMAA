@@ -28,29 +28,22 @@ results of the two clusters were then analyzed to compare the effects of
 imputation.
 }
 \examples{
-\dontrun{
-# load the beatAML data and get the incidence matrix
-beatAML_data <- NIMAA::beatAML
-beatAML_incidence_matrix <- plotInput(beatAML_data)
-
-# extract the sub-matrix
-sub_matrices <- extractSubMatrix(
-beatAML_incidence_matrix,
-shape = c("Square") # the shapes you want to extract
-)
+# load part of the beatAML data and get the incidence matrix
+beatAML_data <- NIMAA::beatAML[1:10000,]
+beatAML_incidence_matrix <- el2IncMatrix(beatAML_data, print_skim = FALSE)
 
 # do clustering
 cls <- findCluster(
-sub_matrices$Rectangular_element_max, # the sub-matrix
-dim = 1
-)
+beatAML_incidence_matrix, # the sub-matrix
+dim = 1)
 
 # impute
-beatAML_incidence_matrix(inc_mat)
+imputations <- imputeMissingValue(beatAML_incidence_matrix)
 
+# validate the imputation
 validation_of_imputation <- validateImputation(
 imputation = imputations,
 refer_community = cls$fast_greedy,
-clustering_args = cls$clustering_args)
-}
+clustering_args = cls$clustering_args
+)
 }
