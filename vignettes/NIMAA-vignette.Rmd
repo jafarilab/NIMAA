@@ -22,9 +22,9 @@ knitr::opts_chunk$set(
 Many numerical analyses are invalid when working with nominal data because the mode is the only way to measure central tendency for nominal data, and frequency testing, like Chi-square tests, is the most common statistical analysis that makes sense.
 [NIMAA](https://github.com/jafarilab/NIMAA) package proposes a comprehensive set of pipeline to perform nominal data mining, which can effectively find label relationships of each nominal variable according to pairwise association with other nominal data.
 
-It uses bipartite graphs to show how two different types of data are linked together, and it puts them in the incidence matrix to continue with network analysis. Finding large sub-matrices with non-missing values and edge prediction are other applications of NIMAA to explore local and global similarities within nominal variables.
+It uses bipartite graphs to show how two different types of data are linked together, and it puts them in the incidence matrix to continue with network analysis. Finding large submatrices with non-missing values and edge prediction are other applications of NIMAA to explore local and global similarities within nominal variables.
 
-Then, using a variety of different network projection methods, two unipartite graphs are constructed on the given sub-matrix. NIMAA provides several options for clustering projected networks and selecting the best one based on external prior knowledge. When weighted bipartite networks are considered, the best clustering results are used as the benchmark for imputation analysis. By using imputation analysis, we tried to get more information from the whole dataset even though there were some missing values. This benchmark is used to figure out which imputation method is the best. It looks at how similar the clustering results are before and after the imputations.
+Then, using a variety of different network projection methods, two unipartite graphs are constructed on the given submatrix. NIMAA provides several options for clustering projected networks and selecting the best one based on external prior knowledge. When weighted bipartite networks are considered, the best clustering results are used as the benchmark for imputation analysis. By using imputation analysis, we tried to get more information from the whole dataset even though there were some missing values. This benchmark is used to figure out which imputation method is the best. It looks at how similar the clustering results are before and after the imputations.
 ```{r setup}
 library(NIMAA)
 ```
@@ -86,53 +86,37 @@ plotBipartiteInteractive(inc_mat = beatAML_incidence_matrix)
 ```{r, echo=FALSE, out.width="100%", fig.cap="beatAML dataset as incidence matrix"}
 knitr::include_graphics("interactiveplot.png")
 ```
-### 1.3 Analysis of the global network properties
+### 1.3 Analysis of network properties
+[NIMAA](https://github.com/jafarilab/NIMAA) package contains a function called `analyseNetwork` to provide more details about the network topology and common centrality measures for vertices and edges.
+
 ```{r}
 analysis_reuslt <- analyseNetwork(bipartGraph)
+
+# showing the general measures for network topology
+analysis_reuslt$general_stats
 ```
 
-## 2 Extract the sub-matrices without missing data
-Function `extractSubMatrix()` will extract the sub-matrices which have no
-missing value inside or with specific proportion of missing values inside (not
-for elements-max matrix), depends on the user's input. The result will also be
-showed as plotly figure.
+## 2 Extract the submatrices without missing data
+In the case of a weighted bipartite graph, the dataset with the fewest missing values should be used for the next steps. This is to avoid the sensitivity problems of clustering-based methods. The `extractSubMatrix()` function extracts the submatrices that have non-missing values or have a certain percentage of missing values inside (not for elements-max matrix), depending on the argument's input. The result will also be shown as a [plotly](https://plotly.com/r/) plot, so you can see the screenshots of `beatAML` dataset below.
 
-The extraction process has two types of data preprocessing, the difference is
-that the first one directly uses the original input matrix (row-wise), while the
-second one uses the transposed matrix (column-wise).
+The extraction process is performed and visualized in two ways, which can be chosen depending on the user's preference: using the original input matrix (row-wise) and using the transposed matrix (column-wise). [NIMAA](https://github.com/jafarilab/NIMAA) extracts the largest submatrices with non-missing values or with a specified proportion of missing values (using the `bar` argument) in four ways predefined in the `shape` argument:
 
-After preprocessing, the matrix will be "three-step arrangement":
+- **Square**, to extract square matrix with the equal number of rows and columns,
+- **Rectangular_row**, to extract matrix with the maximum number of rows, 
+- **Rectangular_col**, to extract matrix with the maximum number of columns,  
+- **Rectangular_element_max**, to extract matrix with the maximum number of elements.
 
-* the first step is row arranging ;
-
-* the second step is column arranging ;
-
-* the third step is total rearranging. 
-
-Then look for the largest possible matrix (with no missing
-values or with specific proportion of missing values) in the four dimensions,
-output the result and print the visualization.
-
-### 2.1 Extract the sub-matrices without missing data
-
-Here we extract two sub-matrices of the `beatAML_incidence_matrix`
+Here we extract two shapes of submatrix from the `beatAML_incidence_matrix` including square and rectangular, with the maximum number of elements:
 
 ```{r extractSubMatrix,eval=FALSE}
 sub_matrices <- extractSubMatrix(
   x = beatAML_incidence_matrix,
-  shape = c("Square", "Rectangular_element_max"), # the shapes wanted
+  shape = c("Square", "Rectangular_element_max"), # the selected shapes of submatrices
   row.vars = "patient_id",
   col.vars = "inhibitor",
-  plot_weight = TRUE,
-  verbose = FALSE,
-  print_skim = TRUE # just to reduce the length of vignette
+  plot_weight = TRUE
   )
 ```
-
-We can see that there is an output called *binmatnest2.temperature*, this is the
-nestedness measure of the matrix, if the input is a highly nested (nestedness
-temperature is less than 1). We suggest that divide the data into different
-parts.
 
 ```{r, echo=FALSE, out.width="30%", fig.cap="Row-wise arrangement"}
 knitr::include_graphics("Row_wise_arrangement.png")
@@ -140,6 +124,8 @@ knitr::include_graphics("Row_wise_arrangement.png")
 ```{r, echo=FALSE, out.width="100%", fig.cap="Column-wise arrangement"}
 knitr::include_graphics("Column_wise_arrangement.png")
 ```
+
+A value called **binmatnest2.temperature** is also printed by this function that indicates the nestedness measure of the input matrix. If the input matrix is highly nested (`binmatnest2.temperature >= 1`), then splitting the input matrix into parts is recommended to follow the analysis in each part independently.
 
 ## 3 Find the cluster in the projected unipartite graphs
 Function `findCluster()` will perform optional pre-processing on the input
@@ -152,7 +138,7 @@ remaining You can choose to keep the original weight or set all of them to 1.
 For the graphs obtained after processing, implement some clustering methods in
 [igraph](https://igraph.org/r/)to obtain the classification results.
 
-### 3.1 Do clustering based on sub-matrices
+### 3.1 Do clustering based on submatrices
 First we can do clustering on one part (patient_id), to find the clusters.
 ```{r, eval=FALSE, fig.height = 3, fig.width = 7, fig.align = "center"}
 cls <- findCluster(
@@ -195,7 +181,7 @@ Some new indices are included (jaccard_similarity, corrected), which showing the
 We can do clustering on the other part (inhibitors), just need to change the `dim` to 2.
 ```{r,eval=FALSE,fig.height = 3, fig.width = 7, fig.align = "center"}
 cls2 <- findCluster(
-  sub_matrices$Rectangular_element_max, # the same sub-matrix
+  sub_matrices$Rectangular_element_max, # the same submatrix
   dim = 2 # set to 2 to use the other part of graph
   )
 ```
