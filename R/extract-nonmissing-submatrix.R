@@ -69,7 +69,7 @@ extractSubMatrix <- function(x,
                              col.vars = NULL,
                              bar = 1,
                              plot_weight = FALSE,
-                             print_skim = TRUE) {
+                             print_skim = FALSE) {
   input_type <- c("matrix", "data.frame")
   if (!(class(x)[1] %in% input_type)) {
     stop("The input should be matrix or data frame")
