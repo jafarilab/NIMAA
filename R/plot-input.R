@@ -48,7 +48,7 @@ plotInput <- function(x,
                       palette = "Blues",
                       verbose = FALSE,
                       plot_weight = FALSE,
-                      print_skim = TRUE) {
+                      print_skim = FALSE) {
   if (purrr::is_empty(colnames(x))) {
     stop("The input data frame should include column names")
   }
