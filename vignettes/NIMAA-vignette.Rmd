@@ -19,36 +19,20 @@ knitr::opts_chunk$set(
 )
 ```
 ## Introduction
-When dealing with nominal data, usually only some methods such
-as simple frequency statistics can be carried out.
-[NIMAA](https://github.com/chendebiao/NIMAA) package proposes a pipeline for
-nominal data mining, which can effectively find special relationships between
-data.
+Many numerical analyses are invalid when working with nominal data because the mode is the only way to measure central tendency for nominal data, and frequency testing, like Chi-square tests, is the most common statistical analysis that makes sense.
+[NIMAA](https://github.com/jafarilab/NIMAA) package proposes a comprehensive set of pipeline to perform nominal data mining, which can effectively find label relationships of each nominal variable according to pairwise association with other nominal data.
 
-It uses bipartite graphs to represent the relationship between two different
-types of nominal data, and organizes them in the incidence matrix to find
-sub-matrices that are larger in different dimensions and do not contain any
-missing values. 
+It uses bipartite graphs to show how two different types of data are linked together, and it puts them in the incidence matrix to continue with network analysis. Finding large sub-matrices with non-missing values and edge prediction are other applications of NIMAA to explore local and global similarities within nominal variables.
 
-Then, two one-partite graphs are obtained on the sub-matrix using a variety of
-different methods of projection. For any of them, NIMAA can use a variety of
-methods to cluster, and users can use possible external prior knowledge to
-select. the result of the best clustering method as the ‘reference cluster’. 
-
-After that we can perform multiple numerical imputations on the matrix with
-missing data, and apply the same clustering method as ‘reference clustering’ for
-clustering, and select the best data imputation method which is the one with the
-closest result to the ‘reference cluster’.
-
+Then, using a variety of different network projection methods, two unipartite graphs are constructed on the given sub-matrix. NIMAA provides several options for clustering projected networks and selecting the best one based on external prior knowledge. When weighted bipartite networks are considered, the best clustering results are used as the benchmark for imputation analysis. By using imputation analysis, we tried to get more information from the whole dataset even though there were some missing values. This benchmark is used to figure out which imputation method is the best. It looks at how similar the clustering results are before and after the imputations.
 ```{r setup}
 library(NIMAA)
 ```
 ## 1 Explore the data
-Here we use 'beatAML' dataset as an example, which is a data set composed of
-three columns, the first two columns are nominal data, and the third column is
-numerical data.
+In this section, we demonstrate how to do a NIMAA analysis on a weighted bipartite network using the `beatAML` dataset. `beatAML` is one of four datasets that can be found in the [NIMAA](https://github.com/jafarilab/NIMAA) package. This dataset has three columns: the first two contain nominal variables, while the third contains numerical variables.
+
 ```{r show data,echo=FALSE, results='asis'}
-knitr::kable(NIMAA::beatAML[1:10,], caption='beatAML dataset samples')
+knitr::kable(NIMAA::beatAML[1:10,], caption='The first ten rows of beatAML dataset')
 ```
 Read the data from the package:
 ```{r read the data}
@@ -56,47 +40,51 @@ Read the data from the package:
 beatAML_data <- NIMAA::beatAML
 ```
 ### 1.1 Plot the original data:
-Function **plotInput()** will print the incidence matrix plot of input data, and
-return that matrix.
+The `plotInput()` function prints some information about the incidence matrix derived from input data, such as its dimensions and the proportion of missing values, as well as the image of the matrix. It also returns the incidence matrix object.
 
-NB: To keep the size of vignette small enough for CRAN rules, we won't output
-the interactive figure here.
+NB: To keep the size of vignette small enough for CRAN rules, we won't output the interactive figure here.
 ```{r plotInput function,results='asis'}
 beatAML_incidence_matrix <- plotInput(
   x = beatAML_data, # original data with 3 columns
   index_nominal = c(2,1), # the first two columns are nominal data
-  index_numeric = 3,  # the third column inumeric data
-  print_skim = FALSE, # if you want to check the skim output, set this as TRUE(Default)
-  plot_weight = TRUE, # when plotting the figure, show the weights
+  index_numeric = 3,  # the third column is numeric data
+  print_skim = FALSE, # if you want to check the skim output, set this as TRUE
+  plot_weight = TRUE, # when plotting the weighted incidence matrix
   verbose = FALSE # NOT save the figures to local folder
   )
 ```
+
+Na/missing values Proportion: 0.2603
 ```{r, echo=FALSE, out.width="100%", fig.cap="beatAML dataset as incidence matrix"}
 knitr::include_graphics("patient_id-inhibitor.png")
 ```
 
 ### 1.2 Plot the bipartite graph of the original data:
-Since we have got the incidence matrix, then we can easily use it to form a
-bipartite graph, in this part we have two different ways to visualize the
-bipartite graph, static or interactive
+Given that we have the incidence matrix, we can easily reconstruct the corresponding bipartite network. In the [NIMAA](https://github.com/jafarilab/NIMAA) package, we have two options for visualizing the bipartite network: static or interactive plots.
 
 #### 1.2.1 stastic:
-Function **plotBipartite()** will print the bipartite graph based on
-[igraph](https://igraph.org/r/) package, and return that igraph graph object.
-```{r plotBipartite, fig.height = 7, fig.width = 7, fig.align = "center"}
-bipartGraph <- plotBipartite(inc_mat = beatAML_incidence_matrix,vertex.label.display = T)
+The `plotBipartite()` function customizes the corresponding bipartite network visualization based on the [igraph](https://igraph.org/r/) package and returns the igraph object.
 
-# show the igraph bipartGraph object
+```{r plotBipartite, fig.height = 7, fig.width = 7, fig.align = "center"}
+bipartGraph <- plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.display = T)
+
+# show the igraph object
 bipartGraph
 ```
+
 #### 1.2.2 interactive:
-Function **plotBipartiteInteractive()** will print the interactive bipartite graph based on [visNetwork](https://datastorm-open.github.io/visNetwork/)
+The `plotBipartiteInteractive()` function generates a customized interactive bipartite network visualization based on the [visNetwork](https://datastorm-open.github.io/visNetwork/)
 package.
 
-NB: To keep the size of vignette small enough, we won't output
-the interactive figure here, a screenshot instead.
+NB: To keep the size of vignette small enough, we do not output
+the interactive figure here. Instead, we show a screenshot of part of the `beatAML` dataset.
+
 ```{r plotBipartiteInteractive, results='hide'}
 plotBipartiteInteractive(inc_mat = beatAML_incidence_matrix)
+```
+
+```{r, echo=FALSE, out.width="100%", fig.cap="beatAML dataset as incidence matrix"}
+knitr::include_graphics("interactiveplot.png")
 ```
 ### 1.3 Analysis of the global network properties
 ```{r}
@@ -104,7 +92,7 @@ analysis_reuslt <- analyseNetwork(bipartGraph)
 ```
 
 ## 2 Extract the sub-matrices without missing data
-Function **extractSubMatrix()** will extract the sub-matrices which have no
+Function `extractSubMatrix()` will extract the sub-matrices which have no
 missing value inside or with specific proportion of missing values inside (not
 for elements-max matrix), depends on the user's input. The result will also be
 showed as plotly figure.
@@ -154,7 +142,7 @@ knitr::include_graphics("Column_wise_arrangement.png")
 ```
 
 ## 3 Find the cluster in the projected unipartite graphs
-Function **findCluster()** will perform optional pre-processing on the input
+Function `findCluster()` will perform optional pre-processing on the input
 incidence matrix, such as normalization. Then use the matrix to perform
 bipartite graph projection, and perform optional pre-processing in one of the
 specified parts, such as removing edges with lower weights, that is, weak edges.
@@ -216,7 +204,7 @@ cls2 <- findCluster(
 In this part we will do exploration about the result of clustering, mainly focus on the visualization of clusters.
 
 ### 4.1 plotCluster
-**plotCluster()** will output an interactive network figure, in which nodes belonging to the same group will be given the same color, and nodes belonging to different groups will have different colors.
+`plotCluster()` will output an interactive network figure, in which nodes belonging to the same group will be given the same color, and nodes belonging to different groups will have different colors.
 ```{r plotcluster,eval = FALSE}
 plotCluster(graph=cls2$graph,cluster = cls2$louvain)
 ```
@@ -251,7 +239,7 @@ scoreCluster(community = cls2$infomap,
 ```
 
 ### 4.4 Validate clusters
-**validateCluster()** will calculate the similarity of the given clustering result and the reference feature, that is, corrected.rand and jaccard_similarity
+`validateCluster()` will calculate the similarity of the given clustering result and the reference feature, that is, corrected.rand and jaccard_similarity
 ```{r,eval=FALSE}
 validateCluster(dist_mat = cls$distance_matrix,
                 extra_feature = external_feature,
@@ -262,7 +250,7 @@ validateCluster(dist_mat = cls$distance_matrix,
 ## 5 Imputation
 
 ### 5.1 impute missing data
-The **imputeMissingValue()** function can impute the missing values in the matrix, we only need to select which methods are needed. The result will be a list, each element is a matrix with no missing values.
+The `imputeMissingValue()` function can impute the missing values in the matrix, we only need to select which methods are needed. The result will be a list, each element is a matrix with no missing values.
 
 it will perform a variety of numerical imputation according to the user's input, and return all the data that does not contain any missing data, a list of matrices. 
 
@@ -286,7 +274,7 @@ names(imputations)
 ```
 
 ### 5.2 Validate imputation
-**validateImputation()** will calculate the 
+`validateImputation()` will calculate the 
 
 1. Jaccard similarity
 
