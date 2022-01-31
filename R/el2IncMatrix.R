@@ -34,6 +34,10 @@ el2IncMatrix <- function(el, index_nominal = c(1, 2), # el = edgelist; 2 = to; I
                          index_numeric = 3,
                          print_skim = TRUE) {
   cn <- colnames(el)
+  if (ncol(el) == 2){
+    el[,'link'] <- rep(1,nrow(el))
+    cn[index_numeric] <- 'link'
+  }
 
   inc_mat <- el %>%
     tidyr::pivot_wider(names_from = cn[index_nominal[1]], values_from = cn[index_numeric]) %>%
