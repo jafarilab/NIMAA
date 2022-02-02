@@ -28,7 +28,7 @@ Then, using a variety of different network projection methods, two unipartite gr
 ```{r setup}
 library(NIMAA)
 ```
-## 1 Explore the data
+## 1 Exploring the data
 In this section, we demonstrate how to do a NIMAA analysis on a weighted bipartite network using the `beatAML` dataset. `beatAML` is one of four datasets that can be found in the [NIMAA](https://github.com/jafarilab/NIMAA) package. This dataset has three columns: the first two contain nominal variables, while the third contains numerical variables.
 
 ```{r show data,echo=FALSE, results='asis'}
@@ -39,7 +39,7 @@ Read the data from the package:
 # read the data
 beatAML_data <- NIMAA::beatAML
 ```
-### 1.1 Plot the original data:
+### 1.1 Plotting the original data:
 The `plotInput()` function prints some information about the incidence matrix derived from input data, such as its dimensions and the proportion of missing values, as well as the image of the matrix. It also returns the incidence matrix object.
 
 NB: To keep the size of vignette small enough for CRAN rules, we won't output the interactive figure here.
@@ -59,10 +59,10 @@ Na/missing values Proportion: 0.2603
 knitr::include_graphics("patient_id-inhibitor.png")
 ```
 
-### 1.2 Plot the bipartite graph of the original data:
+### 1.2 Plotting the bipartite graph of the original data:
 Given that we have the incidence matrix, we can easily reconstruct the corresponding bipartite network. In the [NIMAA](https://github.com/jafarilab/NIMAA) package, we have two options for visualizing the bipartite network: static or interactive plots.
 
-#### 1.2.1 stastic:
+#### 1.2.1 Static plot:
 The `plotBipartite()` function customizes the corresponding bipartite network visualization based on the [igraph](https://igraph.org/r/) package and returns the igraph object.
 
 ```{r plotBipartite, fig.height = 7, fig.width = 7, fig.align = "center"}
@@ -72,7 +72,7 @@ bipartGraph <- plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.di
 bipartGraph
 ```
 
-#### 1.2.2 interactive:
+#### 1.2.2 Interactive plot:
 The `plotBipartiteInteractive()` function generates a customized interactive bipartite network visualization based on the [visNetwork](https://datastorm-open.github.io/visNetwork/)
 package.
 
@@ -96,7 +96,7 @@ analysis_reuslt <- analyseNetwork(bipartGraph)
 analysis_reuslt$general_stats
 ```
 
-## 2 Extract the submatrices without missing data
+## 2 Extracting large submatrices without missing values
 In the case of a weighted bipartite graph, the dataset with the fewest missing values should be used for the next steps. This is to avoid the sensitivity problems of clustering-based methods. The `extractSubMatrix()` function extracts the submatrices that have non-missing values or have a certain percentage of missing values inside (not for elements-max matrix), depending on the argument's input. The result will also be shown as a [plotly](https://plotly.com/r/) plot, so you can see the screenshots of `beatAML` dataset below.
 
 The extraction process is performed and visualized in two ways, which can be chosen depending on the user's preference: using the original input matrix (row-wise) and using the transposed matrix (column-wise). [NIMAA](https://github.com/jafarilab/NIMAA) extracts the largest submatrices with non-missing values or with a specified proportion of missing values (using the `bar` argument) in four ways predefined in the `shape` argument:
@@ -127,63 +127,73 @@ knitr::include_graphics("Column_wise_arrangement.png")
 
 A value called **binmatnest2.temperature** is also printed by this function that indicates the nestedness measure of the input matrix. If the input matrix is highly nested (`binmatnest2.temperature >= 1`), then splitting the input matrix into parts is recommended to follow the analysis in each part independently.
 
-## 3 Find the cluster in the projected unipartite graphs
-Function `findCluster()` will perform optional pre-processing on the input
-incidence matrix, such as normalization. Then use the matrix to perform
-bipartite graph projection, and perform optional pre-processing in one of the
-specified parts, such as removing edges with lower weights, that is, weak edges.
+## 3 Cluster finding analysis of projected unipartite networks
+The `findCluster()` function performs seven commonly used network clustering algorithms, optionally preprocessing the input incidence matrix and projecting the bipartite network into unipartite networks. Preprocessing options such as using normalization and defining a threshold help us remove edges that have low weights or are weak edges. Also, it is possible to continue using binarized or original edge weights before performing community detection or clustering. Finally, all of the clustering methods that were used can be compared and the best one chosen based on internal or external cluster validity measures such as average of silhouette width and Jaccard similarity index. Additionally to displaying in consul, the findings are provided as bar plots.
 
-The removal method and threshold selection can also be specified, and for the
-remaining You can choose to keep the original weight or set all of them to 1.
-For the graphs obtained after processing, implement some clustering methods in
-[igraph](https://igraph.org/r/)to obtain the classification results.
+To begin, let us examine how to utilize `findCluster` to find clusters of `patient_id`s based on the `Rectangular_element_max` submatrix of the `beatAML` bipartite network projection to a patient's unipartite similarity network.
 
-### 3.1 Do clustering based on submatrices
-First we can do clustering on one part (patient_id), to find the clusters.
 ```{r, eval=FALSE, fig.height = 3, fig.width = 7, fig.align = "center"}
 cls <- findCluster(
   sub_matrices$Rectangular_element_max,
   dim = 1,
-  method = "all", # clustering mehod
+  method = "all", # all available clustering methods
   normalization = TRUE, # normalize the input matrix
   rm_weak_edges = TRUE, # remove the weak edges in graph
-  rm_method = 'delete', # removing method is deleting the edges
-  threshold = 'median', # edges with weights under the median of all edges' weight are weak edges
+  rm_method = 'delete', # delete the weak edges
+  threshold = 'median', # Use median of edges' weights as threshold
   set_remaining_to_1 = TRUE, # set the weights of remaining edges to 1
   )
-```
-In addition, if there is an input of external features (prior knowledge), the function will also compare the clustering results obtained with external features regard similarity.
 
-For example, let's generate some random features for patient_id part, here are the samples:
+cls
+```
+
+Additionally, if external features (prior knowledge) are provided, the function compares the clustering results obtained with the external features in terms of similarity by setting `extra_feature` argument.
+
+For instance, let's generate some random features for the patients in the `beatAML` dataset. The following is an example:
+
 ```{r generate extra features,eval=FALSE,echo=FALSE, results='asis'}
 external_feature <- data.frame(row.names = cls$walktrap$names)
-external_feature[,'membership'] <- paste('group', findCluster(sub_matrices$Rectangular_element_max,method = c('walktrap'),rm_weak_edges = T,set_remaining_to_1 = F,threshold = 'median',comparison = F)$walktrap$membership)
+external_feature[,'membership'] <- paste('group',
+                                         findCluster(sub_matrices$Rectangular_element_max,
+                                                     method = c('walktrap'),
+                                                     rm_weak_edges = T,
+                                                     set_remaining_to_1 = F,
+                                                     threshold = 'median',
+                                                     comparison = F)$walktrap$membership)
 dset1 <- utils::head(external_feature)
 knitr::kable(dset1, format = "html")
+
 ```
 
-Then we can do clustering again on one part (patient_id) to see the difference.
+Clustering is done on the patient similarity network again, but this time by setting the `extra_feature` argument to provide external validation for the cluster finding analysis.
+
 ```{r findcluster 1, eval=FALSE,fig.height = 6, fig.width = 7, fig.align = "center"}
 cls <- findCluster(
   sub_matrices$Rectangular_element_max,
   dim = 1,
-  method = "all", # clustering mehod
-  normalization = TRUE, # normalize the input matrix
-  rm_weak_edges = TRUE, # remove the weak edges in graph
-  rm_method = 'delete', # removing method is deleting the edges
-  threshold = 'median', # edges with weights under the median of all edges' weight are weak edges
-  set_remaining_to_1 = TRUE, # set the weights of remaining edges to 1
-  extra_feature =external_feature # ADD A EXTRA FEATURE REFRRENCE HERE!
+  method = "all", 
+  normalization = TRUE, 
+  rm_weak_edges = TRUE, 
+  rm_method = 'delete', 
+  threshold = 'median', 
+  set_remaining_to_1 = TRUE, 
+  extra_feature =external_feature # add a extra feature reference here!
   )
-```
-Some new indices are included (jaccard_similarity, corrected), which showing the similarity between the different clustering results and the reference feature.
 
-We can do clustering on the other part (inhibitors), just need to change the `dim` to 2.
+cls
+```
+
+As you can see, two new indices are included (`jaccard_similarity` and `corrected_rand`) as external cluster validity measures which represent the similarity between clustering and the prior knowledge used as ground truth.
+
+The following sections show how to perform clustering analysis on the other part of the `beatAML` bipartite network, namely, `inhibitor`. In this case, we simply need to modify the `dim` to 2.
+
 ```{r,eval=FALSE,fig.height = 3, fig.width = 7, fig.align = "center"}
 cls2 <- findCluster(
   sub_matrices$Rectangular_element_max, # the same submatrix
-  dim = 2 # set to 2 to use the other part of graph
+  dim = 2 # set to 2 to use the other part of bipartite network
   )
+
+cls2
 ```
 
 ## 4 Explore the clusters
