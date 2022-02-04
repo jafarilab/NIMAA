@@ -143,7 +143,7 @@ cls <- findCluster(
   method = "all", # all available clustering methods
   normalization = TRUE, # normalize the input matrix
   rm_weak_edges = TRUE, # remove the weak edges in graph
-  rm_method = 'delete', # delete the weak edges
+  rm_method = 'delete', # delete the weak edges instead of lowering their weights to 0.
   threshold = 'median', # Use median of edges' weights as threshold
   set_remaining_to_1 = TRUE, # set the weights of remaining edges to 1
   )
@@ -261,51 +261,31 @@ The `imputeMissingValue()` function utilizes the given imputation methods to imp
 - others are from the famous `mice` package [@mice].
 
 ```{r}
-imputations <- imputeMissingValue(
-  inc_mat = beatAML_incidence_matrix,
-  method = c('svd','median','als','CA')
-  )
+imputations <- imputeMissingValue(inc_mat = beatAML_incidence_matrix,
+                                  method = c('svd','median','als','CA'))
 # show the result format
-names(imputations)
+summary(imputations)
 ```
 
-### 5.2 Validate imputation
-`validateImputation()` will calculate the 
+### 5.2 Validating imputations
+The `validateImputation()` function compares the results of clustering after imputation with a predefined benchmark to see how similar they are. After validating clustering on submatrices with non-missing values, the benchmark had already been set up in the previous step. This function does the analysis for a number of user-specified imputation methods. It's also possible to see how each method is ranked by looking at a ranking plot. The following measures are used to compare the methods:
 
-1. Jaccard similarity
+- Jaccard similarity index
 
-2. Dice similarity coefficient
+- Dice similarity coefficient
 
-3. Rand index
+- Rand index
 
-4. Minkowski (inversed)
+- Minkowski measure (inverted)
 
-5. Fowlkes–Mallows index
+- Fowlkes–Mallows index
 
-between each imputation and the reference community, then plot the ranking, user can find which imputation method is relatively better.
-```{r, eval=FALSE, fig.height = 6, fig.width = 7, fig.align = "center"}
-validation_of_imputation <- validateImputation(
-  imputation = imputations,
-  refer_community = cls$fast_greedy,
-  clustering_args = cls$clustering_args
-  )
+```{r, eval=TRUE, fig.height = 6, fig.width = 7, fig.align = "center"}
+validateImputation(imputation = imputations,
+                   refer_community = cls$fast_greedy,
+                   clustering_args = cls$clustering_args)
 ```
 
-
-## 6 Using the data with imputation to explore again
-
-By the result from previous chapter, we can easily know that 'als' is the best method.
-
-There is no missing value in imputation matrix
-```{r,eval=FALSE}
-NA %in% imputations$als
-```
-
-And the size of imputations are the same with original matrix.
-```{r,eval=FALSE}
-dim(imputations$als) == dim(beatAML_incidence_matrix)
-```
-
-Thus the users can use this imputation matrix as input matrix to re-do all the first 5 steps (no need to do extracting because this matrix is already without any missing value) to mining the relationships inside the original dataset.
+Finally, the best imputation method can be chosen, allowing for a re-examination of the label relationships or a re-run of the nominal data mining. In other words, users can use this imputed matrix as an input matrix to redo the previous steps of mining the hidden relationships in the original dataset. Note that this matrix has no missing values, hence no submatrix extraction is required.
 
 ## References
