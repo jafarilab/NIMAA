@@ -23,9 +23,9 @@ knitr::opts_chunk$set(
 Many numerical analyses are invalid when working with nominal data because the mode is the only way to measure central tendency for nominal data, and frequency testing, like Chi-square tests, is the most common statistical analysis that makes sense.
 `NIMAA` package [@nimaa] proposes a comprehensive set of pipeline to perform nominal data mining, which can effectively find label relationships of each nominal variable according to pairwise association with other nominal data. You can also check for updates, here [NIMAA](https://github.com/jafarilab/NIMAA).
 
-It uses bipartite graphs to show how two different types of data are linked together, and it puts them in the incidence matrix to continue with network analysis. Finding large submatrices with non-missing values and edge prediction are other applications of NIMAA to explore local and global similarities within nominal variables.
+It uses bipartite graphs to show how two different types of data are linked together, and it puts them in the incidence matrix to continue with network analysis. Finding large submatrices with non-missing values and edge prediction are other applications of NIMAA to explore local and global similarities within the labels of nominal variables.
 
-Then, using a variety of different network projection methods, two unipartite graphs are constructed on the given submatrix. NIMAA provides several options for clustering projected networks and selecting the best one based on external prior knowledge. When weighted bipartite networks are considered, the best clustering results are used as the benchmark for imputation analysis. By using imputation analysis, we tried to get more information from the whole dataset even though there were some missing values. This benchmark is used to figure out which imputation method is the best. It looks at how similar the clustering results are before and after the imputations.
+Then, using a variety of different network projection methods, two unipartite graphs are constructed on the given submatrix. NIMAA provides several options for clustering projected networks and selecting the best one based on external prior knowledge. When weighted bipartite networks are considered, the best clustering results are used as the benchmark for imputation analysis. This benchmark is used to figure out which imputation method is the best. It looks at how similar the clustering results are before and after the imputations. By using imputation analysis, we tried to get more information from the whole dataset even though there were some missing values.
 ```{r setup}
 library(NIMAA)
 ```
@@ -41,7 +41,7 @@ Read the data from the package:
 beatAML_data <- NIMAA::beatAML
 ```
 
-### 1.1 Plotting the original data:
+### 1.1 Plotting the original data
 The `plotInput()` function prints some information about the incidence matrix derived from input data, such as its dimensions and the proportion of missing values, as well as the image of the matrix. It also returns the incidence matrix object.
 
 NB: To keep the size of vignette small enough for CRAN rules, we won't output the interactive figure here.
@@ -58,14 +58,14 @@ beatAML_incidence_matrix <- plotInput(
 
 Na/missing values Proportion: 0.2603
 
-```{r, echo=FALSE, out.width="100%", fig.cap="beatAML dataset as incidence matrix"}
+```{r, echo=FALSE, out.width="100%", fig.cap="The beatAML dataset as an incidence matrix"}
 knitr::include_graphics("patient_id-inhibitor.png")
 ```
 
-### 1.2 Plotting the bipartite graph of the original data:
+### 1.2 Plotting the bipartite graph of the original data
 Given that we have the incidence matrix, we can easily reconstruct the corresponding bipartite network. In the `NIMAA` package, we have two options for visualizing the bipartite network: static or interactive plots.
 
-#### 1.2.1 Static plot:
+#### 1.2.1 Static plot
 The `plotBipartite()` function customizes the corresponding bipartite network visualization based on the `igraph` package [@igraph] and returns the igraph object.
 
 ```{r plotBipartite, fig.height = 7, fig.width = 7, fig.align = "center"}
@@ -75,7 +75,7 @@ bipartGraph <- plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.di
 bipartGraph
 ```
 
-#### 1.2.2 Interactive plot:
+#### 1.2.2 Interactive plot
 The `plotBipartiteInteractive()` function generates a customized interactive bipartite network visualization based on the `visNetwork` package [@vis].
 
 NB: To keep the size of vignette small enough, we do not output

@@ -13,17 +13,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-# NIMAA <a href='https://github.com/jafarilab/NIMAA'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# NIMAA <a href='https://github.com/jafarilab/NIMAA'><img src="man/figures/logo.png" align="right" height="139"/></a>
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/NIMAA)](https://cran.r-project.org/package=NIMAA)
-[![GitHub Release](https://img.shields.io/github/release/jafarilab/NIMAA?style=flat)](https://github.com/jafarilab/NIMAA/releases)
-[![Github All Releases](https://img.shields.io/github/downloads/jafarilab/NIMAA/total.svg?style=flat)](https://github.com/jafarilab/NIMAA)
+
+[![CRAN status](https://www.r-pkg.org/badges/version/NIMAA)](https://cran.r-project.org/package=NIMAA) [![GitHub Release](https://img.shields.io/github/release/jafarilab/NIMAA?style=flat)](https://github.com/jafarilab/NIMAA/releases) [![Github All Releases](https://img.shields.io/github/downloads/jafarilab/NIMAA/total.svg?style=flat)](https://github.com/jafarilab/NIMAA)
+
 <!-- badges: end -->
 
-The goal of NIMAA is to use bipartite graphs for nominal data mining. 
+The NIMAA package [@nimaa] provides a comprehensive set of methods for performing nominal data mining.
 
-It can select a larger sub-matrix with no missing values in a matrix containing missing data, and then use the matrix to generate a bipartite graph and cluster on two projections. In addition, NIMAA can also impute the missing data, verify and score according to the previous clustering results obtained from the sub-matrix, and give suggestions on which imputation method is better.
+It employs bipartite graphs to demonstrate how two nominal variables are linked, and then places them in the incidence matrix to proceed with network analysis. NIMAA aids in characterizing the pattern of missing values in a dataset, locating large submatrices with non-missing values, and predicting edges within nominal variable labels. Then, given a submatrix, two unipartite graphs are constructed using various network projection methods. NIMAA provides a variety of choices for clustering projected networks and selecting the best one. The best clustering results can also be used as a benchmark for imputation analysis in weighted bipartite networks.
 
 ## Installation
 
@@ -39,9 +39,10 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("jafarilab/NIMAA")
 ```
+
 ## Example
 
-### Plot the original data:
+### Plotting the original data
 
 ```{r example,}
 library(NIMAA)
@@ -52,26 +53,27 @@ beatAML_data <- NIMAA::beatAML
 beatAML_incidence_matrix <- plotInput(
   x = beatAML_data, # original data with 3 columns
   index_nominal = c(2,1), # the first two columns are nominal data
-  index_numeric = 3,  # the third column inumeric data
-  print_skim = FALSE, # if you want to check the skim output, set this as TRUE(Default)
-  plot_weight = TRUE, # when plotting the figure, show the weights
+  index_numeric = 3,  # the third column is numeric data
+  print_skim = FALSE, # if you want to check the skim output, set this as TRUE
+  plot_weight = TRUE, # when plotting the weighted incidence matrix
+  verbose = FALSE # NOT save the figures to local folder
   )
 ```
 
-```{r, echo=FALSE, out.width="100%", fig.cap="beatAML dataset as incidence matrix",fig.align = "center"}
+```{r, echo=FALSE, out.width="100%", fig.cap="The beatAML dataset as an incidence matrix",fig.align = "center"}
 knitr::include_graphics("vignettes/patient_id-inhibitor.png")
 ```
 
-### Plot the bipartite graph of the original data
+### Plotting the bipartite graph of the original data
+
 ```{r plotBipartite, fig.height = 6, fig.width = 6, fig.align = "center"}
 graph <- plotBipartite(inc_mat = beatAML_incidence_matrix)
 ```
 
 ### Extract the sub-matrices without missing data
 
-**extractSubMatrix()** will extract the sub-matrices which have no
-missing value inside or with specific proportion of missing values inside (not
-for elements-max matrix), depends on the user's input.
+**extractSubMatrix()** will extract the sub-matrices which have no missing value inside or with specific proportion of missing values inside (not for elements-max matrix), depends on the user's input.
+
 ```{r extractSubMatrix, eval=FALSE}
 sub_matrices <- extractSubMatrix(
   beatAML_incidence_matrix,
@@ -81,19 +83,19 @@ sub_matrices <- extractSubMatrix(
   plot_weight = T,
   )
 ```
+
 ```{r, echo=FALSE, out.width="30%", fig.cap="Row-wise arrangement",fig.align = "center"}
 knitr::include_graphics("vignettes/Row_wise_arrangement.png")
 ```
+
 ```{r, echo=FALSE, out.width="100%", fig.cap="Column-wise arrangement",fig.align = "center"}
 knitr::include_graphics("vignettes/Column_wise_arrangement.png")
 ```
 
 ### Do clustering based on sub-matrices
 
-**findCluster()** will perform optional pre-processing on the input
-incidence matrix, such as normalization. Then use the matrix to perform
-bipartite graph projection, and perform optional pre-processing in one of the
-specified parts, such as removing edges with lower weights, that is, weak edges.
+**findCluster()** will perform optional pre-processing on the input incidence matrix, such as normalization. Then use the matrix to perform bipartite graph projection, and perform optional pre-processing in one of the specified parts, such as removing edges with lower weights, that is, weak edges.
+
 ```{r, eval=FALSE}
 cls <- findCluster(
   sub_matrices$Rectangular_element_max,
@@ -107,21 +109,21 @@ cls <- findCluster(
   )
 ```
 
-
 ### Impute missing data
+
 The **imputeMissingValue()** function can impute the missing values in the matrix, we only need to select which methods are needed. The result will be a list, each element is a matrix with no missing values.
 
-it will perform a variety of numerical imputation according to the user's input, and return all the data that does not contain any missing data, a list of matrices. 
+it will perform a variety of numerical imputation according to the user's input, and return all the data that does not contain any missing data, a list of matrices.
 
-* 'median' will replace the missing values with the median of each rows (observations)
+-   'median' will replace the missing values with the median of each rows (observations)
 
-* 'knn' is the method in package \code{bnstruct}
+-   'knn' is the method in package \\code{bnstruct}
 
-* 'als' and 'svd' are methods from package \code{softImpute}
+-   'als' and 'svd' are methods from package \\code{softImpute}
 
-* 'CA', 'PCA' and 'FAMD' are from package \code{missMDA}
+-   'CA', 'PCA' and 'FAMD' are from package \\code{missMDA}
 
-* others are from the famous \code{mice} package.
+-   others are from the famous \\code{mice} package.
 
 ```{r,eval=FALSE}
 imputations <- imputeMissingValue(
@@ -130,6 +132,6 @@ imputations <- imputeMissingValue(
   )
 ```
 
-
 ## License
+
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
