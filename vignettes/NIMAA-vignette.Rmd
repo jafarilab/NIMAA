@@ -132,7 +132,7 @@ knitr::include_graphics("Column_wise_arrangement.png")
 A value called **binmatnest2.temperature** is also printed by this function that indicates the nestedness measure of the input matrix. If the input matrix is highly nested (`binmatnest2.temperature >= 1`), then splitting the input matrix into parts is recommended to follow the analysis in each part independently.
 
 ## 3 Cluster finding analysis of projected unipartite networks
-The `findCluster()` function performs seven commonly used network clustering algorithms, optionally preprocessing the input incidence matrix and projecting the bipartite network into unipartite networks. Preprocessing options such as using normalization and defining a threshold help us remove edges that have low weights or are weak edges. Also, it is possible to continue using binarized or original edge weights before performing community detection or clustering. Finally, all of the clustering methods that were used can be compared and the best one chosen based on internal or external cluster validity measures such as average of silhouette width and Jaccard similarity index. Additionally to displaying in consul, the findings are provided as bar plots.
+The `findCluster()` function performs seven commonly used network clustering algorithms, with the option of preprocessing the input incidence matrix following the projecting of the bipartite network into unipartite networks. Preprocessing options such as using normalization and defining a threshold help us remove edges that have low weights or are weak edges. Also, it is possible to continue using binarized or original edge weights before performing community detection or clustering. Finally, all of the clustering methods that were used can be compared and the best one chosen based on internal or external cluster validity measures such as average of silhouette width and Jaccard similarity index. Additionally to displaying in consul, the findings are provided as bar plots.
 
 To begin, let us examine how to utilize `findCluster` to find clusters of `patient_id`s based on the `Rectangular_element_max` submatrix of the `beatAML` bipartite network projection to a patient's unipartite similarity network.
 
@@ -247,7 +247,7 @@ validateCluster(dist_mat = cls$distance_matrix,
 ```
 
 ## 5 Imputation
-### 5.1 impute missing data
+### 5.1 Imputing missing data
 The `imputeMissingValue()` function utilizes the given imputation methods to impute missing values in the input data matrix. The output is a list with each element representing an updated version of input data matrix with no missing values using a separate imputation method. The following is a detailed list of imputation techniques:
 
 - **median** will replace the missing values with the median of each rows (observations),

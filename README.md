@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# NIMAA <a href='https://github.com/jafarilab/NIMAA'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# NIMAA <a href='https://github.com/jafarilab/NIMAA'><img src="man/figures/logo.png" align="right" height="139"/></a>
 
 <!-- badges: start -->
 
@@ -11,11 +11,22 @@ status](https://www.r-pkg.org/badges/version/NIMAA)](https://cran.r-project.org/
 Release](https://img.shields.io/github/release/jafarilab/NIMAA?style=flat)](https://github.com/jafarilab/NIMAA/releases)
 [![Github All
 Releases](https://img.shields.io/github/downloads/jafarilab/NIMAA/total.svg?style=flat)](https://github.com/jafarilab/NIMAA)
+
 <!-- badges: end -->
 
-The NIMAA package [@nimaa] provides a comprehensive set of methods for performing nominal data mining.
+The NIMAA package \[@nimaa\] provides a comprehensive set of methods for
+performing nominal data mining.
 
-It employs bipartite graphs to demonstrate how two nominal variables are linked, and then places them in the incidence matrix to proceed with network analysis. NIMAA aids in characterizing the pattern of missing values in a dataset, locating large submatrices with non-missing values, and predicting edges within nominal variable labels. Then, given a submatrix, two unipartite graphs are constructed using various network projection methods. NIMAA provides a variety of choices for clustering projected networks and selecting the best one. The best clustering results can also be used as a benchmark for imputation analysis in weighted bipartite networks.
+It employs bipartite graphs to demonstrate how two nominal variables are
+linked, and then places them in the incidence matrix to proceed with
+network analysis. NIMAA aids in characterizing the pattern of missing
+values in a dataset, locating large submatrices with non-missing values,
+and predicting edges within nominal variable labels. Then, given a
+submatrix, two unipartite graphs are constructed using various network
+projection methods. NIMAA provides a variety of choices for clustering
+projected networks and selecting the best one. The best clustering
+results can also be used as a benchmark for imputation analysis in
+weighted bipartite networks.
 
 ## Installation
 
@@ -35,10 +46,12 @@ devtools::install_github("jafarilab/NIMAA")
 
 ## Example
 
-### Plot the original data:
+### Plotting the original data
 
 ``` r
 library(NIMAA)
+#> Warning in register(): Can't find generic `scale_type` in package ggplot2 to
+#> register S3 method.
 ## load the beatAML data
 beatAML_data <- NIMAA::beatAML
 
@@ -46,106 +59,104 @@ beatAML_data <- NIMAA::beatAML
 beatAML_incidence_matrix <- plotInput(
   x = beatAML_data, # original data with 3 columns
   index_nominal = c(2,1), # the first two columns are nominal data
-  index_numeric = 3,  # the third column inumeric data
-  print_skim = FALSE, # if you want to check the skim output, set this as TRUE(Default)
-  plot_weight = TRUE, # when plotting the figure, show the weights
+  index_numeric = 3,  # the third column is numeric data
+  print_skim = FALSE, # if you want to check the skim output, set this as TRUE
+  plot_weight = TRUE, # when plotting the weighted incidence matrix
+  verbose = FALSE # NOT save the figures to local folder
   )
 #> 
 #> Na/missing values Proportion:     0.2603
 ```
 
-<div class="figure" style="text-align: center">
+<img src="vignettes/patient_id-inhibitor.png" title="The beatAML dataset as an incidence matrix" alt="The beatAML dataset as an incidence matrix" width="100%" style="display: block; margin: auto;" />
 
-<img src="vignettes/patient_id-inhibitor.png" alt="beatAML dataset as incidence matrix" width="100%" />
-<p class="caption">
-beatAML dataset as incidence matrix
-</p>
-
-</div>
-
-### Plot the bipartite graph of the original data
+### Plotting the bipartite graph of the original data
 
 ``` r
-graph <- plotBipartite(inc_mat = beatAML_incidence_matrix)
+plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.display = T)
 ```
 
 <img src="man/figures/README-plotBipartite-1.png" width="100%" style="display: block; margin: auto;" />
 
-### Extract the sub-matrices without missing data
+    #> IGRAPH ceda410 UNWB 650 47636 -- 
+    #> + attr: name (v/c), type (v/l), shape (v/c), color (v/c), weight (e/n)
+    #> + edges from ceda410 (vertex names):
+    #>  [1] Alisertib (MLN8237)      --11-00261 Barasertib (AZD1152-HQPA)--11-00261
+    #>  [3] Bortezomib (Velcade)     --11-00261 Canertinib (CI-1033)     --11-00261
+    #>  [5] Crenolanib               --11-00261 CYT387                   --11-00261
+    #>  [7] Dasatinib                --11-00261 Doramapimod (BIRB 796)   --11-00261
+    #>  [9] Dovitinib (CHIR-258)     --11-00261 Erlotinib                --11-00261
+    #> [11] Flavopiridol             --11-00261 GDC-0941                 --11-00261
+    #> [13] Gefitinib                --11-00261 Go6976                   --11-00261
+    #> [15] GW-2580                  --11-00261 Idelalisib               --11-00261
+    #> + ... omitted several edges
 
-**extractSubMatrix()** will extract the sub-matrices which have no
-missing value inside or with specific proportion of missing values
-inside (not for elements-max matrix), depends on the user’s input.
+### Extracting large submatrices without missing values
+
+The `extractSubMatrix()` function extracts the submatrices that have
+non-missing values or have a certain percentage of missing values inside
+(not for elements-max matrix), depending on the argument’s input. The
+package vignette and help manual contain more details.
 
 ``` r
 sub_matrices <- extractSubMatrix(
-  beatAML_incidence_matrix,
-  shape = c("Square", "Rectangular_element_max"), # the shapes you want to extract
+  x = beatAML_incidence_matrix,
+  shape = c("Square", "Rectangular_element_max"), # the selected shapes of submatrices
   row.vars = "patient_id",
   col.vars = "inhibitor",
-  plot_weight = T,
+  plot_weight = TRUE,
+  print_skim = FALSE
   )
+#> binmatnest2.temperature 
+#>                20.12523 
+#> Size of Square:   96 rows x  96 columns 
+#> Size of Rectangular_element_max:      87 rows x  140 columns
 ```
 
-<div class="figure" style="text-align: center">
+<img src="vignettes/Row_wise_arrangement.png" title="Row-wise arrangement" alt="Row-wise arrangement" width="30%" />
+<img src="vignettes/Column_wise_arrangement.png" title="Column-wise arrangement" alt="Column-wise arrangement" width="100%" />
 
-<img src="vignettes/Row_wise_arrangement.png" alt="Row-wise arrangement" width="30%" />
-<p class="caption">
-Row-wise arrangement
-</p>
+### Cluster finding analysis of projected unipartite networks
 
-</div>
-
-<div class="figure" style="text-align: center">
-
-<img src="vignettes/Column_wise_arrangement.png" alt="Column-wise arrangement" width="100%" />
-<p class="caption">
-Column-wise arrangement
-</p>
-
-</div>
-
-### Do clustering based on sub-matrices
-
-**findCluster()** will perform optional pre-processing on the input
-incidence matrix, such as normalization. Then use the matrix to perform
-bipartite graph projection, and perform optional pre-processing in one
-of the specified parts, such as removing edges with lower weights, that
-is, weak edges.
+The `findCluster()` function implements seven widely used network
+clustering algorithms, with the option of preprocessing the input
+incidence matrix following the projecting of the bipartite network into
+unipartite networks. Also, internal and external measurements can be
+used to compare clustering algorithms. Details can be found in the
+package vignette and help manual.
 
 ``` r
 cls <- findCluster(
   sub_matrices$Rectangular_element_max,
   dim = 1,
-  method = "all", # clustering mehod
+  method = "all", # all available clustering methods
   normalization = TRUE, # normalize the input matrix
   rm_weak_edges = TRUE, # remove the weak edges in graph
-  rm_method = 'delete', # removing method is deleting the edges
-  threshold = 'median', # edges with weights under the median of all edges' weight are weak edges
+  rm_method = 'delete', # delete the weak edges instead of lowering their weights to 0.
+  threshold = 'median', # Use median of edges' weights as threshold
   set_remaining_to_1 = TRUE, # set the weights of remaining edges to 1
   )
+#> Warning in findCluster(sub_matrices$Rectangular_element_max, dim = 1, method =
+#> "all", : cluster_spinglass cannot work with unconnected graph
+#> 
+#> 
+#> |             |  walktrap|   louvain|   infomap| label_prop| leading_eigen| fast_greedy|
+#> |:------------|---------:|---------:|---------:|----------:|-------------:|-----------:|
+#> |modularity   | 0.0125994| 0.0825865| 0.0000000|  0.0000000|     0.0806766|   0.0825865|
+#> |avg.silwidth | 0.2109092| 0.1134990| 0.9785714|  0.9785714|     0.1001961|   0.1134990|
+#> |coverage     | 0.9200411| 0.5866393| 1.0000000|  1.0000000|     0.5806783|   0.5866393|
 ```
+
+<img src="man/figures/README-findcluster 1-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Impute missing data
 
-The **imputeMissingValue()** function can impute the missing values in
-the matrix, we only need to select which methods are needed. The result
-will be a list, each element is a matrix with no missing values.
-
-it will perform a variety of numerical imputation according to the
-user’s input, and return all the data that does not contain any missing
-data, a list of matrices.
-
--   ‘median’ will replace the missing values with the median of each
-    rows (observations)
-
--   ‘knn’ is the method in package
-
--   ‘als’ and ‘svd’ are methods from package
-
--   ‘CA’, ‘PCA’ and ‘FAMD’ are from package
-
--   others are from the famous package.
+The `imputeMissingValue()` function predicts new edges between nominal
+variables’ labels or imputes missing values in the input data matrix
+using several imputation methods. We can compare the imputation results
+using the `validateImputation()` function to choose the best method
+based on a predefined benchmark. The package vignette and help manual
+contain more details.
 
 ``` r
 imputations <- imputeMissingValue(
@@ -153,6 +164,33 @@ imputations <- imputeMissingValue(
   method = c('svd','median','als','CA')
   )
 ```
+
+``` r
+validateImputation(imputation = imputations,
+                   refer_community = cls$fast_greedy,
+                   clustering_args = cls$clustering_args)
+#> 
+#> 
+#> |       | Jaccard_similarity| Dice_similarity_coefficient| Rand_index| Minkowski (inversed)| Fowlkes_Mallows_index|
+#> |:------|------------------:|---------------------------:|----------:|--------------------:|---------------------:|
+#> |median |          0.7476353|                   0.8555964|  0.8628983|             1.870228|             0.8556407|
+#> |svd    |          0.7224792|                   0.8388829|  0.8458376|             1.763708|             0.8388853|
+#> |als    |          0.7290576|                   0.8433005|  0.8510791|             1.794478|             0.8433362|
+#> |CA     |          0.6935897|                   0.8190765|  0.8280576|             1.670030|             0.8191111|
+```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" />
+
+    #>   imputation_method Jaccard_similarity Dice_similarity_coefficient Rand_index
+    #> 1            median          0.7476353                   0.8555964  0.8628983
+    #> 2               svd          0.7224792                   0.8388829  0.8458376
+    #> 3               als          0.7290576                   0.8433005  0.8510791
+    #> 4                CA          0.6935897                   0.8190765  0.8280576
+    #>   Minkowski (inversed) Fowlkes_Mallows_index
+    #> 1             1.870228             0.8556407
+    #> 2             1.763708             0.8388853
+    #> 3             1.794478             0.8433362
+    #> 4             1.670030             0.8191111
 
 ## License
 

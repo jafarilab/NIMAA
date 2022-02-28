@@ -67,69 +67,61 @@ knitr::include_graphics("vignettes/patient_id-inhibitor.png")
 ### Plotting the bipartite graph of the original data
 
 ```{r plotBipartite, fig.height = 6, fig.width = 6, fig.align = "center"}
-graph <- plotBipartite(inc_mat = beatAML_incidence_matrix)
+plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.display = T)
 ```
 
-### Extract the sub-matrices without missing data
+### Extracting large submatrices without missing values
+The `extractSubMatrix()` function extracts the submatrices that have non-missing values or have a certain percentage of missing values inside (not for elements-max matrix), depending on the argument's input. The package vignette and help manual contain more details.
 
-**extractSubMatrix()** will extract the sub-matrices which have no missing value inside or with specific proportion of missing values inside (not for elements-max matrix), depends on the user's input.
-
-```{r extractSubMatrix, eval=FALSE}
+```{r extractSubMatrix, eval=TRUE}
 sub_matrices <- extractSubMatrix(
-  beatAML_incidence_matrix,
-  shape = c("Square", "Rectangular_element_max"), # the shapes you want to extract
+  x = beatAML_incidence_matrix,
+  shape = c("Square", "Rectangular_element_max"), # the selected shapes of submatrices
   row.vars = "patient_id",
   col.vars = "inhibitor",
-  plot_weight = T,
+  plot_weight = TRUE,
+  print_skim = FALSE
   )
 ```
 
-```{r, echo=FALSE, out.width="30%", fig.cap="Row-wise arrangement",fig.align = "center"}
+```{r, echo=FALSE, out.width="30%", fig.cap="Row-wise arrangement"}
 knitr::include_graphics("vignettes/Row_wise_arrangement.png")
 ```
-
-```{r, echo=FALSE, out.width="100%", fig.cap="Column-wise arrangement",fig.align = "center"}
+```{r, echo=FALSE, out.width="100%", fig.cap="Column-wise arrangement"}
 knitr::include_graphics("vignettes/Column_wise_arrangement.png")
 ```
 
-### Do clustering based on sub-matrices
+### Cluster finding analysis of projected unipartite networks
 
-**findCluster()** will perform optional pre-processing on the input incidence matrix, such as normalization. Then use the matrix to perform bipartite graph projection, and perform optional pre-processing in one of the specified parts, such as removing edges with lower weights, that is, weak edges.
+The `findCluster()` function implements seven widely used network clustering algorithms, with the option of preprocessing the input incidence matrix following the projecting of the bipartite network into unipartite networks. Also, internal and external measurements can be used to compare clustering algorithms. Details can be found in the package vignette and help manual.
 
-```{r, eval=FALSE}
+```{r findcluster 1, eval=TRUE, fig.height = 7, fig.width = 7, fig.align = "center"}
 cls <- findCluster(
   sub_matrices$Rectangular_element_max,
   dim = 1,
-  method = "all", # clustering mehod
+  method = "all", # all available clustering methods
   normalization = TRUE, # normalize the input matrix
   rm_weak_edges = TRUE, # remove the weak edges in graph
-  rm_method = 'delete', # removing method is deleting the edges
-  threshold = 'median', # edges with weights under the median of all edges' weight are weak edges
+  rm_method = 'delete', # delete the weak edges instead of lowering their weights to 0.
+  threshold = 'median', # Use median of edges' weights as threshold
   set_remaining_to_1 = TRUE, # set the weights of remaining edges to 1
   )
 ```
 
 ### Impute missing data
 
-The **imputeMissingValue()** function can impute the missing values in the matrix, we only need to select which methods are needed. The result will be a list, each element is a matrix with no missing values.
+The `imputeMissingValue()` function predicts new edges between nominal variables' labels or imputes missing values in the input data matrix using several imputation methods. We can compare the imputation results using the `validateImputation()` function to choose the best method based on a predefined benchmark. The package vignette and help manual contain more details.
 
-it will perform a variety of numerical imputation according to the user's input, and return all the data that does not contain any missing data, a list of matrices.
-
--   'median' will replace the missing values with the median of each rows (observations)
-
--   'knn' is the method in package \\code{bnstruct}
-
--   'als' and 'svd' are methods from package \\code{softImpute}
-
--   'CA', 'PCA' and 'FAMD' are from package \\code{missMDA}
-
--   others are from the famous \\code{mice} package.
-
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 imputations <- imputeMissingValue(
   inc_mat = beatAML_incidence_matrix,
   method = c('svd','median','als','CA')
   )
+```
+```{r, eval=TRUE, fig.height = 6, fig.width = 7, fig.align = "center"}
+validateImputation(imputation = imputations,
+                   refer_community = cls$fast_greedy,
+                   clustering_args = cls$clustering_args)
 ```
 
 ## License
