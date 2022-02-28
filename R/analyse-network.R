@@ -1,6 +1,6 @@
 #' Analyze the network (graph)
 #' @description This function analyzes the input graph object and returns
-#'   several technical indicators.
+#'   several indicators.
 #'
 #' @details This function mainly uses several methods in the igraph package to
 #'   analyze the input \href{https://igraph.org/r/}{igraph} graph object, and
