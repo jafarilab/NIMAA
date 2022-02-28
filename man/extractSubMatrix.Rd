@@ -13,7 +13,7 @@ extractSubMatrix(
   col.vars = NULL,
   bar = 1,
   plot_weight = FALSE,
-  print_skim = TRUE
+  print_skim = FALSE
 )
 }
 \arguments{

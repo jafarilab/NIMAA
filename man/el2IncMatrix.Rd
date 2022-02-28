@@ -4,7 +4,12 @@
 \alias{el2IncMatrix}
 \title{Convert Edge list to Incidence Matrix}
 \usage{
-el2IncMatrix(el, index_nominal = c(1, 2), index_numeric = 3, print_skim = TRUE)
+el2IncMatrix(
+  el,
+  index_nominal = c(1, 2),
+  index_numeric = 3,
+  print_skim = FALSE
+)
 }
 \arguments{
 \item{el}{A dataframe or matrix, edgelist data}

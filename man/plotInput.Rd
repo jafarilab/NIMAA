@@ -11,7 +11,7 @@ plotInput(
   palette = "Blues",
   verbose = FALSE,
   plot_weight = FALSE,
-  print_skim = TRUE
+  print_skim = FALSE
 )
 }
 \arguments{
