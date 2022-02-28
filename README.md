@@ -13,14 +13,9 @@ Release](https://img.shields.io/github/release/jafarilab/NIMAA?style=flat)](http
 Releases](https://img.shields.io/github/downloads/jafarilab/NIMAA/total.svg?style=flat)](https://github.com/jafarilab/NIMAA)
 <!-- badges: end -->
 
-The goal of NIMAA is to use bipartite graphs for nominal data mining.
+The NIMAA package [@nimaa] provides a comprehensive set of methods for performing nominal data mining.
 
-It can select a larger sub-matrix with no missing values in a matrix
-containing missing data, and then use the matrix to generate a bipartite
-graph and cluster on two projections. In addition, NIMAA can also impute
-the missing data, verify and score according to the previous clustering
-results obtained from the sub-matrix, and give suggestions on which
-imputation method is better.
+It employs bipartite graphs to demonstrate how two nominal variables are linked, and then places them in the incidence matrix to proceed with network analysis. NIMAA aids in characterizing the pattern of missing values in a dataset, locating large submatrices with non-missing values, and predicting edges within nominal variable labels. Then, given a submatrix, two unipartite graphs are constructed using various network projection methods. NIMAA provides a variety of choices for clustering projected networks and selecting the best one. The best clustering results can also be used as a benchmark for imputation analysis in weighted bipartite networks.
 
 ## Installation
 
