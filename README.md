@@ -78,9 +78,9 @@ plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.display = T)
 
 <img src="man/figures/README-plotBipartite-1.png" width="100%" style="display: block; margin: auto;" />
 
-    #> IGRAPH ceda410 UNWB 650 47636 -- 
+    #> IGRAPH b9ecc5b UNWB 650 47636 -- 
     #> + attr: name (v/c), type (v/l), shape (v/c), color (v/c), weight (e/n)
-    #> + edges from ceda410 (vertex names):
+    #> + edges from b9ecc5b (vertex names):
     #>  [1] Alisertib (MLN8237)      --11-00261 Barasertib (AZD1152-HQPA)--11-00261
     #>  [3] Bortezomib (Velcade)     --11-00261 Canertinib (CI-1033)     --11-00261
     #>  [5] Crenolanib               --11-00261 CYT387                   --11-00261
@@ -108,7 +108,7 @@ sub_matrices <- extractSubMatrix(
   print_skim = FALSE
   )
 #> binmatnest2.temperature 
-#>                20.12523 
+#>                20.12502 
 #> Size of Square:   96 rows x  96 columns 
 #> Size of Rectangular_element_max:      87 rows x  140 columns
 ```
@@ -149,7 +149,7 @@ cls <- findCluster(
 
 <img src="man/figures/README-findcluster 1-1.png" width="100%" style="display: block; margin: auto;" />
 
-### Impute missing data
+### Imputing missing data
 
 The `imputeMissingValue()` function predicts new edges between nominal
 variables’ labels or imputes missing values in the input data matrix
