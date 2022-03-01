@@ -1,6 +1,5 @@
-#' Analyze the network (graph)
-#' @description This function analyzes the input graph object and returns
-#'   several indicators.
+#' General analysis of the network (graph)
+#' @description This function returns some general network properties, allowing you to get a quick overview of the network topology.
 #'
 #' @details This function mainly uses several methods in the igraph package to
 #'   analyze the input \href{https://igraph.org/r/}{igraph} graph object, and

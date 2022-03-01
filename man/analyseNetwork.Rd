@@ -2,7 +2,7 @@
 % Please edit documentation in R/analyse-network.R
 \name{analyseNetwork}
 \alias{analyseNetwork}
-\title{Analyze the network (graph)}
+\title{General analysis of the network (graph)}
 \usage{
 analyseNetwork(graph)
 }
@@ -15,8 +15,7 @@ A list containing various indicators.
 edges, \emph{general_stats} are other indicators.
 }
 \description{
-This function analyzes the input graph object and returns
-several indicators.
+This function returns some general network properties, allowing you to get a quick overview of the network topology.
 }
 \details{
 This function mainly uses several methods in the igraph package to
