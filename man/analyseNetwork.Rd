@@ -2,33 +2,34 @@
 % Please edit documentation in R/analyse-network.R
 \name{analyseNetwork}
 \alias{analyseNetwork}
-\title{General analysis of the network (graph)}
+\title{General properties of the network}
 \usage{
 analyseNetwork(graph)
 }
 \arguments{
-\item{graph}{A igraph graph object.}
+\item{graph}{An \code{igraph} object.}
 }
 \value{
-A list containing various indicators.
-\emph{vertices} is the number of nodes, \emph{edges} is the number of
-edges, \emph{general_stats} are other indicators.
+A list containing \code{vertices} and \code{edges} centrality values as well as \code{general_stats} for the whole network.
 }
 \description{
-This function returns some general network properties, allowing you to get a quick overview of the network topology.
+Generic function for network properties, allowing you to get a quick overview of the network topology.
 }
 \details{
-This function mainly uses several methods in the igraph package to
-analyze the input \href{https://igraph.org/r/}{igraph} graph object, and
-summarize the indices as a result.
+The following measurements are calculated in one step using the \href{https://igraph.org/r/}{igraph} package to analyze the input graph object: the Degree, Betweenness, Closeness, Kleinberg's hub score and Eigenvector centrality of nodes (vertices), the Betweenness centrality of edges, number of nodes, edges and components, the edge density, global Eigenvector centrality value and global Kleinberg's hub centrality score.
 }
 \examples{
-# generate a graph
-g <- igraph::make_graph(c(1, 2, 3, 4, 1, 3), directed = FALSE)
-igraph::V(g)$name <- c("n1", "n2", "n3", "n4")
+# generate a toy graph
+g1 <- igraph::make_graph(c(1, 2, 3, 4, 1, 3), directed = FALSE)
+igraph::V(g1)$name <- c("n1", "n2", "n3", "n4")
+
+# generate random graph according to the Erdos-Renyi model
+g2 <- sample_gnm(10, 23)
+V(g2)$name <- letters[1:10]
 
 # run analyseNetwork
-analyseNetwork(g)
+analyseNetwork(g1)
+analyseNetwork(g2)
 }
 \seealso{
 \code{\link[igraph]{vcount}}, \code{\link[igraph]{ecount}},
