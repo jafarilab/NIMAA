@@ -13,13 +13,13 @@ A tibble with three variables:
 }
 }
 \source{
-\url{http://vizome.org/aml/}
+Tyner, Jeffrey W., et al.(2018), Functional Genomic Landscape of Acute Myeloid Leukaemia. Nature 562 (7728): 526–31.
 }
 \usage{
 beatAML
 }
 \description{
 The Beat AML program publishes an extensive genomic, drug response, and
-clinical dataset on acute myeloid leukemia. We selected some data from it.
+clinical dataset on acute myeloid leukemia. We represented drug response data from Beat AML program.
 }
 \keyword{datasets}

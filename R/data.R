@@ -1,7 +1,7 @@
 #' beatAML
 #'
 #' The Beat AML program publishes an extensive genomic, drug response, and
-#' clinical dataset on acute myeloid leukemia. We selected some data from it.
+#' clinical dataset on acute myeloid leukemia. We represented drug response data from Beat AML program.
 #'
 #' @format A tibble with three variables:
 #' \describe{
@@ -9,7 +9,7 @@
 #' \item{\code{patient_id}}{anonymous patient ID}
 #' \item{\code{median}}{the median of drug response at corresponding \code{inhibitor} and \code{patient_id}}
 #' }
-#' @source \url{http://vizome.org/aml/}
+#' @source Tyner, Jeffrey W., et al.(2018), Functional Genomic Landscape of Acute Myeloid Leukaemia. Nature 562 (7728): 526–31.
 "beatAML"
 
 #' herbIngredient
