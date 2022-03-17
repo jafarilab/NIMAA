@@ -9,7 +9,7 @@
 #' \item{\code{patient_id}}{anonymous patient ID}
 #' \item{\code{median}}{the median of drug response at corresponding \code{inhibitor} and \code{patient_id}}
 #' }
-#' @source Tyner, Jeffrey W., et al.(2018), Functional Genomic Landscape of Acute Myeloid Leukaemia. Nature 562 (7728): 526–31.
+#' @source \url{http://vizome.org/aml/}
 "beatAML"
 
 #' herbIngredient
