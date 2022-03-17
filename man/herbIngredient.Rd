@@ -7,8 +7,8 @@
 \format{
 A tibble with two variables:
 \describe{
-\item{\code{herb}}{names of herbs}
-\item{\code{pubchem_id}}{unique id of ingredients in pubchemn for \code{herb}}
+\item{\code{herb}}{Scientific Latin names of herbs avialbale in TCMID database}
+\item{\code{pubchem_id}}{unique compound id (CID) of ingredients in pubchem database for available \code{herb} in TCMID database}
 }
 }
 \source{
@@ -18,8 +18,6 @@ A tibble with two variables:
 herbIngredient
 }
 \description{
-This data set used the second version of the TCMID database, as the largest
-dataset in TCM herbs field, which contains richer experimental data
-originating from ingredient-specific and herbal mass spectrometry spectra.
+The second version of the TCMID database, which included additional ingredient-specific experimental data based on herbal mass spectrometry spectra, was used as the largest dataset in the TCM herb sector. The herb and ingredient associations from this database are provided here.
 }
 \keyword{datasets}
