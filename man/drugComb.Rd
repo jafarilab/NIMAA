@@ -11,19 +11,14 @@ A tibble with three variables:
 \item{\code{cell_line}}{cell_line for each \code{inhibitor}}
 \item{\code{median}}{the median of drug response at corresponding \code{inhibitor} and \code{cell_line}}
 }
-
-For further details, see
-\url{https://academic.oup.com/nar/article-abstract/47/W1/W43/5486743}
 }
 \source{
-\url{https://www.biorxiv.org/content/10.1101/2021.03.18.436040v3.full}
+Zheng, S., Aldahdooh, J., Shadbahr, T., Wang, Y., Aldahdooh, D., Bao, J., Wang, W., Tang, J. (2021). DrugComb update: a more comprehensive drug sensitivity data repository and analysis portal, Nucleic Acids Research, 49(W1), W174–W184.  \url{https://academic.oup.com/nar/article/49/W1/W174/6290546}
 }
 \usage{
 drugComb
 }
 \description{
-DrugComb collect datasets from several major drug combination studies,
-covering 437 923 drug combination experiments with 7 423 800 data points
-across 93 human cancer cell lines.
+DrugComb is a web-based portal for storing and analyzing drug combination screening datasets, containing 739,964 drug combination experiments across 2320 cancer cell lines and 8397 drugs. Single drug screening was extracted and provided here as a subset of drug combination experiments.
 }
 \keyword{datasets}

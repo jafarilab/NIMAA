@@ -18,8 +18,6 @@ A tibble with two variables:
 robertson
 }
 \description{
-The author listed 1429 animal species visiting flowers of 456 plant species
-that grew in a small area in soutWhwestern Illinois, USA. Marlin and LaBerge
-(2001) describe Robertson’s methods.
+The author listed 1429 animal species visiting flowers of 456 plant species that grew in a small area in soutWhwestern Illinois, USA. Marlin and LaBerge (2001) describe Robertson’s methods.
 }
 \keyword{datasets}

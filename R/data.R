@@ -13,23 +13,20 @@
 
 #' herbIngredient
 #'
-#' The second version of the TCMID database, which included additional ingredient-specific experimental data based on herbal mass spectrometry spectra, was used as the largest dataset in the TCM herb sector. The herb and ingredient associations from this database are provided here.
+#' The second version of the TCMID database was used as one of the large datasets in the TCM herb field. TCMID includes additional ingredient-specific experimental data based on herbal mass spectrometry spectra. The herb and ingredient associations from this database are provided here.
 #'
 #'
 #' @format A tibble with two variables:
 #' \describe{
-#' \item{\code{herb}}{Scientific Latin names of herbs avialbale in TCMID database}
-#' \item{\code{pubchem_id}}{unique compound id (CID) of ingredients in pubchem database for available \code{herb} in TCMID database}
+#' \item{\code{herb}}{Scientific Latin names of available herbs in TCM database}
+#' \item{\code{pubchem_id}}{unique compound id (CID) of ingredients based on PubChem database for available \code{herb} in TCMID database}
 #' }
-#' @source
-#' \url{https://www.frontiersin.org/articles/10.3389/fphar.2020.01319/full#h6}
+#' @source Huang, L., Xie, D., Yu, Y., Liu, H., Shi, Y., Shi, T., & Wen, C. (2018). TCMID 2.0: a comprehensive resource for TCM. Nucleic acids research, 46(D1), D1117–D1120. \url{http://www.megabionet.org/tcmid/}
 "herbIngredient"
 
 #' drugComb
 #'
-#' DrugComb collect datasets from several major drug combination studies,
-#' covering 437 923 drug combination experiments with 7 423 800 data points
-#' across 93 human cancer cell lines.
+#' DrugComb is a web-based portal for storing and analyzing drug combination screening datasets, containing 739,964 drug combination experiments across 2320 cancer cell lines and 8397 drugs. Single drug screening was extracted and provided here as a subset of drug combination experiments.
 #'
 #' @format A tibble with three variables:
 #' \describe{
@@ -38,17 +35,13 @@
 #' \item{\code{median}}{the median of drug response at corresponding \code{inhibitor} and \code{cell_line}}
 #' }
 #'
-#'   For further details, see
-#'   \url{https://academic.oup.com/nar/article-abstract/47/W1/W43/5486743}
-#' @source \url{https://www.biorxiv.org/content/10.1101/2021.03.18.436040v3.full}
+#' @source Zheng, S., Aldahdooh, J., Shadbahr, T., Wang, Y., Aldahdooh, D., Bao, J., Wang, W., Tang, J. (2021). DrugComb update: a more comprehensive drug sensitivity data repository and analysis portal, Nucleic Acids Research, 49(W1), W174–W184.  \url{https://academic.oup.com/nar/article/49/W1/W174/6290546}
 #'
 "drugComb"
 
 #' robertson
 #'
-#' The author listed 1429 animal species visiting flowers of 456 plant species
-#' that grew in a small area in soutWhwestern Illinois, USA. Marlin and LaBerge
-#' (2001) describe Robertson’s methods.
+#' The author listed 1429 animal species visiting flowers of 456 plant species that grew in a small area in soutWhwestern Illinois, USA. Marlin and LaBerge (2001) describe Robertson’s methods.
 #'
 #' @format A tibble with two variables:
 #' \describe{
