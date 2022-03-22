@@ -2,7 +2,7 @@
 % Please edit documentation in R/find-cluster.R
 \name{findCluster}
 \alias{findCluster}
-\title{Find clusters in one-partite graph}
+\title{Find clusters in projected unipartite graphs}
 \usage{
 findCluster(
   inc_mat,
@@ -42,10 +42,10 @@ findCluster(
 A list containing the clustering results.
 }
 \description{
-This function will extract the clusters in one projection of the bipartite graph of the given incidence matrix.
+This function looks for the clusters in the projected unipartite graphs of the bipartite graph (the incidence matrix) that was given to it.
 }
 \details{
-This function will perform optional pre-processing on the input incidence matrix, such as normalization. Then use the matrix to perform bipartite graph projection, and perform optional pre-processing in one of the specified parts, such as removing edges with lower weights, that is, weak edges. The removal method and threshold selection can also be specified, and for the remaining You can choose to keep the original weight or set all of them to 1. For the graphs obtained after processing, implement some clustering methods in \href{https://igraph.org/r/}{igraph} to obtain the classification results. In addition, if there is an input of external features (prior knowledge), the function will also compare the clustering results obtained with external features regard similarity.
+This function performs optional preprocessing, such as normalization, on the input incidence matrix (bipartite graph). The matrix is then used to perform bipartite graph projection and optional preprocessing on one of the projected networks specified, such as removing edges with low weights (weak edges). Additionally, the user can specify the removal method, threshold value, or binarization of the weights. For the graphs obtained after processing, this function implements some clustering methods in \href{https://igraph.org/r/}{igraph} such as "walktrap" and "infomap", to detect the communities within the network. Furthermore, if external features (prior knowledge) are provided, the function compares the clustering results obtained with the external features in terms of similarity as an external validation of clustering. Otherwise, several internal validation criteria such as modularity and coverage are only represented to compare the clustering results.
 }
 \examples{
 # generate a incidence matrix
