@@ -7,17 +7,17 @@
 \format{
 A tibble with two variables:
 \describe{
-\item{\code{plant}}{names of plants}
-\item{\code{pollinator}}{names of pollinators for \code{plant}}
+\item{\code{plant}}{Scientific Latin names of plants}
+\item{\code{pollinator}}{Scientific Latin names of pollinators for the \code{plant}}
 }
 }
 \source{
-\url{http://www.ecologia.ib.usp.br/iwdb/html/robertson_1929.html}
+Marlin, J. C., & LaBerge, W. E. (2001). The native bee fauna of Carlinville, Illinois, revisited after 75 years: a case for persistence. Conservation Ecology, 5(1). \url{http://www.ecologia.ib.usp.br/iwdb/html/robertson_1929.html}
 }
 \usage{
 robertson
 }
 \description{
-The author listed 1429 animal species visiting flowers of 456 plant species that grew in a small area in soutWhwestern Illinois, USA. Marlin and LaBerge (2001) describe Robertson’s methods.
+Charles Robertson's detailed collections provide as an amazing resource for long-term comparisons of numerous terrestrial plant and insect species collected in a single location. From 1884 through 1916, Robertson observed and collected 1429 insect species that visited 456 flower of plant species. He gathered this dataset in Macoupin County, Illinois, USA, within a 16-kilometer radius of Carlinville.
 }
 \keyword{datasets}
