@@ -1,43 +1,21 @@
-#' Extract the percentage-cut-off non-missing sub-matrices in a given matrix.
+#' Extract the non-missing submatrices from a given matrix.
 #'
-#' @description This function arrange the input matrix, extract the sub-matrices
-#'   without any missing value or with specific proportion of missing values
-#'   (not for elements-max matrix). The result will also be showed as plotly
-#'   figure.
-#' @details The extraction process has two types of data preprocessing, the
-#'   difference is that the first one directly uses the original input matrix
-#'   (row-wise), while the second one uses the transposed matrix (column-wise).
-#'   After preprocessing, the matrix will be "three-step arrangement", the first
-#'   step is row arranging, the second step is col arranging, and the third step
-#'   is total rearranging. Then look for the largest possible matrix (with no
-#'   missing values) in the four dimensions, output the result and print the
-#'   visualization.
+#' @description This function arranges the input matrix and extracts the submatrices with non-missing values or with a specific proportion of missing values (except for the elements-max submatrix). The result is also shown as \code{plotly} figure.
+#' @details This function performs row- and column-wise preprocessing in order to extract the largest submtrices. The distinction is that the first employs the original input matrix (row-wise), whereas the second employs the transposed matrix (column-wise). Following that, this function performs a "three-step arrangement" on the matrix, the first step being row-by-row arrangement, the second step being column-by-column arrangement, and the third step being total rearranging. Then, using four strategies, namely "Square", "Rectangular row", "Rectangular col", and "Rectangular element max", this function finds the largest possible submatrix (with no missing values), outputs the result, and prints the visualization. "Square" denotes the square submatric with the same number of rows and columns. "Rectangular_row" indicates the submatrices with the most rows. "Rectangular_col" denotes the submatrices with the most columns. "Rectangular_element_max" indicates the submatrices with the most elements which is typically a rectangular submatrix.
 #'
 #' @seealso \code{\link[dplyr]{arrange}}, \code{\link[dplyr]{arrange_if}}
 #'
-#' @param x A matrix including valid values and NAs.
-#' @param shape A string array indicating the shape of the output, by defalut is
-#'   "All", other options are "Square", "Rectangular_row", "Rectangular_col",
-#'   "Rectangular_element_max".
-#' @param verbose A Boolean value, If \code{TRUE}, the plot will be saved as the
-#'   .png file in the working directory. By default is \code{FALSE}.
-#' @param palette A string or number. Color palette used for the heatmap. By
-#'   default is 'Blues'. (Find the option in the ggplot2 manual 'Sequential,
-#'   diverging and qualitative colour scales from ColorBrewer')
+#' @param x A matrix.
+#' @param shape A string array indicating the shape of the submatrix, by default is "All", other options are "Square", "Rectangular_row", "Rectangular_col", "Rectangular_element_max".
+#' @param verbose A Boolean value, If \code{TRUE}, the plot is saved as the .png file in the working directory. By default, it is \code{FALSE}.
+#' @param palette A string or number. Color palette used for the visualization. By default, it is 'Blues'.
 #' @param row.vars A string, the name for the row variable.
 #' @param col.vars A string, the name for the column variable.
-#' @param bar A numeric value bigger than0 and less or equal to 0. The cut-off
-#'   percentage, i.e., the proportion of non missing values. By default is 1,
-#'   which means there is no missing value in sub-matrices. This argument is not
-#'   applicable for elements-max sub-matrix.
-#' @param plot_weight A A Boolean value, If \code{TRUE}, then the funtion will
-#'   print matrices with weights, otherwise it will print the matrices with all
-#'   weights as 1.
-#' @param print_skim A Boolean value, If \code{TRUE}, then the funtion will
-#'   print \code{\link[skimr]{skim}} information in console.
+#' @param bar A numeric value. The cut-off percentage, i.e., the proportion of non-missing values. By default, it is set to 1, indicating that no missing values are permitted in the submatrices. This argument is not applicable to the elements-max sub-matrix.
+#' @param plot_weight A Boolean value, If \code{TRUE}, then the function prints submatrices with weights, otherwise it prints the submatrices with all weights as 1.
+#' @param print_skim A Boolean value, If \code{TRUE}, then the function prints \code{\link[skimr]{skim}} information in console. By default, it is \code{FALSE}.
 #'
-#' @return A matrix or a list of matrices, with non(bar = 1) or few missing
-#'   value inside.
+#' @return A matrix or a list of matrices, with non-missing (bar = 1) or few missing value inside.
 #' @importFrom  bipartite nested
 #' @import ggplot2
 #' @importFrom  dplyr arrange arrange_if
@@ -51,16 +29,11 @@
 #' data <- NIMAA::beatAML[1:10000,]
 #'
 #' # convert to incidence matrix
-#' inc_mat <- NIMAA::el2IncMatrix(data, print_skim = FALSE)
+#' inc_mat <- NIMAA::el2IncMatrix(data)
 #'
-#' # extract sub-matricess without missing value
-#' sub_matrices <- extractSubMatrix(
-#' inc_mat,
-#' print_skim = FALSE,
-#' col.vars = "patient_id",
-#' row.vars = "inhibitor",
-#' verbose = FALSE
-#' )
+#' # extract sub-matricess with non-missing values
+#' sub_matrices <- extractSubMatrix(inc_mat,
+#' col.vars = "patient_id", row.vars = "inhibitor")
 extractSubMatrix <- function(x,
                              shape = "All",
                              verbose = FALSE,
