@@ -12,38 +12,37 @@ el2IncMatrix(
 )
 }
 \arguments{
-\item{el}{A dataframe or matrix, edgelist data}
+\item{el}{A data frame or matrix object as an edge list.}
 
-\item{index_nominal}{A vector with two values. The indexes for the nominal
-columns (the first value indicating the rows objects and the second value
-indicating the column object).}
+\item{index_nominal}{A vector with two values represents the indices for the nominal columns. The first value indicates the row objects and the second value indicates the column objects in the incidence matrix output.}
 
-\item{index_numeric}{An integer, the index for numeric values. (this is value
-for selecting the column which contains our numeric values and we change it
-to the matrix for missing value investigation and imputation).}
+\item{index_numeric}{An integer, the index for numeric values. This is value for selecting the column which contains the numeric values of pairwise relationship. This column is used for missing value investigation and imputation steps.}
 
-\item{print_skim}{A Boolean value, If \code{TRUE}, then the funtion will
-print \code{\link[skimr]{skim}} information in console.}
+\item{print_skim}{A Boolean value, If \code{TRUE}, then the function will print \code{\link[skimr]{skim}} information in console.}
 }
 \value{
 The incidence matrix
 }
 \description{
-This function will convert edge-list-format data (usually a
-dataframe concluding 2/3 columns stand for two parts and possible numerical
-relationship) to a matrix (columns and rows stand for two parts, values in
-the matrix are the 'relationship')
+This function converts data in the edge list format to an incidence matrix. An edge list is typically a data frame with two (or three) columns representing starting and ending nodes (or with a possible numerical relationship). The elements in the incidence matrix are the binary or numeric values of the pairwise relationships.
 }
 \examples{
-# generate a edgelist
-el <- data.frame(
-  A = c(1, 2, 3, 4, 5, 6),
-  B = c("a", "b", "c", "e", "f", "g"),
-  m = c(1, 2, 1, 2, 1, 2)
+# generate an edge list without numeric value
+el1 <- data.frame(
+  Part1 = c("d", "e", "e", "b", "a", "a"),
+  Part2 = c("J", "N", "O", "R", "R", "L")
 )
 
-# run el2IncMatrix() to convert edgelist to incidence matrix
-inc_mat <- el2IncMatrix(el, print_skim = FALSE)
+# generate an edge list with numeric value
+el2 <- data.frame(
+  Part1 = c("d", "e", "e", "b", "a", "a"),
+  Part2 = c("J", "N", "O", "R", "R", "L"),
+  Value = c(4, 5, 5, 8, 7, 7)
+)
+
+# run el2IncMatrix() to convert the edge list to the incidence matrix
+inc_mat1 <- el2IncMatrix(el1)
+inc_mat2 <- el2IncMatrix(el2)
 }
 \seealso{
 \code{\link[tidyr]{pivot_wider}},
