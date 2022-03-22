@@ -20,58 +20,32 @@ findCluster(
 \arguments{
 \item{inc_mat}{A matrix including valid values and NAs.}
 
-\item{dim}{An integer, 1 or 2, indicating which one-partite projection should
-be used. Default is 1}
+\item{dim}{An integer, 1 or 2, indicating which one-partite projection should be used. Default is 1.}
 
-\item{method}{A string array indicating the clustering methods. Defalut is
-"all" which means all clutering methods in this function will be used,
-other options are conbinations of "walktrap", "multi level", "infomap",
-"label propagation", "leading eigenvector", "spinglass", "fast greedy".}
+\item{method}{A string array indicating the clustering methods. Defalut is "all" which means all clutering methods in this function will be used, other options are conbinations of "walktrap", "multi level", "infomap", "label propagation", "leading eigenvector", "spinglass", "fast greedy".}
 
-\item{normalization}{A logical, whether to normalize the weights. Default is
-TRUE.}
+\item{normalization}{A logical, whether to normalize the weights. Default is TRUE.}
 
-\item{rm_weak_edges}{A logical, whether to remove the weak edges. Default is
-TRUE.}
+\item{rm_weak_edges}{A logical, whether to remove the weak edges. Default is TRUE.}
 
-\item{rm_method}{A string indicating the weak edges removing method, if
-'rm_weak_edges' is False, then this argument will be ignored. Default is
-'delete', which means delete weak edges from graph, other option is
-'as_zero', set the weak edges' weights to 0.}
+\item{rm_method}{A string indicating the weak edges removing method, if 'rm_weak_edges' is False, then this argument will be ignored. Default is 'delete', which means delete weak edges from graph, other option is 'as_zero', set the weak edges' weights to 0.}
 
-\item{threshold}{A string indicating the weak edges threshold selection
-method, if 'rm_weak_edges' is False, then this argument will be ignored..
-Default is 'median', other option is 'keep_connected', removing edges in
-ascending order of weight until the last one that keep the graph connected.}
+\item{threshold}{A string indicating the weak edges threshold selection method, if 'rm_weak_edges' is False, then this argument will be ignored. Default is 'median', other option is 'keep_connected', removing edges in ascending order of weight until the last one that keep the graph connected.}
 
-\item{set_remaining_to_1}{A logical, whether to set the remaining edges'
-weight to 1. Default is TRUE.}
+\item{set_remaining_to_1}{A logical, whether to set the remaining edges' weight to 1. Default is TRUE.}
 
-\item{extra_feature}{A dataframe has only one column indicating the
-membership of each nodes (rownames).}
+\item{extra_feature}{A dataframe has only one column indicating the membership of each nodes (rownames).}
 
-\item{comparison}{A logical, whether to compare different clustering methods'
-result. Default is TRUE.}
+\item{comparison}{A logical, whether to compare different clustering methods' result. Default is TRUE.}
 }
 \value{
 A list containing the clustering results.
 }
 \description{
-This function will extract the clusters in one projection of the
-bipartite graph of the given incidence matrix.
+This function will extract the clusters in one projection of the bipartite graph of the given incidence matrix.
 }
 \details{
-This function will perform optional pre-processing on the input
-incidence matrix, such as normalization. Then use the matrix to perform
-bipartite graph projection, and perform optional pre-processing in one of
-the specified parts, such as removing edges with lower weights, that is,
-weak edges. The removal method and threshold selection can also be
-specified, and for the remaining You can choose to keep the original weight
-or set all of them to 1. For the graphs obtained after processing,
-implement some clustering methods in \href{https://igraph.org/r/}{igraph}
-to obtain the classification results. In addition, if there is an input of
-external features (prior knowledge), the function will also compare the
-clustering results obtained with external features regard similarity.
+This function will perform optional pre-processing on the input incidence matrix, such as normalization. Then use the matrix to perform bipartite graph projection, and perform optional pre-processing in one of the specified parts, such as removing edges with lower weights, that is, weak edges. The removal method and threshold selection can also be specified, and for the remaining You can choose to keep the original weight or set all of them to 1. For the graphs obtained after processing, implement some clustering methods in \href{https://igraph.org/r/}{igraph} to obtain the classification results. In addition, if there is an input of external features (prior knowledge), the function will also compare the clustering results obtained with external features regard similarity.
 }
 \examples{
 # generate a incidence matrix
