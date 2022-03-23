@@ -21,7 +21,7 @@ extractSubMatrix(
 
 \item{shape}{A string array indicating the shape of the submatrix, by default is "All", other options are "Square", "Rectangular_row", "Rectangular_col", "Rectangular_element_max".}
 
-\item{verbose}{A Boolean value, If \code{TRUE}, the plot is saved as the .png file in the working directory. By default, it is \code{FALSE}.}
+\item{verbose}{A logical value, If \code{TRUE}, the plot is saved as the .png file in the working directory. By default, it is \code{FALSE}.}
 
 \item{palette}{A string or number. Color palette used for the visualization. By default, it is 'Blues'.}
 
@@ -31,9 +31,9 @@ extractSubMatrix(
 
 \item{bar}{A numeric value. The cut-off percentage, i.e., the proportion of non-missing values. By default, it is set to 1, indicating that no missing values are permitted in the submatrices. This argument is not applicable to the elements-max sub-matrix.}
 
-\item{plot_weight}{A Boolean value, If \code{TRUE}, then the function prints submatrices with weights, otherwise it prints the submatrices with all weights as 1.}
+\item{plot_weight}{A logical value, If \code{TRUE}, then the function prints submatrices with weights, otherwise it prints the submatrices with all weights as 1.}
 
-\item{print_skim}{A Boolean value, If \code{TRUE}, then the function prints \code{\link[skimr]{skim}} information in console. By default, it is \code{FALSE}.}
+\item{print_skim}{A logical value, If \code{TRUE}, then the function prints \code{\link[skimr]{skim}} information in console. By default, it is \code{FALSE}.}
 }
 \value{
 A matrix or a list of matrices, with non-missing (bar = 1) or few missing value inside.

@@ -108,12 +108,12 @@ cls <- findCluster(
   )
 ```
 
-### Imputing missing data
+### Predict edge in bipartite network
 
-The `imputeMissingValue()` function predicts new edges between nominal variables' labels or imputes missing values in the input data matrix using several imputation methods. We can compare the imputation results using the `validateImputation()` function to choose the best method based on a predefined benchmark. The package vignette and help manual contain more details.
+The `predictEdge()` function predicts new edges between nominal variables' labels or imputes missing values in the input data matrix using several imputation methods. We can compare the imputation results using the `validateImputation()` function to choose the best method based on a predefined benchmark. The package vignette and help manual contain more details.
 
 ```{r,eval=TRUE}
-imputations <- imputeMissingValue(
+imputations <- predictEdge(
   inc_mat = beatAML_incidence_matrix,
   method = c('svd','median','als','CA')
   )

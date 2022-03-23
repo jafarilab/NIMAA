@@ -1,5 +1,5 @@
-#' Impute the missing value in the given matrix.
-#' @description This function will call several data imputation methods, where the columns of the matrix are different objects, and the rows represent multiple observations.
+#' Edge prediction of weighted bipartite network.
+#' @description This function utilizes several data imputation methods in order to predict the existence of a link between two nodes by imputing the edges' weight in a weighted bipartite network of nominal data.
 #'
 #' @details First, this function will convert the column name and row name to avoid possible interpolation failures caused by the special characters of the column name and row name. Then it will perform a variety of numerical imputation according to the user's input, and return all the data that does not contain any missing data, a list of matrices. 'median' will replace the missing values with the median of each rows(observations), 'knn' is the  method in package \code{bnstruct}, 'als' and 'svd' are methods from package \code{softImpute}, 'CA', 'PCA' and 'FAMD' are from package \code{missMDA}, others are from the famous \code{mice}.
 #'
@@ -28,8 +28,8 @@
 #' inc_mat <- el2IncMatrix(data, print_skim = FALSE)
 #'
 #' # impute
-#' imputeMissingValue(inc_mat)
-imputeMissingValue <- function(inc_mat,
+#' predictEdge(inc_mat)
+predictEdge <- function(inc_mat,
                                method = c("svd", "median", "als", "CA")) {
   if (TRUE %in% rowSums(is.na(inc_mat)) == ncol(inc_mat)) {
     warning("Some observation row(s) are all Na, removed")

@@ -244,9 +244,9 @@ validateCluster(dist_mat = cls$distance_matrix,
                 community = cls$leading_eigen)
 ```
 
-## 5 Imputation
-### 5.1 Imputing missing data
-The `imputeMissingValue()` function utilizes the given imputation methods to impute missing values in the input data matrix. The output is a list with each element representing an updated version of input data matrix with no missing values using a separate imputation method. The following is a detailed list of imputation techniques:
+## 5 Edge prediction
+### 5.1 Predicting of edge in bipartite network
+The `predictEdge()` function utilizes the given imputation methods to impute missing values in the input data matrix. The output is a list with each element representing an updated version of input data matrix with no missing values using a separate imputation method. The following is a detailed list of imputation techniques:
 
 - **median** will replace the missing values with the median of each rows (observations),
 
@@ -259,14 +259,14 @@ The `imputeMissingValue()` function utilizes the given imputation methods to imp
 - others are from the famous `mice` package [@mice].
 
 ```{r}
-imputations <- imputeMissingValue(inc_mat = beatAML_incidence_matrix,
+imputations <- predictEdge(inc_mat = beatAML_incidence_matrix,
                                   method = c('svd','median','als','CA'))
 # show the result format
 summary(imputations)
 ```
 
-### 5.2 Validating imputations
-The `validateImputation()` function compares the results of clustering after imputation with a predefined benchmark to see how similar they are. After validating clustering on submatrices with non-missing values, the benchmark had already been set up in the previous step. This function does the analysis for a number of user-specified imputation methods. It's also possible to see how each method is ranked by looking at a ranking plot. The following measures are used to compare the methods:
+### 5.2 Validating prediction
+The `validatePrediction()` function compares the results of clustering after imputation with a predefined benchmark to see how similar they are. After validating clustering on submatrices with non-missing values, the benchmark had already been set up in the previous step. This function does the analysis for a number of user-specified imputation methods. It's also possible to see how each method is ranked by looking at a ranking plot. The following measures are used to compare the methods:
 
 - Jaccard similarity index
 
@@ -279,7 +279,7 @@ The `validateImputation()` function compares the results of clustering after imp
 - Fowlkes–Mallows index
 
 ```{r, eval=TRUE, fig.height = 6, fig.width = 7, fig.align = "center"}
-validateImputation(imputation = imputations,
+validatePrediction(imputation = imputations,
                    refer_community = cls$fast_greedy,
                    clustering_args = cls$clustering_args)
 ```

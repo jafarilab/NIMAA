@@ -40,7 +40,7 @@
 #' refer_community = cls$fast_greedy,
 #' clustering_args = cls$clustering_args
 #' )
-validateImputation <- function(imputation,
+validatePrediction <- function(imputation,
                                refer_community,
                                clustering_args) {
   if (is.matrix(imputation)) {

@@ -6,7 +6,7 @@
 \usage{
 findCluster(
   inc_mat,
-  dim = 1,
+  part = 1,
   method = "all",
   normalization = TRUE,
   rm_weak_edges = TRUE,
@@ -18,28 +18,28 @@ findCluster(
 )
 }
 \arguments{
-\item{inc_mat}{A matrix including valid values and NAs.}
+\item{inc_mat}{An incidence matrix.}
 
-\item{dim}{An integer, 1 or 2, indicating which one-partite projection should be used. Default is 1.}
+\item{part}{An integer, 1 or 2, indicating which unipartite projection should be used. The default is 1.}
 
-\item{method}{A string array indicating the clustering methods. Defalut is "all" which means all clutering methods in this function will be used, other options are conbinations of "walktrap", "multi level", "infomap", "label propagation", "leading eigenvector", "spinglass", "fast greedy".}
+\item{method}{A string array indicating the clustering methods. The defalut is "all", which means all available clustering methods in this function are utilized. Other options are combinations of "walktrap", "multi level", "infomap", "label propagation", "leading eigenvector", "spinglass", and "fast greedy".}
 
-\item{normalization}{A logical, whether to normalize the weights. Default is TRUE.}
+\item{normalization}{A logical value indicating whether edge weights should be normalized before the computation proceeds. The default is TRUE.}
 
-\item{rm_weak_edges}{A logical, whether to remove the weak edges. Default is TRUE.}
+\item{rm_weak_edges}{A logical value indicating whether weak edges should be removed before the computation proceeds. The default is TRUE.}
 
-\item{rm_method}{A string indicating the weak edges removing method, if 'rm_weak_edges' is False, then this argument will be ignored. Default is 'delete', which means delete weak edges from graph, other option is 'as_zero', set the weak edges' weights to 0.}
+\item{rm_method}{A string indicating the weak edges removing method. If \code{rm_weak_edges} is False, then this argument will be ignored. The default is \code{delete}, which means deleting weak edges from the graph. The other option is \code{as_zero}, which sets the weak edges' weights to 0.}
 
-\item{threshold}{A string indicating the weak edges threshold selection method, if 'rm_weak_edges' is False, then this argument will be ignored. Default is 'median', other option is 'keep_connected', removing edges in ascending order of weight until the last one that keep the graph connected.}
+\item{threshold}{A string indicating the weak edge threshold selection method. If \code{rm_weak_edges} is False, then this argument will be ignored. By default, \code{median} is used. The other option is \code{keep_connected}, which prevents the graph from being unconnected and removes edges in ascending order of weights.}
 
-\item{set_remaining_to_1}{A logical, whether to set the remaining edges' weight to 1. Default is TRUE.}
+\item{set_remaining_to_1}{A logical value indicating whether the remaining edges' weight should be set to 1. The default is TRUE.}
 
-\item{extra_feature}{A dataframe has only one column indicating the membership of each nodes (rownames).}
+\item{extra_feature}{A data frame object that shows the group membership of each node based on prior knowledge.}
 
-\item{comparison}{A logical, whether to compare different clustering methods' result. Default is TRUE.}
+\item{comparison}{A logical value indicating whether clustering methods should be compared to each other using internal measures of clustering, including modularity, average silluoutte width, and coverage. The default value is TRUE.}
 }
 \value{
-A list containing the clustering results.
+A list containing the igraph object of the projected network, the clustering results of each method on the projected network separately, along with a comparison between them. The comparison of selected clustering methods is also presented as bar plots simultaneously.
 }
 \description{
 This function looks for the clusters in the projected unipartite graphs of the bipartite graph (the incidence matrix) that was given to it.
@@ -48,7 +48,7 @@ This function looks for the clusters in the projected unipartite graphs of the b
 This function performs optional preprocessing, such as normalization, on the input incidence matrix (bipartite graph). The matrix is then used to perform bipartite graph projection and optional preprocessing on one of the projected networks specified, such as removing edges with low weights (weak edges). Additionally, the user can specify the removal method, threshold value, or binarization of the weights. For the graphs obtained after processing, this function implements some clustering methods in \href{https://igraph.org/r/}{igraph} such as "walktrap" and "infomap", to detect the communities within the network. Furthermore, if external features (prior knowledge) are provided, the function compares the clustering results obtained with the external features in terms of similarity as an external validation of clustering. Otherwise, several internal validation criteria such as modularity and coverage are only represented to compare the clustering results.
 }
 \examples{
-# generate a incidence matrix
+# generate an incidence matrix
 data <- matrix(c(1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1), nrow = 3)
 colnames(data) <- letters[1:5]
 rownames(data) <- LETTERS[1:3]
@@ -56,7 +56,7 @@ rownames(data) <- LETTERS[1:3]
 # run findCluster() to do clustering
 cls <- findCluster(
   data,
-  dim = 1,
+  part = 1,
   method = "all",
   normalization = FALSE,
   rm_weak_edges = TRUE,
