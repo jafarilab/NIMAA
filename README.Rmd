@@ -108,7 +108,7 @@ cls <- findCluster(
   )
 ```
 
-### Predict edge in bipartite network
+### Predicting edge in bipartite network
 
 The `predictEdge()` function predicts new edges between nominal variables' labels or imputes missing values in the input data matrix using several imputation methods. We can compare the imputation results using the `validatePrediction()` function to choose the best method based on a predefined benchmark. The package vignette and help manual contain more details.
 
