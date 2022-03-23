@@ -139,7 +139,7 @@ To begin, let us examine how to utilize `findCluster` to find clusters of `patie
 ```{r, eval=TRUE, echo= TRUE, results='hide',error=FALSE, warning=FALSE, message=FALSE, fig.height = 3, fig.width = 7, fig.align = "center"}
 cls <- findCluster(
   sub_matrices$Rectangular_element_max,
-  dim = 1,
+  part = 1,
   method = "all", # all available clustering methods
   normalization = TRUE, # normalize the input matrix
   rm_weak_edges = TRUE, # remove the weak edges in graph
@@ -172,7 +172,7 @@ Clustering is done on the patient similarity network again, but this time by set
 ```{r findcluster 1, eval=TRUE, fig.height = 6, fig.width = 7, fig.align = "center"}
 cls <- findCluster(
   sub_matrices$Rectangular_element_max,
-  dim = 1,
+  part = 1,
   method = "all", 
   normalization = TRUE, 
   rm_weak_edges = TRUE, 
@@ -185,12 +185,12 @@ cls <- findCluster(
 
 As you can see, two new indices are included (`jaccard_similarity` and `corrected_rand`) as external cluster validity measures which represent the similarity between clustering and the prior knowledge used as ground truth.
 
-The following sections show how to perform clustering analysis on the other part of the `beatAML` bipartite network, namely, `inhibitor`. In this case, we simply need to modify the `dim` to 2.
+The following sections show how to perform clustering analysis on the other part of the `beatAML` bipartite network, namely, `inhibitor`. In this case, we simply need to modify the `part` to 2.
 
 ```{r,eval=TRUE,fig.height = 3, fig.width = 7, fig.align = "center"}
 cls2 <- findCluster(
   sub_matrices$Rectangular_element_max, # the same submatrix
-  dim = 2 # set to 2 to use the other part of bipartite network
+  part = 2 # set to 2 to use the other part of bipartite network
   )
 ```
 

@@ -3,8 +3,8 @@
 #'
 #' @details  This function performs optional preprocessing, such as normalization, on the input incidence matrix (bipartite graph). The matrix is then used to perform bipartite graph projection and optional preprocessing on one of the projected networks specified, such as removing edges with low weights (weak edges). Additionally, the user can specify the removal method, threshold value, or binarization of the weights. For the graphs obtained after processing, this function implements some clustering methods in \href{https://igraph.org/r/}{igraph} such as "walktrap" and "infomap", to detect the communities within the network. Furthermore, if external features (prior knowledge) are provided, the function compares the clustering results obtained with the external features in terms of similarity as an external validation of clustering. Otherwise, several internal validation criteria such as modularity and coverage are only represented to compare the clustering results.
 #'
-#' @param inc_mat A matrix including valid values and NAs.
-#' @param dim An integer, 1 or 2, indicating which one-partite projection should be used. Default is 1.
+#' @param inc_mat An incidence matrix.
+#' @param part An integer, 1 or 2, indicating which unipartite projection should be used. Default is 1.
 #' @param method A string array indicating the clustering methods. Defalut is "all" which means all clutering methods in this function will be used, other options are conbinations of "walktrap", "multi level", "infomap", "label propagation", "leading eigenvector", "spinglass", "fast greedy".
 #' @param normalization A logical, whether to normalize the weights. Default is TRUE.
 #' @param rm_weak_edges A logical, whether to remove the weak edges. Default is TRUE.
@@ -32,14 +32,14 @@
 #' # run findCluster() to do clustering
 #' cls <- findCluster(
 #'   data,
-#'   dim = 1,
+#'   part = 1,
 #'   method = "all",
 #'   normalization = FALSE,
 #'   rm_weak_edges = TRUE,
 #'   comparison = FALSE
 #' )
 findCluster <- function(inc_mat,
-                        dim = 1,
+                        part = 1,
                         method = "all",
                         normalization = TRUE,
                         rm_weak_edges = TRUE,
@@ -54,7 +54,7 @@ findCluster <- function(inc_mat,
   }
 
   # Projection
-  projection_g <- projectGraph(inc_mat, dim = dim)
+  projection_g <- projectGraph(inc_mat, dim = part)
 
   # Remove weak edges
   if (rm_weak_edges) {

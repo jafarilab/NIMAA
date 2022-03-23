@@ -98,7 +98,7 @@ The `findCluster()` function implements seven widely used network clustering alg
 ```{r findcluster 1, eval=TRUE, fig.height = 7, fig.width = 7, fig.align = "center"}
 cls <- findCluster(
   sub_matrices$Rectangular_element_max,
-  dim = 1,
+  part = 1,
   method = "all", # all available clustering methods
   normalization = TRUE, # normalize the input matrix
   rm_weak_edges = TRUE, # remove the weak edges in graph
