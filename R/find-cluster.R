@@ -4,15 +4,15 @@
 #' @details  This function performs optional preprocessing, such as normalization, on the input incidence matrix (bipartite graph). The matrix is then used to perform bipartite graph projection and optional preprocessing on one of the projected networks specified, such as removing edges with low weights (weak edges). Additionally, the user can specify the removal method, threshold value, or binarization of the weights. For the graphs obtained after processing, this function implements some clustering methods in \href{https://igraph.org/r/}{igraph} such as "walktrap" and "infomap", to detect the communities within the network. Furthermore, if external features (prior knowledge) are provided, the function compares the clustering results obtained with the external features in terms of similarity as an external validation of clustering. Otherwise, several internal validation criteria such as modularity and coverage are only represented to compare the clustering results.
 #'
 #' @param inc_mat An incidence matrix.
-#' @param part An integer, 1 or 2, indicating which unipartite projection should be used. Default is 1.
-#' @param method A string array indicating the clustering methods. Defalut is "all" which means all clutering methods in this function will be used, other options are conbinations of "walktrap", "multi level", "infomap", "label propagation", "leading eigenvector", "spinglass", "fast greedy".
-#' @param normalization A logical, whether to normalize the weights. Default is TRUE.
-#' @param rm_weak_edges A logical, whether to remove the weak edges. Default is TRUE.
-#' @param rm_method A string indicating the weak edges removing method, if 'rm_weak_edges' is False, then this argument will be ignored. Default is 'delete', which means delete weak edges from graph, other option is 'as_zero', set the weak edges' weights to 0.
-#' @param threshold A string indicating the weak edges threshold selection method, if 'rm_weak_edges' is False, then this argument will be ignored. Default is 'median', other option is 'keep_connected', removing edges in ascending order of weight until the last one that keep the graph connected.
-#' @param set_remaining_to_1 A logical, whether to set the remaining edges' weight to 1. Default is TRUE.
+#' @param part An integer, 1 or 2, indicating which unipartite projection should be used. The default is 1.
+#' @param method A string array indicating the clustering methods. The defalut is "all", which means all available clustering methods in this function are utilized. Other options are combinations of "walktrap", "multi level", "infomap", "label propagation", "leading eigenvector", "spinglass", and "fast greedy".
+#' @param normalization A logical value indicating whether edge weights should be normalized before the computation proceeds. The default is TRUE.
+#' @param rm_weak_edges A logical value indicating whether weak edges should be removed before the computation proceeds. The default is TRUE.
+#' @param rm_method A string indicating the weak edges removing method. If `rm_weak_edges` is False, then this argument will be ignored. The default is `delete`, which means deleting weak edges from the graph. The other option is `as_zero`, which sets the weak edges' weights to 0.
+#' @param threshold A string indicating the weak edges threshold selection method. If rm_weak_edges` is False, then this argument will be ignored. The default is `median. The other option is `keep_connected, which removes edges in ascending order of weight until the last one that keeps the graph connected.
+#' @param set_remaining_to_1 A logical value, whether to set the remaining edges' weight to 1. The default is TRUE.
 #' @param extra_feature A dataframe has only one column indicating the membership of each nodes (rownames).
-#' @param comparison A logical, whether to compare different clustering methods' result. Default is TRUE.
+#' @param comparison A logical value, whether to compare different clustering methods' result. The default is TRUE.
 #'
 #' @return A list containing the clustering results.
 #'

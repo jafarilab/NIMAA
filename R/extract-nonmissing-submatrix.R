@@ -7,13 +7,13 @@
 #'
 #' @param x A matrix.
 #' @param shape A string array indicating the shape of the submatrix, by default is "All", other options are "Square", "Rectangular_row", "Rectangular_col", "Rectangular_element_max".
-#' @param verbose A Boolean value, If \code{TRUE}, the plot is saved as the .png file in the working directory. By default, it is \code{FALSE}.
+#' @param verbose A logical value, If \code{TRUE}, the plot is saved as the .png file in the working directory. By default, it is \code{FALSE}.
 #' @param palette A string or number. Color palette used for the visualization. By default, it is 'Blues'.
 #' @param row.vars A string, the name for the row variable.
 #' @param col.vars A string, the name for the column variable.
 #' @param bar A numeric value. The cut-off percentage, i.e., the proportion of non-missing values. By default, it is set to 1, indicating that no missing values are permitted in the submatrices. This argument is not applicable to the elements-max sub-matrix.
-#' @param plot_weight A Boolean value, If \code{TRUE}, then the function prints submatrices with weights, otherwise it prints the submatrices with all weights as 1.
-#' @param print_skim A Boolean value, If \code{TRUE}, then the function prints \code{\link[skimr]{skim}} information in console. By default, it is \code{FALSE}.
+#' @param plot_weight A logical value, If \code{TRUE}, then the function prints submatrices with weights, otherwise it prints the submatrices with all weights as 1.
+#' @param print_skim A logical value, If \code{TRUE}, then the function prints \code{\link[skimr]{skim}} information in console. By default, it is \code{FALSE}.
 #'
 #' @return A matrix or a list of matrices, with non-missing (bar = 1) or few missing value inside.
 #' @importFrom  bipartite nested
