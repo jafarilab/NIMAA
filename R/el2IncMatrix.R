@@ -4,7 +4,7 @@
 #' @param index_nominal  A vector with two values represents the indices for the nominal columns. The first value indicates the row objects and the second value indicates the column objects in the incidence matrix output.
 #' @param index_numeric An integer, the index for numeric values. This is value for selecting the column which contains the numeric values of pairwise relationship. This column is used for missing value investigation and imputation steps.
 #' @param print_skim A logical value, If \code{TRUE}, then the function will print \code{\link[skimr]{skim}} information in console.
-#' @return The incidence matrix
+#' @return The incidence matrix.
 #' @seealso \code{\link[tidyr]{pivot_wider}},
 #'   \code{\link[tibble]{column_to_rownames}}
 #' @importFrom tidyr pivot_wider

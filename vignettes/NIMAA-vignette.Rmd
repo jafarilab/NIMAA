@@ -56,8 +56,6 @@ beatAML_incidence_matrix <- plotInput(
   )
 ```
 
-Na/missing values Proportion: 0.2603
-
 ```{r, echo=FALSE, out.width="100%", fig.cap="The beatAML dataset as an incidence matrix"}
 knitr::include_graphics("patient_id-inhibitor.png")
 ```
@@ -179,7 +177,7 @@ cls <- findCluster(
   rm_method = 'delete', 
   threshold = 'median', 
   set_remaining_to_1 = TRUE, 
-  extra_feature =external_feature # add a extra feature reference here!
+  extra_feature = external_feature # add a extra feature reference here!
   )
 ```
 
