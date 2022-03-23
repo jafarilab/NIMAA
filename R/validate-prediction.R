@@ -52,7 +52,7 @@ validatePrediction <- function(imputation,
     sub_inc_mat <- imputation[[method_name]][, refer_community$names]
     cluster2 <- findCluster(
       inc_mat = sub_inc_mat,
-      dim = 1,
+      part = 1,
       method = refer_community$algorithm,
       normalization = clustering_args$normalization,
       rm_weak_edges = clustering_args$rm_weak_edges,

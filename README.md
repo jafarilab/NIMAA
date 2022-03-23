@@ -50,8 +50,6 @@ devtools::install_github("jafarilab/NIMAA")
 
 ``` r
 library(NIMAA)
-#> Warning in register(): Can't find generic `scale_type` in package ggplot2 to
-#> register S3 method.
 ## load the beatAML data
 beatAML_data <- NIMAA::beatAML
 
@@ -78,9 +76,9 @@ plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.display = T)
 
 <img src="man/figures/README-plotBipartite-1.png" width="100%" style="display: block; margin: auto;" />
 
-    #> IGRAPH b9ecc5b UNWB 650 47636 -- 
+    #> IGRAPH ff6c2a0 UNWB 650 47636 -- 
     #> + attr: name (v/c), type (v/l), shape (v/c), color (v/c), weight (e/n)
-    #> + edges from b9ecc5b (vertex names):
+    #> + edges from ff6c2a0 (vertex names):
     #>  [1] Alisertib (MLN8237)      --11-00261 Barasertib (AZD1152-HQPA)--11-00261
     #>  [3] Bortezomib (Velcade)     --11-00261 Canertinib (CI-1033)     --11-00261
     #>  [5] Crenolanib               --11-00261 CYT387                   --11-00261
@@ -108,7 +106,7 @@ sub_matrices <- extractSubMatrix(
   print_skim = FALSE
   )
 #> binmatnest2.temperature 
-#>                20.12502 
+#>                20.12512 
 #> Size of Square:   96 rows x  96 columns 
 #> Size of Rectangular_element_max:      87 rows x  140 columns
 ```
@@ -128,7 +126,7 @@ package vignette and help manual.
 ``` r
 cls <- findCluster(
   sub_matrices$Rectangular_element_max,
-  dim = 1,
+  part = 1,
   method = "all", # all available clustering methods
   normalization = TRUE, # normalize the input matrix
   rm_weak_edges = TRUE, # remove the weak edges in graph
@@ -136,7 +134,7 @@ cls <- findCluster(
   threshold = 'median', # Use median of edges' weights as threshold
   set_remaining_to_1 = TRUE, # set the weights of remaining edges to 1
   )
-#> Warning in findCluster(sub_matrices$Rectangular_element_max, dim = 1, method =
+#> Warning in findCluster(sub_matrices$Rectangular_element_max, part = 1, method =
 #> "all", : cluster_spinglass cannot work with unconnected graph
 #> 
 #> 
@@ -149,24 +147,24 @@ cls <- findCluster(
 
 <img src="man/figures/README-findcluster 1-1.png" width="100%" style="display: block; margin: auto;" />
 
-### Imputing missing data
+### Predict edge in bipartite network
 
-The `imputeMissingValue()` function predicts new edges between nominal
+The `predictEdge()` function predicts new edges between nominal
 variables’ labels or imputes missing values in the input data matrix
 using several imputation methods. We can compare the imputation results
-using the `validateImputation()` function to choose the best method
+using the `validatePrediction()` function to choose the best method
 based on a predefined benchmark. The package vignette and help manual
 contain more details.
 
 ``` r
-imputations <- imputeMissingValue(
+imputations <- predictEdge(
   inc_mat = beatAML_incidence_matrix,
   method = c('svd','median','als','CA')
   )
 ```
 
 ``` r
-validateImputation(imputation = imputations,
+validatePrediction(imputation = imputations,
                    refer_community = cls$fast_greedy,
                    clustering_args = cls$clustering_args)
 #> 
@@ -175,7 +173,7 @@ validateImputation(imputation = imputations,
 #> |:------|------------------:|---------------------------:|----------:|--------------------:|---------------------:|
 #> |median |          0.7476353|                   0.8555964|  0.8628983|             1.870228|             0.8556407|
 #> |svd    |          0.7224792|                   0.8388829|  0.8458376|             1.763708|             0.8388853|
-#> |als    |          0.7290576|                   0.8433005|  0.8510791|             1.794478|             0.8433362|
+#> |als    |          0.7599244|                   0.8635875|  0.8694758|             1.916772|             0.8635900|
 #> |CA     |          0.6935897|                   0.8190765|  0.8280576|             1.670030|             0.8191111|
 ```
 
@@ -184,12 +182,12 @@ validateImputation(imputation = imputations,
     #>   imputation_method Jaccard_similarity Dice_similarity_coefficient Rand_index
     #> 1            median          0.7476353                   0.8555964  0.8628983
     #> 2               svd          0.7224792                   0.8388829  0.8458376
-    #> 3               als          0.7290576                   0.8433005  0.8510791
+    #> 3               als          0.7599244                   0.8635875  0.8694758
     #> 4                CA          0.6935897                   0.8190765  0.8280576
     #>   Minkowski (inversed) Fowlkes_Mallows_index
     #> 1             1.870228             0.8556407
     #> 2             1.763708             0.8388853
-    #> 3             1.794478             0.8433362
+    #> 3             1.916772             0.8635900
     #> 4             1.670030             0.8191111
 
 ## License
