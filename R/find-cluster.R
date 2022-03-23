@@ -9,12 +9,12 @@
 #' @param normalization A logical value indicating whether edge weights should be normalized before the computation proceeds. The default is TRUE.
 #' @param rm_weak_edges A logical value indicating whether weak edges should be removed before the computation proceeds. The default is TRUE.
 #' @param rm_method A string indicating the weak edges removing method. If `rm_weak_edges` is False, then this argument will be ignored. The default is `delete`, which means deleting weak edges from the graph. The other option is `as_zero`, which sets the weak edges' weights to 0.
-#' @param threshold A string indicating the weak edges threshold selection method. If rm_weak_edges` is False, then this argument will be ignored. The default is `median. The other option is `keep_connected, which removes edges in ascending order of weight until the last one that keeps the graph connected.
-#' @param set_remaining_to_1 A logical value, whether to set the remaining edges' weight to 1. The default is TRUE.
-#' @param extra_feature A dataframe has only one column indicating the membership of each nodes (rownames).
-#' @param comparison A logical value, whether to compare different clustering methods' result. The default is TRUE.
+#' @param threshold A string indicating the weak edge threshold selection method. If `rm_weak_edges` is False, then this argument will be ignored. By default, `median` is used. The other option is `keep_connected`, which prevents the graph from being unconnected and removes edges in ascending order of weights.
+#' @param set_remaining_to_1 A logical value indicating whether the remaining edges' weight should be set to 1. The default is TRUE.
+#' @param extra_feature A data frame object that shows the group membership of each node based on prior knowledge.
+#' @param comparison A logical value indicating whether clustering methods should be compared to each other using internal measures of clustering, including modularity, average silluoutte width, and coverage. The default value is TRUE.
 #'
-#' @return A list containing the clustering results.
+#' @return A list containing the igraph object of the projected network, the clustering results of each method on the projected network separately, along with a comparison between them. The comparison of selected clustering methods is also presented as bar plots simultaneously.
 #'
 #' @import igraph
 #' @importFrom  stats median
@@ -24,7 +24,7 @@
 #' @export
 #'
 #' @examples
-#' # generate a incidence matrix
+#' # generate an incidence matrix
 #' data <- matrix(c(1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1), nrow = 3)
 #' colnames(data) <- letters[1:5]
 #' rownames(data) <- LETTERS[1:3]
