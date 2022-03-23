@@ -1,17 +1,7 @@
 #' Impute the missing value in the given matrix.
-#' @description This function will call several data imputation methods, where
-#'   the columns of the matrix are different objects, and the rows represent
-#'   multiple observations.
+#' @description This function will call several data imputation methods, where the columns of the matrix are different objects, and the rows represent multiple observations.
 #'
-#' @details First, this function will convert the column name and row name to
-#'   avoid possible interpolation failures caused by the special characters of
-#'   the column name and row name. Then it will perform a variety of numerical
-#'   imputation according to the user's input, and return all the data that does
-#'   not contain any missing data, a list of matrices. 'median' will replace the
-#'   missing values with the median of each rows(observations), 'knn' is the
-#'   method in package \code{bnstruct}, 'als' and 'svd' are methods from
-#'   package \code{softImpute}, 'CA', 'PCA' and 'FAMD' are from package
-#'   \code{missMDA}, others are from the famous \code{mice}.
+#' @details First, this function will convert the column name and row name to avoid possible interpolation failures caused by the special characters of the column name and row name. Then it will perform a variety of numerical imputation according to the user's input, and return all the data that does not contain any missing data, a list of matrices. 'median' will replace the missing values with the median of each rows(observations), 'knn' is the  method in package \code{bnstruct}, 'als' and 'svd' are methods from package \code{softImpute}, 'CA', 'PCA' and 'FAMD' are from package \code{missMDA}, others are from the famous \code{mice}.
 #'
 #' @seealso \code{\link[bnstruct]{knn.impute}},
 #'   \code{\link[softImpute]{softImpute}}, \code{\link[missMDA]{imputeCA}},
@@ -19,10 +9,7 @@
 #'   \code{\link[mice]{mice}}.
 #'
 #' @param inc_mat A matrix containing missing values, represented by NAs.
-#' @param method A string or list of string, can be one of them, or belong to
-#'   the interpolation method suitable for numerical data in the MICE
-#'   package.Default is a list, c('svd','median','als','CA'), other options
-#'   could be in MICE or 'knn', 'FAMD', 'PCA', 'pmm'.
+#' @param method A string or list of string, can be one of them, or belong to the interpolation method suitable for numerical data in the MICE package.Default is a list, c('svd','median','als','CA'), other options could be in MICE or 'knn', 'FAMD', 'PCA', 'pmm'.
 #'
 #' @return A list of matrices without missing values
 #'
