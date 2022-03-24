@@ -1,20 +1,12 @@
-#' Validate different imputation methods' result comparing to user's input.
+#' Validate and compare edge prediction methods.
 #'
-#' @description This function will cluster the input imputation results of no
-#'   missing data, and the clustering method will be exactly the same as the
-#'   reference clustering result (prior knowledge) based on the input. The
-#'   results of the two clusters were then analyzed to compare the effects of
-#'   imputation.
+#' @description This function compares the imputation approaches for predicting edges using the clustering result of a submatrix with non-missing values as a ground truth.  This function performs the same analysis as the `findCluster` function on every imputed incidence matrices independently. Then, using different similarity measures, all imputation approaches are compared to each other, revealing how edge prediction methods affects network communities (clusters). The best method should result in a higher degree of similarity (common node membership) to the non-missing submatrix as a benchmark.
 #'
-#' @param imputation A list ro a matrix, the results of different imputation
-#'   method(s).
-#' @param refer_community An igraph community object, usually got from
-#'   \code{\link{findCluster}}.
-#' @param clustering_args A list indicating the clutering arguments used in
-#'   \code{\link{findCluster}}, usually got from \code{\link{findCluster}}.
+#' @param imputation A list ro a matrix, the results of different imputation method(s).
+#' @param refer_community An igraph community object, usually got from \code{\link{findCluster}}.
+#' @param clustering_args A list indicating the clutering arguments used in \code{\link{findCluster}}, usually got from \code{\link{findCluster}}.
 #'
-#' @return A list containing the following indicators, Jaccard similarity/ Dice
-#'   similarity coefficient/ Rand index/ Minkowski(inversed)/ Fowlkes-Mallows index
+#' @return A list containing the following indicators, Jaccard similarity/ Dice similarity coefficient/ Rand index/ Minkowski(inversed)/ Fowlkes-Mallows index.
 #'
 #' @importFrom  tibble rownames_to_column
 #' @importFrom  tidyr pivot_longer
@@ -24,7 +16,7 @@
 #' @examples
 #' # load part of the beatAML data and get the incidence matrix
 #' beatAML_data <- NIMAA::beatAML[1:10000,]
-#' beatAML_incidence_matrix <- el2IncMatrix(beatAML_data, print_skim = FALSE)
+#' beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
 #'
 #' # do clustering
 #' cls <- findCluster(
