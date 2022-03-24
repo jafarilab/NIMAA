@@ -7,25 +7,25 @@
 predictEdge(inc_mat, method = c("svd", "median", "als", "CA"))
 }
 \arguments{
-\item{inc_mat}{A matrix containing missing values, represented by NAs.}
+\item{inc_mat}{An incidence matrix containing missing values (edge weights), represented by NAs.}
 
-\item{method}{A string or list of string, can be one of them, or belong to the interpolation method suitable for numerical data in the MICE package.Default is a list, c('svd','median','als','CA'), other options could be in MICE or 'knn', 'FAMD', 'PCA', 'pmm'.}
+\item{method}{A string or list of string. By default, it is set to this list: \code{c("svd", "median", "als", "CA")}. Other available methods in \code{MICE}, \code{knn}, \code{FAMD}, \code{PCA}, and \code{pmm}, can be called to perform at a single step.}
 }
 \value{
-A list of matrices without missing values
+A list of matrices with original and imputed values by different methods.
 }
 \description{
 This function utilizes several data imputation methods in order to predict the existence of a link between two nodes by imputing the edges' weight in a weighted bipartite network of nominal data.
 }
 \details{
-First, this function will convert the column name and row name to avoid possible interpolation failures caused by the special characters of the column name and row name. Then it will perform a variety of numerical imputation according to the user's input, and return all the data that does not contain any missing data, a list of matrices. 'median' will replace the missing values with the median of each rows(observations), 'knn' is the  method in package \code{bnstruct}, 'als' and 'svd' are methods from package \code{softImpute}, 'CA', 'PCA' and 'FAMD' are from package \code{missMDA}, others are from the famous \code{mice}.
+This function performs a variety of numerical imputation according to the user's input, and returns a list of imputed data matrices based on each method separately, such as \code{median} which replaces the missing values with the median of each rows (observations), \code{knn} is the method in package \code{bnstruct}, \code{als} and \code{svd} are methods from \code{softImpute} package, \code{CA}, \code{PCA} and \code{FAMD} are from \code{missMDA} package, others are from the \code{mice} package.
 }
 \examples{
 # load part of beatAML data
 data <- NIMAA::beatAML[1:10000,]
 
 # convert to incidence matrix
-inc_mat <- el2IncMatrix(data, print_skim = FALSE)
+inc_mat <- el2IncMatrix(data)
 
 # impute
 predictEdge(inc_mat)

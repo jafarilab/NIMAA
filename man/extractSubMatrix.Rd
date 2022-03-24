@@ -36,7 +36,7 @@ extractSubMatrix(
 \item{print_skim}{A logical value, If \code{TRUE}, then the function prints \code{\link[skimr]{skim}} information in console. By default, it is \code{FALSE}.}
 }
 \value{
-A matrix or a list of matrices, with non-missing (bar = 1) or few missing value inside.
+A matrix or a list of matrices with non-missing (bar = 1) or a few missing values inside. Also, a specific heat map plot is generated to visualize the topology of missing values and the submatrix sub-setting from the original incidence matrix. Additionally, the nestedness temperature is included to indicate whether the original incidence matrix should be divided into several incidence matrices beforehand.
 }
 \description{
 This function arranges the input matrix and extracts the submatrices with non-missing values or with a specific proportion of missing values (except for the elements-max submatrix). The result is also shown as \code{plotly} figure.
