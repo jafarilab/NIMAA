@@ -15,7 +15,7 @@
 #' @param plot_weight A logical value, If \code{TRUE}, then the function prints submatrices with weights, otherwise it prints the submatrices with all weights as 1.
 #' @param print_skim A logical value, If \code{TRUE}, then the function prints \code{\link[skimr]{skim}} information in console. By default, it is \code{FALSE}.
 #'
-#' @return A matrix or a list of matrices, with non-missing (bar = 1) or few missing value inside.
+#' @return A matrix or a list of matrices with non-missing (bar = 1) or a few missing values inside. Also, a specific heat map plot is generated to visualize the topology of missing values and the submatrix sub-setting from the original incidence matrix. Additionally, the nestedness temperature is included to indicate whether the original incidence matrix should be divided into several incidence matrices beforehand.
 #' @importFrom  bipartite nested
 #' @import ggplot2
 #' @importFrom  dplyr arrange arrange_if
