@@ -39,7 +39,7 @@ findCluster(
 \item{comparison}{A logical value indicating whether clustering methods should be compared to each other using internal measures of clustering, including modularity, average silluoutte width, and coverage. The default value is TRUE.}
 }
 \value{
-A list containing the igraph object of the projected network, the clustering results of each method on the projected network separately, along with a comparison between them. The comparison of selected clustering methods is also presented as bar plots simultaneously.
+A list containing the igraph object of the projected network, the clustering results of each method on the projected network separately, along with a comparison between them. The applied clustering arguments and the network's distance matrix are also included in this list for potential use in the next steps. In the case of weighted projected networks, the distance matrix is obtained by inverting the edge weights. The comparison of selected clustering methods is also presented as bar plots simultaneously.
 }
 \description{
 This function looks for the clusters in the projected unipartite networks of the bipartite network (the incidence matrix) that was given to it.

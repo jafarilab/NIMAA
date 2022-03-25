@@ -14,7 +14,7 @@
 #' @param extra_feature A data frame object that shows the group membership of each node based on prior knowledge.
 #' @param comparison A logical value indicating whether clustering methods should be compared to each other using internal measures of clustering, including modularity, average silluoutte width, and coverage. The default value is TRUE.
 #'
-#' @return A list containing the igraph object of the projected network, the clustering results of each method on the projected network separately, along with a comparison between them. The comparison of selected clustering methods is also presented as bar plots simultaneously.
+#' @return A list containing the igraph object of the projected network, the clustering results of each method on the projected network separately, along with a comparison between them. The applied clustering arguments and the network's distance matrix are also included in this list for potential use in the next steps. In the case of weighted projected networks, the distance matrix is obtained by inverting the edge weights. The comparison of selected clustering methods is also presented as bar plots simultaneously.
 #'
 #' @import igraph
 #' @importFrom  stats median

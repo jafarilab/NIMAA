@@ -25,7 +25,7 @@ Many numerical analyses are invalid when working with nominal data because the m
 
 It uses bipartite graphs to show how two different types of data are linked together, and it puts them in the incidence matrix to continue with network analysis. Finding large submatrices with non-missing values and edge prediction are other applications of NIMAA to explore local and global similarities within the labels of nominal variables.
 
-Then, using a variety of different network projection methods, two unipartite graphs are constructed on the given submatrix. NIMAA provides several options for clustering projected networks and selecting the best one based on external prior knowledge. When weighted bipartite networks are considered, the best clustering results are used as the benchmark for imputation analysis. This benchmark is used to figure out which imputation method is the best. It looks at how similar the clustering results are before and after the imputations. By using imputation analysis, we tried to get more information from the whole dataset even though there were some missing values.
+Then, using a variety of different network projection methods, two unipartite graphs are constructed on the given submatrix. NIMAA provides several options for clustering projected networks and selecting the best one based on internal measures and external prior knowledge (ground truth). When weighted bipartite networks are considered, the best clustering results are used as the benchmark for edge prediction analysis. This benchmark is used to figure out which imputation method is the best one to predict weight of edges in bipartite network. It looks at how similar the clustering results are before and after the imputations. By using edge prediciton analysis, we tried to get more information from the whole dataset even though there were some missing values.
 ```{r setup}
 library(NIMAA)
 ```
@@ -60,7 +60,7 @@ beatAML_incidence_matrix <- plotInput(
 knitr::include_graphics("patient_id-inhibitor.png")
 ```
 
-### 1.2 Plotting the bipartite graph of the original data
+### 1.2 Plotting the bipartite network of the original data
 Given that we have the incidence matrix, we can easily reconstruct the corresponding bipartite network. In the `NIMAA` package, we have two options for visualizing the bipartite network: static or interactive plots.
 
 #### 1.2.1 Static plot
@@ -97,7 +97,7 @@ analysis_reuslt$general_stats
 ```
 
 ## 2 Extracting large submatrices without missing values
-In the case of a weighted bipartite graph, the dataset with the fewest missing values should be used for the next steps. This is to avoid the sensitivity problems of clustering-based methods. The `extractSubMatrix()` function extracts the submatrices that have non-missing values or have a certain percentage of missing values inside (not for elements-max matrix), depending on the argument's input. The result will also be shown as a `plotly` plot [@plotly], so you can see the screenshots of `beatAML` dataset below.
+In the case of a weighted bipartite network, the dataset with the fewest missing values should be used for the next steps. This is to avoid the sensitivity problems of clustering-based methods. The `extractSubMatrix()` function extracts the submatrices that have non-missing values or have a certain percentage of missing values inside (not for elements-max matrix), depending on the argument's input. The result will also be shown as a `plotly` plot [@plotly], so you can see the screenshots of `beatAML` dataset below.
 
 The extraction process is performed and visualized in two ways, which can be chosen depending on the user's preference: using the original input matrix (row-wise) and using the transposed matrix (column-wise). `NIMAA` extracts the largest submatrices with non-missing values or with a specified proportion of missing values (using the `bar` argument) in four ways predefined in the `shape` argument:
 
@@ -227,7 +227,7 @@ knitr::include_graphics("visualClusterInBipartite.png")
 ```
 
 ### 4.3 Scoring clusters
-Based on the `fpc` package [@fpc], and @DBLP, the `scoreCluster` function provides additional internal cluster validity measures such as entropy and coverage. The concept of scoring is according to the weight fraction of all intra-cluster edges relative to the total weight of all edges in the graph.
+Based on the `fpc` package [@fpc], and @DBLP, the `scoreCluster` function provides additional internal cluster validity measures such as entropy and coverage. The concept of scoring is according to the weight fraction of all intra-cluster edges relative to the total weight of all edges in the network.
 
 ```{r,eval=FALSE, echo=TRUE}
 scoreCluster(community = cls2$infomap,

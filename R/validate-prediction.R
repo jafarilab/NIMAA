@@ -1,6 +1,6 @@
 #' Validate and compare edge prediction methods.
 #'
-#' @description This function compares the imputation approaches for predicting edges using the clustering result of a submatrix with non-missing values as a ground truth.  This function performs the same analysis as the `findCluster` function on every imputed incidence matrices independently. Then, using different similarity measures, all imputation approaches are compared to each other, revealing how edge prediction methods affects network communities (clusters). The best method should result in a higher degree of similarity (common node membership) to the non-missing submatrix as a benchmark.
+#' @description This function compares the imputation approaches for predicting edges using the clustering result of a submatrix with non-missing values as a benchmark.  This function performs the same analysis as the `findCluster` function on every imputed incidence matrices independently. Then, using different similarity measures, all imputation approaches are compared to each other, revealing how edge prediction methods affects network communities (clusters). The best method should result in a higher degree of similarity (common node membership) to the non-missing submatrix as a benchmark.
 #'
 #' @param imputation A list or a matrix containing the results of imputation method (s).
 #' @param refer_community An igraph community object obtained through \code{\link{findCluster}} using a given method.

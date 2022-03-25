@@ -17,7 +17,7 @@ validatePrediction(imputation, refer_community, clustering_args)
 A list containing the following indices: Jaccard similarity, Dice similarity coefficient, Rand index, Minkowski (inversed), and Fowlkes-Mallows index. The higher value indicates the greater similarity between the imputed dataset and the benchmark.
 }
 \description{
-This function compares the imputation approaches for predicting edges using the clustering result of a submatrix with non-missing values as a ground truth.  This function performs the same analysis as the \code{findCluster} function on every imputed incidence matrices independently. Then, using different similarity measures, all imputation approaches are compared to each other, revealing how edge prediction methods affects network communities (clusters). The best method should result in a higher degree of similarity (common node membership) to the non-missing submatrix as a benchmark.
+This function compares the imputation approaches for predicting edges using the clustering result of a submatrix with non-missing values as a benchmark.  This function performs the same analysis as the \code{findCluster} function on every imputed incidence matrices independently. Then, using different similarity measures, all imputation approaches are compared to each other, revealing how edge prediction methods affects network communities (clusters). The best method should result in a higher degree of similarity (common node membership) to the non-missing submatrix as a benchmark.
 }
 \examples{
 # load part of the beatAML data

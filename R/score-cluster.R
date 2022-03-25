@@ -1,11 +1,10 @@
-#' Score the clusters in a projected network of the bipartite networks.
-#' @description This function provides additional internal cluster validity measures such as entropy and coverage. The concept of scoring is according to the weight fraction of all intra-cluster edges relative to the total weight of all edges in the graph. This function requiers the community object, igraph object and distance matrix returned by \code{\link{findCluster}} to analyze.
+#' Score the clusters in a projected network based on additional internal measures.
+#' @description This function provides additional internal cluster validity measures such as entropy and coverage. The concept of scoring is according to the weight fraction of all intra-cluster edges relative to the total weight of all edges in the graph. This function requires the community object, igraph object and distance matrix returned by \code{\link{findCluster}} to analyze.
 #'
 #' @seealso \code{\link[fpc]{cluster.stats}}, \code{\link{findCluster}}
 #' @param community An igraph community object.
 #' @param graph An igraph graph object.
-#' @param distance_matrix A matrix, the distance of graph, usually got from
-#'   \code{\link{findCluster}}
+#' @param dist_mat A matrix containing the distance of nodes in the network. This matrix can be retrieved by the output of \code{\link{findCluster}} to analyze.
 #'
 #' @return A list of various scores.
 #'
@@ -27,9 +26,9 @@
 #'
 #' # get the scoring result
 #' scoreCluster(community = cls$infomap, graph = cls$graph,
-#'   distance_matrix = cls$distance_matrix)
+#'   dist_mat = cls$distance_matrix)
 #'
-scoreCluster <- function(community, graph, distance_matrix) {
+scoreCluster <- function(community, graph, dist_mat) {
   result <- list()
 
   fpc_stats <- fpc::cluster.stats(d = distance_matrix, clustering = community$membership)
