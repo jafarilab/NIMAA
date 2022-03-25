@@ -177,7 +177,7 @@ cls <- findCluster(
   rm_method = 'delete', 
   threshold = 'median', 
   set_remaining_to_1 = TRUE, 
-  extra_feature = external_feature # add a extra feature reference here!
+  extra_feature = external_feature # add an extra feature reference here
   )
 ```
 

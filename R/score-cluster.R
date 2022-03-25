@@ -1,7 +1,5 @@
-#' Score the clusters in one projection of the bipartite graph.
-#' @description This function will use the community object, graph object and
-#'   distance matrix to analyze, mainly using the cluster.stats function in the
-#'   fpc package, in addition, it also calculates a ‘coverage’ indicator.
+#' Score the clusters in a projected network of the bipartite networks.
+#' @description This function provides additional internal cluster validity measures such as entropy and coverage. The concept of scoring is according to the weight fraction of all intra-cluster edges relative to the total weight of all edges in the graph. This function requiers the community object, igraph object and distance matrix returned by \code{\link{findCluster}} to analyze.
 #'
 #' @seealso \code{\link[fpc]{cluster.stats}}, \code{\link{findCluster}}
 #' @param community An igraph community object.
@@ -17,25 +15,20 @@
 #'
 #' @examples
 #' # load part of the beatAML data
-#' data <- NIMAA::beatAML[1:1000,]
-#' # convert to incidence matrix
-#' inc_mat <- el2IncMatrix(data, print_skim = FALSE)
+#' beatAML_data <- NIMAA::beatAML[1:10000,]
 #'
-#' # run findCluster() to do clustering
-#' cls <- findCluster(
-#'   inc_mat,
-#'   dim = 1,
-#'   method = "infomap",
-#'   normalization = FALSE,
-#'   rm_weak_edges = TRUE,
-#'   comparison = FALSE
-#' )
+#' # convert to incidence matrix
+#' beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
+#'
+#' # do clustering
+#' cls <- findCluster(beatAML_incidence_matrix,
+#'   dim = 1, method = "infomap", normalization = FALSE,
+#'   rm_weak_edges = TRUE, comparison = FALSE)
+#'
 #' # get the scoring result
-#' scoreCluster(
-#'   community = cls$infomap,
-#'   graph = cls$graph,
-#'   distance_matrix = cls$distance_matrix
-#' )
+#' scoreCluster(community = cls$infomap, graph = cls$graph,
+#'   distance_matrix = cls$distance_matrix)
+#'
 scoreCluster <- function(community, graph, distance_matrix) {
   result <- list()
 

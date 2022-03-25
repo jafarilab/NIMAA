@@ -2,7 +2,7 @@
 % Please edit documentation in R/find-cluster.R
 \name{findCluster}
 \alias{findCluster}
-\title{Find clusters in projected unipartite graphs}
+\title{Find clusters in projected unipartite networks}
 \usage{
 findCluster(
   inc_mat,
@@ -28,9 +28,9 @@ findCluster(
 
 \item{rm_weak_edges}{A logical value indicating whether weak edges should be removed before the computation proceeds. The default is TRUE.}
 
-\item{rm_method}{A string indicating the weak edges removing method. If \code{rm_weak_edges} is False, then this argument will be ignored. The default is \code{delete}, which means deleting weak edges from the graph. The other option is \code{as_zero}, which sets the weak edges' weights to 0.}
+\item{rm_method}{A string indicating the weak edges removing method. If \code{rm_weak_edges} is False, then this argument will be ignored. The default is \code{delete}, which means deleting weak edges from the network. The other option is \code{as_zero}, which sets the weak edges' weights to 0.}
 
-\item{threshold}{A string indicating the weak edge threshold selection method. If \code{rm_weak_edges} is False, then this argument will be ignored. By default, \code{median} is used. The other option is \code{keep_connected}, which prevents the graph from being unconnected and removes edges in ascending order of weights.}
+\item{threshold}{A string indicating the weak edge threshold selection method. If \code{rm_weak_edges} is False, then this argument will be ignored. By default, \code{median} is used. The other option is \code{keep_connected}, which prevents the network from being unconnected and removes edges in ascending order of weights.}
 
 \item{set_remaining_to_1}{A logical value indicating whether the remaining edges' weight should be set to 1. The default is TRUE.}
 
@@ -42,10 +42,10 @@ findCluster(
 A list containing the igraph object of the projected network, the clustering results of each method on the projected network separately, along with a comparison between them. The comparison of selected clustering methods is also presented as bar plots simultaneously.
 }
 \description{
-This function looks for the clusters in the projected unipartite graphs of the bipartite graph (the incidence matrix) that was given to it.
+This function looks for the clusters in the projected unipartite networks of the bipartite network (the incidence matrix) that was given to it.
 }
 \details{
-This function performs optional preprocessing, such as normalization, on the input incidence matrix (bipartite graph). The matrix is then used to perform bipartite graph projection and optional preprocessing on one of the projected networks specified, such as removing edges with low weights (weak edges). Additionally, the user can specify the removal method, threshold value, or binarization of the weights. For the graphs obtained after processing, this function implements some clustering methods in \href{https://igraph.org/r/}{igraph} such as "walktrap" and "infomap", to detect the communities within the network. Furthermore, if external features (prior knowledge) are provided, the function compares the clustering results obtained with the external features in terms of similarity as an external validation of clustering. Otherwise, several internal validation criteria such as modularity and coverage are only represented to compare the clustering results.
+This function performs optional preprocessing, such as normalization, on the input incidence matrix (bipartite network). The matrix is then used to perform bipartite network projection and optional preprocessing on one of the projected networks specified, such as removing edges with low weights (weak edges). Additionally, the user can specify the removal method, threshold value, or binarization of the weights. For the networks obtained after processing, this function implements some clustering methods in \href{https://igraph.org/r/}{igraph} such as "walktrap" and "infomap", to detect the communities within the network. Furthermore, if external features (prior knowledge) are provided, the function compares the clustering results obtained with the external features in terms of similarity as an external validation of clustering. Otherwise, several internal validation criteria such as modularity and coverage are only represented to compare the clustering results.
 }
 \examples{
 # generate an incidence matrix
