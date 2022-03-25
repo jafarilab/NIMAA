@@ -215,11 +215,11 @@ compareClusters <- function(clusters,
       mod <- 0
     }
     result[method, "modularity"] <- mod
-    score <- scoreCluster(community = communities[[method]], graph = g, distance_matrix = dist_mat)
+    score <- scoreCluster(community = communities[[method]], graph = g, dist_mat = dist_mat)
     result[method, "avg.silwidth"] <- score$fpc_stats$avg.silwidth
     result[method, "coverage"] <- score$coverage
     if (!is.null(extra_feature)) {
-      suppressWarnings(validation <- validateCluster(dist_mat = dist_mat, extra_feature = extra_feature, community = communities[[method]]))
+      suppressWarnings(validation <- validateCluster(community = communities[[method]], extra_feature = extra_feature, dist_mat = dist_mat))
       corr_rad <- validation$corrected.rand
       if (corr_rad < 0) {
         corr_rad <- 0

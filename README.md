@@ -76,9 +76,9 @@ plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.display = T)
 
 <img src="man/figures/README-plotBipartite-1.png" width="100%" style="display: block; margin: auto;" />
 
-    #> IGRAPH 04ae5ff UNWB 650 47636 -- 
+    #> IGRAPH 8eac304 UNWB 650 47636 -- 
     #> + attr: name (v/c), type (v/l), shape (v/c), color (v/c), weight (e/n)
-    #> + edges from 04ae5ff (vertex names):
+    #> + edges from 8eac304 (vertex names):
     #>  [1] Alisertib (MLN8237)      --11-00261 Barasertib (AZD1152-HQPA)--11-00261
     #>  [3] Bortezomib (Velcade)     --11-00261 Canertinib (CI-1033)     --11-00261
     #>  [5] Crenolanib               --11-00261 CYT387                   --11-00261
@@ -106,7 +106,7 @@ sub_matrices <- extractSubMatrix(
   print_skim = FALSE
   )
 #> binmatnest2.temperature 
-#>                20.12294 
+#>                20.12074 
 #> Size of Square:   96 rows x  96 columns 
 #> Size of Rectangular_element_max:      87 rows x  140 columns
 ```
@@ -152,7 +152,7 @@ cls <- findCluster(
 The `predictEdge()` function predicts new edges between nominal
 variables’ labels or imputes missing values in the input data matrix
 using several imputation methods. We can compare the imputation results
-using the `validatePrediction()` function to choose the best method
+using the `validateEdgePrediction()` function to choose the best method
 based on a predefined benchmark. The package vignette and help manual
 contain more details.
 
@@ -164,7 +164,7 @@ imputations <- predictEdge(
 ```
 
 ``` r
-validatePrediction(imputation = imputations,
+validateEdgePrediction(imputation = imputations,
                    refer_community = cls$fast_greedy,
                    clustering_args = cls$clustering_args)
 #> 
@@ -173,7 +173,7 @@ validatePrediction(imputation = imputations,
 #> |:------|------------------:|---------------------------:|----------:|--------------------:|---------------------:|
 #> |median |          0.7476353|                   0.8555964|  0.8628983|             1.870228|             0.8556407|
 #> |svd    |          0.7224792|                   0.8388829|  0.8458376|             1.763708|             0.8388853|
-#> |als    |          0.7476353|                   0.8555964|  0.8628983|             1.870228|             0.8556407|
+#> |als    |          0.7290576|                   0.8433005|  0.8510791|             1.794478|             0.8433362|
 #> |CA     |          0.6935897|                   0.8190765|  0.8280576|             1.670030|             0.8191111|
 ```
 
@@ -182,12 +182,12 @@ validatePrediction(imputation = imputations,
     #>   imputation_method Jaccard_similarity Dice_similarity_coefficient Rand_index
     #> 1            median          0.7476353                   0.8555964  0.8628983
     #> 2               svd          0.7224792                   0.8388829  0.8458376
-    #> 3               als          0.7476353                   0.8555964  0.8628983
+    #> 3               als          0.7290576                   0.8433005  0.8510791
     #> 4                CA          0.6935897                   0.8190765  0.8280576
     #>   Minkowski (inversed) Fowlkes_Mallows_index
     #> 1             1.870228             0.8556407
     #> 2             1.763708             0.8388853
-    #> 3             1.870228             0.8556407
+    #> 3             1.794478             0.8433362
     #> 4             1.670030             0.8191111
 
 ## License

@@ -232,16 +232,16 @@ Based on the `fpc` package [@fpc], and @DBLP, the `scoreCluster` function provid
 ```{r,eval=FALSE, echo=TRUE}
 scoreCluster(community = cls2$infomap,
              graph = cls2$graph,
-             distance_matrix = cls2$distance_matrix)
+             dist_mat = cls2$distance_matrix)
 ```
 
 ### 4.4 Validating clusters based on prior knowledge
 The `validateCluster()` function calculates the similarity of a given clustering method to the provided ground truth. This function provides external cluster validity measures including `corrected.rand` and `jaccard similarity`.
 
 ```{r,eval=TRUE}
-validateCluster(dist_mat = cls$distance_matrix,
+validateCluster(community = cls$leading_eigen,
                 extra_feature = external_feature,
-                community = cls$leading_eigen)
+                dist_mat = cls$distance_matrix)
 ```
 
 ## 5 Edge prediction
@@ -266,7 +266,7 @@ summary(imputations)
 ```
 
 ### 5.2 Validating prediction
-The `validatePrediction()` function compares the results of clustering after imputation with a predefined benchmark to see how similar they are. After validating clustering on submatrices with non-missing values, the benchmark had already been set up in the previous step. This function does the analysis for a number of user-specified imputation methods. It's also possible to see how each method is ranked by looking at a ranking plot. The following measures are used to compare the methods:
+The `validateEdgePrediction()` function compares the results of clustering after imputation with a predefined benchmark to see how similar they are. After validating clustering on submatrices with non-missing values, the benchmark had already been set up in the previous step. This function does the analysis for a number of user-specified imputation methods. It's also possible to see how each method is ranked by looking at a ranking plot. The following measures are used to compare the methods:
 
 - Jaccard similarity index
 
@@ -279,7 +279,7 @@ The `validatePrediction()` function compares the results of clustering after imp
 - Fowlkes–Mallows index
 
 ```{r, eval=TRUE, fig.height = 6, fig.width = 7, fig.align = "center"}
-validatePrediction(imputation = imputations,
+validateEdgePrediction(imputation = imputations,
                    refer_community = cls$fast_greedy,
                    clustering_args = cls$clustering_args)
 ```

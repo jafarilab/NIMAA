@@ -31,7 +31,7 @@
 scoreCluster <- function(community, graph, dist_mat) {
   result <- list()
 
-  fpc_stats <- fpc::cluster.stats(d = distance_matrix, clustering = community$membership)
+  fpc_stats <- fpc::cluster.stats(d = dist_mat, clustering = community$membership)
   result$fpc_stats <- fpc_stats
 
   result$coverage <- calculateCoverage(graph, community)

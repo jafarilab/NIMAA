@@ -27,11 +27,11 @@
 #' imputed_beatAML <- predictEdge(beatAML_incidence_matrix)
 #'
 #' # validate the edge prediction
-#' validatePrediction(imputation = imputed_beatAML,
+#' validateEdgePrediction(imputation = imputed_beatAML,
 #' refer_community = cls$fast_greedy,
 #' clustering_args = cls$clustering_args
 #' )
-validatePrediction <- function(imputation,
+validateEdgePrediction <- function(imputation,
                                refer_community,
                                clustering_args) {
   if (is.matrix(imputation)) {
