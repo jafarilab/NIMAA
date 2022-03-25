@@ -22,14 +22,14 @@
 #' @export
 #'
 #' @examples
-#' # load part of beatAML data
-#' data <- NIMAA::beatAML[1:10000,]
+#' # load part of the beatAML data
+#' beatAML_data <- NIMAA::beatAML[1:10000,]
 #'
 #' # convert to incidence matrix
-#' inc_mat <- el2IncMatrix(data)
+#' beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
 #'
-#' # impute
-#' predictEdge(inc_mat)
+#' # predict the edges by imputation the wights
+#' predictEdge(beatAML_incidence_matrix)
 predictEdge <- function(inc_mat,
                                method = c("svd", "median", "als", "CA")) {
   if (TRUE %in% rowSums(is.na(inc_mat)) == ncol(inc_mat)) {
