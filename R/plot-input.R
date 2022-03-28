@@ -1,36 +1,20 @@
-#' Plot the given data with heatmap figure.
+#' Plot the incidence matrix.
 #'
-#' @description This function plot the input data in heatmap format. The row and
-#'   column are two nominal variables. The color/value of heatmap could be the
-#'   weights or logical value showing valid/missing connection.
+#' @description This function converts a nominal data edge list to an incidence matrix and provides some information about that.
 #'
-#' @details This function mainly convert data in the form of edge list into
-#'   matrix data and visualize it. In addition, it will also calculate some
-#'   basic matrix properties and the proportion of missing data.
+#' @details This function mainly converts data in the form of edge list into matrix data. It also returns the incidence matrix object, the dimensions and proportion of missing values, as well as the matrix's image for visualization.
 #'
 #' @seealso \code{\link{el2IncMatrix}}
 #'
-#' @param x A a dataframe containing the missing values, at least 2 nominal
-#'   columns.
-#' @param index_nominal  A vector containing two numbers, which are the indexes
-#'   for the nominal columns (the first value indicating the rows objects and
-#'   the second value indicating the column object). By default is c(1,2), i.e.,
-#'   the first two columns are nomianl columns.
-#' @param index_numeric An integer, the index for numeric values. (this is value
-#'   for selecting the column which contains our numeric values and we change it
-#'   to the matrix for missing value investigation and imputation).
-#' @param palette A string or number. Color palette used for the heatmap. By
-#'   default is 'Blues'. (Find the option in the manual of
-#'   [scale_fill_distiller()]).
-#' @param verbose A Boolean value, If \code{TRUE}, the plot will be saved as the
-#'   .png file in the working directory. By default is \code{FALSE}.
-#' @param plot_weight A Boolean value, If \code{TRUE}, the plot will have
-#'   corresponding colors based on weights, otherwise plot the binary/logical
-#'   matrix figure. By default is \code{FALSE}.
-#' @param print_skim A Boolean value, If \code{TRUE}, then the funtion will
-#'   print \code{\link[skimr]{skim}} information in console.
+#' @param x A data frame containing at least 2 nominal columns and an optional numeric column.
+#' @param index_nominal  A vector made up of two numbers that serve as nominal columns. The first value indicates the incidence matrix's row name, while the second value represents the incidence matrix's column name. It is c (1,2) by default, which implies that the first column in the x data frame is the incidence matrix's row, and the second column in the x data frame is the incidence matrix's column.
+#' @param index_numeric An integer, the index of a numeric variable. This is the value used to select the column that contains weight score values for pairwise relationships, and it is used to fill the elements of the incidence matrix. These values are also utilized for investigating missing data and predicting edges via imputation.
+#' @param palette A string or number. Color palette used for the heat map. By default, it sets to "Blues". (Find more option in the manual of [scale_fill_distiller()]).
+#' @param verbose A logical value, If it is set to \code{TRUE}, the plot is saved as the .png file in the working directory. By default, it is set to \code{FALSE}.
+#' @param plot_weight A logical value, If it is set to \code{TRUE}, the plot is displayed with the corresponding colors based on weight scores, otherwise the binary matrix image is displayed. By default, it is set to \code{FALSE}.
+#' @param print_skim A logical value, If \code{TRUE}, then the function prints \code{\link[skimr]{skim}} information in console.
 #'
-#' @return A matrix, the incidence matrix got from input data.
+#' @return An incidence matrix object and image with the dimension and missing value proportion.
 #' @importFrom crayon green
 #' @importFrom dplyr setdiff
 #' @importFrom plotly ggplotly
@@ -41,7 +25,9 @@
 #' # load part of the beatAML data
 #' beatAML_data <- NIMAA::beatAML[1:1000,]
 #'
-#' beatAML_incidence_matrix <- plotInput(beatAML_data,index_numeric=3)
+#' # visualize the input dataset
+#' beatAML_incidence_matrix <- plotInput(beatAML_data,
+#' index_numeric= 3)
 plotInput <- function(x,
                       index_nominal = c(1, 2),
                       index_numeric = NULL,
