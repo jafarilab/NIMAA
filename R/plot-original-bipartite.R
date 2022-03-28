@@ -1,31 +1,18 @@
 #' Plot the graph based on input data
 #'
-#' @description This function converts the input incidence matrix into a
-#'   bipartite graph, and uses the igraph package to draw an figure.
+#' @description This function converts the input incidence matrix into a bipartite graph, and uses the igraph package to draw an figure.
 #'
 #' @param inc_mat A matrix, the incidence matrix of graph.
-#' @param dim An integer value, chosen between plotting the original bipartite
-#'   graph or its projection. Default is 0 which plot the original bipartite
-#'   graph. other options: 1, 2
-#' @param verbose A logical, if TRUE, the plot is saved as the .png file in the
-#'   working directory. Default is FALSE.
-#' @param vertex.label.display A Boolean var, if TRUE then show the label of
-#'   each vertex. Default is FALSE.
-#' @param layout A function from igraph package, plot layout. Default is
-#'   layout.bipartite, thus the nodes on the top side are the variables in rows,
-#'   nodes on the bottom side are those in columns.
+#' @param dim An integer value, chosen between plotting the original bipartite graph or its projection. Default is 0 which plot the original bipartite graph. other options: 1, 2
+#' @param verbose A logical, if TRUE, the plot is saved as the .png file in the working directory. Default is FALSE.
+#' @param vertex.label.display A Boolean var, if TRUE then show the label of each vertex. Default is FALSE.
+#' @param layout A function from igraph package, plot layout. Default is layout.bipartite, thus the nodes on the top side are the variables in rows, nodes on the bottom side are those in columns.
 #' @param vertex.label.cex A numeric, vertex labels' size. Default is 0.3.
 #' @param vertex.size A numeric, vertex size. Default is 4.
 #' @param edge.width A numeric, edge width. Default is 0.1.
 #' @param edge.color A string, edge color. Default is pink.
-#' @param vertex.shape A vector, shapes for two different sets of vertices.
-#'   Default is c("square", "circle"), the first one is for the nodes in rows,
-#'   the second one is for nodes in columns, if the \code{dim} is not 0, then
-#'   only the first one will be used.
-#' @param vertix.color A vector, colors for two different sets of vertices.
-#'   Default is c("steel blue", "orange"), the first one is for the nodes in
-#'   rows, the second one is for nodes in columns, if the \code{dim} is not 0,
-#'   then only the first one will be used..
+#' @param vertex.shape A vector, shapes for two different sets of vertices. Default is c("square", "circle"), the first one is for the nodes in rows, the second one is for nodes in columns, if the \code{dim} is not 0, then only the first one will be used.
+#' @param vertix.color A vector, colors for two different sets of vertices. Default is c("steel blue", "orange"), the first one is for the nodes in rows, the second one is for nodes in columns, if the \code{dim} is not 0, then only the first one will be used.
 #'
 #' @return An igraph graph object.
 #' @import igraph
