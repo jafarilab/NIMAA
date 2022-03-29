@@ -45,15 +45,15 @@ This function arranges the input matrix and extracts the submatrices with non-mi
 This function performs row- and column-wise preprocessing in order to extract the largest submtrices. The distinction is that the first employs the original input matrix (row-wise), whereas the second employs the transposed matrix (column-wise). Following that, this function performs a "three-step arrangement" on the matrix, the first step being row-by-row arrangement, the second step being column-by-column arrangement, and the third step being total rearranging. Then, using four strategies, namely "Square", "Rectangular row", "Rectangular col", and "Rectangular element max", this function finds the largest possible submatrix (with no missing values), outputs the result, and prints the visualization. "Square" denotes the square submatric with the same number of rows and columns. "Rectangular_row" indicates the submatrices with the most rows. "Rectangular_col" denotes the submatrices with the most columns. "Rectangular_element_max" indicates the submatrices with the most elements which is typically a rectangular submatrix.
 }
 \examples{
-# load some data from beatAML dataset
-data <- NIMAA::beatAML[1:10000,]
+# load part of the beatAML data
+beatAML_data <- NIMAA::beatAML[1:10000,]
 
 # convert to incidence matrix
-inc_mat <- NIMAA::el2IncMatrix(data)
+beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
 
-# extract sub-matricess with non-missing values
-sub_matrices <- extractSubMatrix(inc_mat,
-col.vars = "patient_id", row.vars = "inhibitor")
+# extract submatrices with non-missing values
+sub_matrices <- extractSubMatrix(beatAML_incidence_matrix, col.vars = "patient_id",
+ row.vars = "inhibitor")
 }
 \seealso{
 \code{\link[dplyr]{arrange}}, \code{\link[dplyr]{arrange_if}}

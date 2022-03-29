@@ -18,7 +18,7 @@ el2IncMatrix(
 
 \item{index_numeric}{An integer, the index for numeric values. This is value for selecting the column which contains the numeric values of pairwise relationship. This column is used for missing value investigation and imputation steps.}
 
-\item{print_skim}{A logical value, If \code{TRUE}, then the function will print \code{\link[skimr]{skim}} information in console.}
+\item{print_skim}{A logical value, If \code{TRUE}, then the function prints \code{\link[skimr]{skim}} information in console.}
 }
 \value{
 The incidence matrix.

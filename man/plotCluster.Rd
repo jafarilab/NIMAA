@@ -2,43 +2,39 @@
 % Please edit documentation in R/plot-cluster.R
 \name{plotCluster}
 \alias{plotCluster}
-\title{Plot the clusters in one projection of the bipartite graph.}
+\title{Plot the clusters in one projection of the bipartite network}
 \usage{
 plotCluster(graph, cluster, ...)
 }
 \arguments{
-\item{graph}{A igraph graph object.}
+\item{graph}{An igraph object.}
 
-\item{cluster}{A igraph cluster object, usually got from \code{\link{findCluster}}}
+\item{cluster}{An igraph cluster object.}
 
 \item{...}{Pass to \code{\link[networkD3]{forceNetwork}}}
 }
 \value{
-A networkD3 object, the plot of cluster.
+A networkD3 object.
 }
 \description{
-This function will visualize the input igraph cluster objects
-and igraph graph objects with membership properties. Different memberships
-will be represented by dots of different colors.
+This function makes an interactive network figure that shows nodes in which nodes belonging to the same cluster are colored the same and nodes belonging to other clusters are colored differently. This function has been customized to use the output of \code{\link{findCluster}}.
 }
 \examples{
-# generate a incidence matrix
-data <- matrix(c(0, 1, 0, 1, 0,
-1, 0, 0, 0, 0,
-1, 0, 1, 1, 1), nrow = 3,byrow = TRUE)
+# generate an incidence matrix
+data <- matrix(c(1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0), nrow = 3)
 colnames(data) <- letters[1:5]
 rownames(data) <- LETTERS[1:3]
 
 # run findCluster() to do clustering
 cls <- findCluster(
   data,
-  dim = 1,
+  part = 1,
   method = "all",
   normalization = FALSE,
-  rm_weak_edges = FALSE,
+  rm_weak_edges = TRUE,
   comparison = FALSE
 )
-# plot the cluster
+# plot the cluster with Louvain method
 plotCluster(graph = cls$graph, cluster = cls$louvain)
 }
 \seealso{

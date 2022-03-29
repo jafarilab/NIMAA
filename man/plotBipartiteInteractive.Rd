@@ -2,33 +2,30 @@
 % Please edit documentation in R/plot-original-bipartite-interactive.R
 \name{plotBipartiteInteractive}
 \alias{plotBipartiteInteractive}
-\title{Use the incidence matrix to plot an interactive bipartite graph figure}
+\title{Use the incidence matrix to plot an interactive bipartite network}
 \usage{
 plotBipartiteInteractive(inc_mat)
 }
 \arguments{
-\item{inc_mat}{A matrix, the incidence matrix of graph.}
+\item{inc_mat}{A matrix, the incidence matrix of bipartite network.}
 }
 \value{
-An visNetwork interactive figure, details in \code{\link[visNetwork]{visNetwork}}
+An visNetwork object for interactive figure.
 }
 \description{
-This function converts the input incidence matrix into a
-bipartite graph, and uses the visNetwork package to draw an interactive
-figure.
+This function converts the input incidence matrix into a bipartite network, and generates a customized interactive bipartite network visualization.
 }
 \details{
-This function realizes interactive visualization. The user can input
-a simple incidence matrix, and then get a dynamic graph with a bipartite
-graph layout, in which two parts use different colors and shapes to
-represent nodes.
+This function creates customized interactive visualization for bipartite networks. The user can enter a simple incidence matrix to generate a dynamic network with a bipartite network layout, in which two parts use different colors and shapes to represent nodes. This function relies on the visNetwork package.
 }
 \examples{
 # load part of the beatAML data
-beatAML_data <- NIMAA::beatAML[1:1000,]
+beatAML_data <- NIMAA::beatAML[1:10000,]
 
-# plot beatAML data and convert to incidence matrix
-beatAML_incidence_matrix <- el2IncMatrix(beatAML_data, print_skim = FALSE)
+# convert to incidence matrix
+beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
+
+# plot with the interactive bipartite network
 
 plotBipartiteInteractive(inc_mat = beatAML_incidence_matrix)
 }

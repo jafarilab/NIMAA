@@ -2,11 +2,11 @@
 % Please edit documentation in R/plot-original-bipartite.R
 \name{plotBipartite}
 \alias{plotBipartite}
-\title{Plot the graph based on input data}
+\title{Plot the bipartite network and the corresponding projected networks}
 \usage{
 plotBipartite(
   inc_mat,
-  dim = 0,
+  part = 0,
   verbose = FALSE,
   vertex.label.display = FALSE,
   layout = layout.bipartite,
@@ -19,53 +19,40 @@ plotBipartite(
 )
 }
 \arguments{
-\item{inc_mat}{A matrix, the incidence matrix of graph.}
+\item{inc_mat}{A matrix, the incidence matrix of bipartite network.}
 
-\item{dim}{An integer value, chosen between plotting the original bipartite
-graph or its projection. Default is 0 which plot the original bipartite
-graph. other options: 1, 2}
+\item{part}{An integer value indicates whether the original bipartite network or its projection should be plotted. The default value of 0 represents the original bipartite network. Other possibilities are 1 and 2 for two projected networks.}
 
-\item{verbose}{A logical, if TRUE, the plot is saved as the .png file in the
-working directory. Default is FALSE.}
+\item{verbose}{A logical value, if it is \code{TRUE}, the plot is saved as the .png file in the working directory. The default value is \code{FALSE}.}
 
-\item{vertex.label.display}{A Boolean var, if TRUE then show the label of
-each vertex. Default is FALSE.}
+\item{vertex.label.display}{A logical value, if it is \code{TRUE}, then the label of each vertex is shown in the output graph. The default value is \code{FALSE}.}
 
-\item{layout}{A function from igraph package, plot layout. Default is
-layout.bipartite, thus the nodes on the top side are the variables in rows,
-nodes on the bottom side are those in columns.}
+\item{layout}{A function from igraph package. The default is \code{layout.bipartite}, so the nodes on the top side are the variables in rows, and the nodes on the bottom side are those in columns.}
 
-\item{vertex.shape}{A vector, shapes for two different sets of vertices.
-Default is c("square", "circle"), the first one is for the nodes in rows,
-the second one is for nodes in columns, if the \code{dim} is not 0, then
-only the first one will be used.}
+\item{vertex.shape}{A string vector to define the shapes for two different sets of vertices. The default value is \code{c("square", "circle")}, the first string value is for the nodes in rows, and the second one is for nodes in columns. If the \code{part} is not 0, then only the first string value is used.}
 
-\item{vertix.color}{A vector, colors for two different sets of vertices.
-Default is c("steel blue", "orange"), the first one is for the nodes in
-rows, the second one is for nodes in columns, if the \code{dim} is not 0,
-then only the first one will be used..}
+\item{vertix.color}{A string vector to define the colors for two different sets of vertices. The default value is \code{c("steel blue", "orange")}, the first string value is for the nodes in rows, and the second one is for nodes in columns. If the \code{part} is not 0, then only the first string value is used.}
 
-\item{vertex.label.cex}{A numeric, vertex labels' size. Default is 0.3.}
+\item{vertex.label.cex}{A numeric value used to define the size of vertex labels. The default value is 0.3.}
 
-\item{vertex.size}{A numeric, vertex size. Default is 4.}
+\item{vertex.size}{A numeric value used to define the size of vertex. The default value is 4.}
 
-\item{edge.width}{A numeric, edge width. Default is 0.1.}
+\item{edge.width}{A numeric value used to define the edge width. The default value is 0.1.}
 
-\item{edge.color}{A string, edge color. Default is pink.}
+\item{edge.color}{A string used to define the color of edges. The default value is "pink".}
 }
 \value{
-An igraph graph object.
+An igraph network object with visualization.
 }
 \description{
-This function converts the input incidence matrix into a
-bipartite graph, and uses the igraph package to draw an figure.
+This function converts the incidence matrix into an igraph object and provides network visualization in multiple ways.
 }
 \examples{
 # load part of the beatAML data
-beatAML_data <- NIMAA::beatAML[1:1000,]
+beatAML_data <- NIMAA::beatAML[1:10000,]
 
-# plot beatAML data and convert to incidence matrix
-beatAML_incidence_matrix <- el2IncMatrix(beatAML_data, print_skim = FALSE)
+# convert to incidence matrix
+beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
 
 # plot with the vertex label showing
 plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.display = TRUE)

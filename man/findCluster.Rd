@@ -28,9 +28,9 @@ findCluster(
 
 \item{rm_weak_edges}{A logical value indicating whether weak edges should be removed before the computation proceeds. The default is TRUE.}
 
-\item{rm_method}{A string indicating the weak edges removing method. If \code{rm_weak_edges} is False, then this argument will be ignored. The default is \code{delete}, which means deleting weak edges from the network. The other option is \code{as_zero}, which sets the weak edges' weights to 0.}
+\item{rm_method}{A string indicating the weak edges removing method. If \code{rm_weak_edges} is False, then this argument is ignored. The default is \code{delete}, which means deleting weak edges from the network. The other option is \code{as_zero}, which sets the weak edges' weights to 0.}
 
-\item{threshold}{A string indicating the weak edge threshold selection method. If \code{rm_weak_edges} is False, then this argument will be ignored. By default, \code{median} is used. The other option is \code{keep_connected}, which prevents the network from being unconnected and removes edges in ascending order of weights.}
+\item{threshold}{A string indicating the weak edge threshold selection method. If \code{rm_weak_edges} is False, then this argument is ignored. By default, \code{median} is used. The other option is \code{keep_connected}, which prevents the network from being unconnected and removes edges in ascending order of weights.}
 
 \item{set_remaining_to_1}{A logical value indicating whether the remaining edges' weight should be set to 1. The default is TRUE.}
 
@@ -49,7 +49,7 @@ This function performs optional preprocessing, such as normalization, on the inp
 }
 \examples{
 # generate an incidence matrix
-data <- matrix(c(1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1), nrow = 3)
+data <- matrix(c(1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0), nrow = 3)
 colnames(data) <- letters[1:5]
 rownames(data) <- LETTERS[1:3]
 
@@ -60,6 +60,6 @@ cls <- findCluster(
   method = "all",
   normalization = FALSE,
   rm_weak_edges = TRUE,
-  comparison = FALSE
+  comparison = TRUE
 )
 }
