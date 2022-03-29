@@ -25,7 +25,7 @@
 #'
 #' @examples
 #' # generate an incidence matrix
-#' data <- matrix(c(1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1), nrow = 3)
+#' data <- matrix(c(1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0), nrow = 3)
 #' colnames(data) <- letters[1:5]
 #' rownames(data) <- LETTERS[1:3]
 #'
@@ -36,7 +36,7 @@
 #'   method = "all",
 #'   normalization = FALSE,
 #'   rm_weak_edges = TRUE,
-#'   comparison = FALSE
+#'   comparison = TRUE
 #' )
 findCluster <- function(inc_mat,
                         part = 1,
