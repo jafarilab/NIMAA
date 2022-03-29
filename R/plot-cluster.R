@@ -1,38 +1,35 @@
-#' Plot the clusters in one projection of the bipartite graph.
-#' @description This function will visualize the input igraph cluster objects
-#'   and igraph graph objects with membership properties. Different memberships
-#'   will be represented by dots of different colors.
+#' Plot the clusters in one projection of the bipartite network
 #'
-#' @param graph A igraph graph object.
-#' @param cluster A igraph cluster object, usually got from \code{\link{findCluster}}
+#' @description This function makes an interactive network figure that shows nodes in which nodes belonging to the same cluster are colored the same and nodes belonging to other clusters are colored differently. This function has been customized to use the output of \code{\link{findCluster}}.
+#'
+#' @param graph An igraph object.
+#' @param cluster An igraph cluster object.
 #' @param ... Pass to \code{\link[networkD3]{forceNetwork}}
 #'
 #' @seealso \code{\link[networkD3]{forceNetwork}}
 #'
-#' @return A networkD3 object, the plot of cluster.
+#' @return A networkD3 object.
 #'
 #' @import igraph
 #' @import networkD3
 #' @export
 #'
 #' @examples
-#' # generate a incidence matrix
-#' data <- matrix(c(0, 1, 0, 1, 0,
-#' 1, 0, 0, 0, 0,
-#' 1, 0, 1, 1, 1), nrow = 3,byrow = TRUE)
+#' # generate an incidence matrix
+#' data <- matrix(c(1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0), nrow = 3)
 #' colnames(data) <- letters[1:5]
 #' rownames(data) <- LETTERS[1:3]
 #'
 #' # run findCluster() to do clustering
 #' cls <- findCluster(
 #'   data,
-#'   dim = 1,
+#'   part = 1,
 #'   method = "all",
 #'   normalization = FALSE,
-#'   rm_weak_edges = FALSE,
+#'   rm_weak_edges = TRUE,
 #'   comparison = FALSE
 #' )
-#' # plot the cluster
+#' # plot the cluster with Louvain method
 #' plotCluster(graph = cls$graph, cluster = cls$louvain)
 plotCluster <- function(graph, cluster, ...) {
   members <- igraph::membership(cluster)
