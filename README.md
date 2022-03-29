@@ -17,12 +17,12 @@ Releases](https://img.shields.io/github/downloads/jafarilab/NIMAA/total.svg?styl
 The NIMAA package \[@nimaa\] provides a comprehensive set of methods for
 performing nominal data mining.
 
-It employs bipartite graphs to demonstrate how two nominal variables are
-linked, and then places them in the incidence matrix to proceed with
+It employs bipartite networks to demonstrate how two nominal variables
+are linked, and then places them in the incidence matrix to proceed with
 network analysis. NIMAA aids in characterizing the pattern of missing
 values in a dataset, locating large submatrices with non-missing values,
 and predicting edges within nominal variable labels. Then, given a
-submatrix, two unipartite graphs are constructed using various network
+submatrix, two unipartite networks are constructed using various network
 projection methods. NIMAA provides a variety of choices for clustering
 projected networks and selecting the best one. The best clustering
 results can also be used as a benchmark for imputation analysis in
@@ -68,7 +68,7 @@ beatAML_incidence_matrix <- plotInput(
 
 <img src="vignettes/patient_id-inhibitor.png" title="The beatAML dataset as an incidence matrix" alt="The beatAML dataset as an incidence matrix" width="100%" style="display: block; margin: auto;" />
 
-### Plotting the bipartite graph of the original data
+### Plotting the bipartite network of the original data
 
 ``` r
 plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.display = T)
@@ -76,9 +76,9 @@ plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.display = T)
 
 <img src="man/figures/README-plotBipartite-1.png" width="100%" style="display: block; margin: auto;" />
 
-    #> IGRAPH 8eac304 UNWB 650 47636 -- 
+    #> IGRAPH e129e7c UNWB 650 47636 -- 
     #> + attr: name (v/c), type (v/l), shape (v/c), color (v/c), weight (e/n)
-    #> + edges from 8eac304 (vertex names):
+    #> + edges from e129e7c (vertex names):
     #>  [1] Alisertib (MLN8237)      --11-00261 Barasertib (AZD1152-HQPA)--11-00261
     #>  [3] Bortezomib (Velcade)     --11-00261 Canertinib (CI-1033)     --11-00261
     #>  [5] Crenolanib               --11-00261 CYT387                   --11-00261
@@ -106,7 +106,7 @@ sub_matrices <- extractSubMatrix(
   print_skim = FALSE
   )
 #> binmatnest2.temperature 
-#>                20.12074 
+#>                20.12034 
 #> Size of Square:   96 rows x  96 columns 
 #> Size of Rectangular_element_max:      87 rows x  140 columns
 ```
@@ -129,7 +129,7 @@ cls <- findCluster(
   part = 1,
   method = "all", # all available clustering methods
   normalization = TRUE, # normalize the input matrix
-  rm_weak_edges = TRUE, # remove the weak edges in graph
+  rm_weak_edges = TRUE, # remove the weak edges in the network
   rm_method = 'delete', # delete the weak edges instead of lowering their weights to 0.
   threshold = 'median', # Use median of edges' weights as threshold
   set_remaining_to_1 = TRUE, # set the weights of remaining edges to 1
