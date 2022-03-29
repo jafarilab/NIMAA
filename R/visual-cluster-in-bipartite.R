@@ -1,19 +1,14 @@
-#' Plot the bipartite graph with color coding for different cluster in different
-#' projections.
+#' Plot the bipartite graph with color coding for different clusters in both parts
 #'
-#' @description This function will use sankey to draw two graphs, the left and
-#'   right parts are two projections, and in each projection, a node corresponds
-#'   to a group in the clustering result.
-#' @param data A a dataframe containing the missing values, at least 2 nominal
-#'   columns.
-#' @param community_left An igraph community object, one projection of the
-#'   graph, will be showed on the left side.
-#' @param community_right An igraph community object, the other projection of the
-#'   graph, will be showed on the right side.
-#' @param name_left A string, the name of left community.
-#' @param name_right A string, the name of right community.
+#' @description The Sankey diagram is used to depict the connections between clusters within each part of the bipartite network. The display is also interactive, and by grouping nodes within each cluster as "summary" nodes, this function emphasizes how clusters of each part are connected together.
 #'
-#' @return A Data frame containing plotting datas.
+#' @param data A data frame or matrix object as an edge list.
+#' @param community_left An igraph community object, one projection of the bipartite network to be showed on the left side.
+#' @param community_right An igraph community object, the other projection of the bipartite network to be showed on the right side.
+#' @param name_left A string value, the name of left community.
+#' @param name_right A string value, the name of right community.
+#'
+#' @return A customized Sankey plot with a data frame containing plotting data.
 #' @seealso \code{\link[plotly]{plot_ly}}
 #'
 #' @importFrom  dplyr inner_join group_by summarize
@@ -21,29 +16,25 @@
 #' @export
 #'
 #' @examples
-#' # load part of the beatAML data and get the incidence matrix
-#' beatAML_data <- NIMAA::beatAML[1:1000,]
+#' # load part of the beatAML data
+#' beatAML_data <- NIMAA::beatAML
+#'
+#' # convert to incidence matrix
 #' beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
 #'
-#' # extract the sub-matrix
-#' sub_matrices <- extractSubMatrix(
-#' beatAML_incidence_matrix,
-#' shape = c("Rectangular_element_max") # the shapes you want to extract
-#' )
+#' # extract the Recetengular_element_max submatrix
+#' sub_matrices <- extractSubMatrix(beatAML_incidence_matrix,
+#' col.vars = "patient_id", row.vars = "inhibitor",
+#' shape = c("Rectangular_element_max"))
 #'
-#' # do clustering
-#' cls <- findCluster(
-#' sub_matrices$Rectangular_element_max, # the sub-matrix
-#' dim = 1
-#' )
+#' # do clustering analysis
+#' cls1 <- findCluster(sub_matrices$Rectangular_element_max,
+#' part = 1, comparison = FALSE)
 #'
-#' cls2 <- findCluster(
-#' sub_matrices$Rectangular_element_max, # the sub-matrix
-#' dim = 2
-#' )
+#' cls2 <- findCluster(sub_matrices$Rectangular_element_max,
+#' part = 2, comparison = FALSE)
 #'
-#' visualClusterInBipartite(
-#' data = beatAML_data,
+#' visualClusterInBipartite(data = beatAML_data,
 #' community_left = cls2$leading_eigen,
 #' community_right = cls$fast_greedy,
 #' name_left = 'patient_id',
