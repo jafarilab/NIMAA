@@ -135,7 +135,7 @@ The `findCluster()` function performs seven commonly used network clustering alg
 To begin, let us examine how to utilize `findCluster` to find clusters of `patient_id`s based on the `Rectangular_element_max` submatrix of the `beatAML` bipartite network projection to a patient's unipartite similarity network.
 
 ```{r, eval=TRUE, echo= TRUE, results='hide',error=FALSE, warning=FALSE, message=FALSE, fig.height = 3, fig.width = 7, fig.align = "center"}
-cls <- findCluster(
+cls1 <- findCluster(
   sub_matrices$Rectangular_element_max,
   part = 1,
   method = "all", # all available clustering methods
@@ -152,7 +152,7 @@ Additionally, if external features (prior knowledge) are provided, the function 
 For instance, let's generate some random features for the patients in the `beatAML` dataset. The following is an example:
 
 ```{r generate extra features, eval=TRUE, echo=TRUE, results='asis'}
-external_feature <- data.frame(row.names = cls$walktrap$names)
+external_feature <- data.frame(row.names = cls1$walktrap$names)
 external_feature[,'membership'] <- paste('group',
                                          findCluster(sub_matrices$Rectangular_element_max,
                                                      method = c('walktrap'),
@@ -214,7 +214,7 @@ The Sankey diagram is used to depict the connections between clusters within eac
 ```{r visualClusterInBipartite, eval = FALSE}
 visualClusterInBipartite(
   data = beatAML_data,
-  community_left = cls$leading_eigen,
+  community_left = cls1$leading_eigen,
   community_right = cls2$fast_greedy,
   name_left = 'patient_id',
   name_right = 'inhibitor')
@@ -280,8 +280,8 @@ The `validateEdgePrediction()` function compares the results of clustering after
 
 ```{r, eval=TRUE, fig.height = 6, fig.width = 7, fig.align = "center"}
 validateEdgePrediction(imputation = imputations,
-                   refer_community = cls$fast_greedy,
-                   clustering_args = cls$clustering_args)
+                   refer_community = cls1$fast_greedy,
+                   clustering_args = cls1$clustering_args)
 ```
 
 Finally, the best imputation method can be chosen, allowing for a re-examination of the label relationships or a re-run of the nominal data mining. In other words, users can use this imputed matrix as an input matrix to redo the previous steps of mining the hidden relationships in the original dataset. Note that this matrix has no missing values, hence no submatrix extraction is required.
