@@ -196,7 +196,7 @@ cls2 <- findCluster(
 In this section, we look at the clustering results, with a particular emphasis on cluster visualization and scoring measures.
 
 ### 4.1 Displaying Clusters inside the unipartite network
-The `plotCluster()` function makes an interactive network figure that shows nodes that belong to the same group in the same color and nodes that belong to different groups in separate colors.
+The `plotCluster()` function makes an interactive network figure that shows nodes that belong to the same cluster in the same color and nodes that belong to different clusters in separate colors.
 
 ```{r plotcluster,eval = FALSE}
 plotCluster(graph=cls2$graph,cluster = cls2$louvain)
