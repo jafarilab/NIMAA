@@ -25,15 +25,15 @@
 #' @export
 #'
 #' @examples
-#' # load some data from beatAML dataset
-#' data <- NIMAA::beatAML[1:10000,]
+#' # load part of the beatAML data
+#' beatAML_data <- NIMAA::beatAML[1:10000,]
 #'
 #' # convert to incidence matrix
-#' inc_mat <- NIMAA::el2IncMatrix(data)
+#' beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
 #'
-#' # extract sub-matricess with non-missing values
-#' sub_matrices <- extractSubMatrix(inc_mat,
-#' col.vars = "patient_id", row.vars = "inhibitor")
+#' # extract submatrices with non-missing values
+#' sub_matrices <- extractSubMatrix(beatAML_incidence_matrix, col.vars = "patient_id",
+#'  row.vars = "inhibitor")
 extractSubMatrix <- function(x,
                              shape = "All",
                              verbose = FALSE,
