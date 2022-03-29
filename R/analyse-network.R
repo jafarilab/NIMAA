@@ -1,4 +1,5 @@
 #' General properties of the network
+#'
 #' @description Generic function for network properties, allowing you to get a quick overview of the network topology.
 #'
 #' @details The following measurements are calculated in one step using the \href{https://igraph.org/r/}{igraph} package to analyze the input graph object: the Degree, Betweenness, Closeness, Kleinberg's hub score and Eigenvector centrality of nodes (vertices), the Betweenness centrality of edges, number of nodes, edges and components, the edge density, global Eigenvector centrality value and global Kleinberg's hub centrality score.
