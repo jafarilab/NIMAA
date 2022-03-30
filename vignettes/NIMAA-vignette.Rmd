@@ -204,7 +204,7 @@ plotCluster(graph=cls2$graph,cluster = cls2$louvain)
 
 NB: To keep the size of vignette small enough, we do not output
 the interactive figure here. Instead, we show a screenshot.
-```{r, eval=FALSE, echo=FALSE, out.width="100%", fig.cap="Interactive plot for function plotCluster()"}
+```{r, echo=FALSE, out.width="100%", fig.cap="Interactive plot for function plotCluster()"}
 knitr::include_graphics("plotCluster.png")
 ```
 
