@@ -5,5 +5,5 @@
 \alias{NIMAA}
 \title{NIMAA: A package for Nominal Data Mining Analysis.}
 \description{
-The NIMAA package provides 12 main functions that build a pipeline for nominal data mining.
+The NIMAA package contains 13 main functions that together provide a pipeline for nominal data mining. This package also includes four datasets that can be used to perform various nominal data mining analyses.
 }
