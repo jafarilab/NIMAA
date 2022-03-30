@@ -1,8 +1,8 @@
 Package: NIMAA
 Title: Nominal Data Mining Analysis
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(
- person("Mohieddin", "Jafari", role = c("aut"),email = "mohieddin.jafari@helsinki.fi"),
+ person("Mohieddin", "Jafari", role = c("aut","cre"),email = "mohieddin.jafari@helsinki.fi"),
  person("Cheng", "Chen", role = c("aut","cre"),email = "cheng.chen@helsinki.fi")
  )
 Description: Functions for nominal data mining based on bipartite graphs, which build a pipeline for analysis and missing values imputation. Methods are mainly from the paper: Jafari, Mohieddin, et al. (2021) <doi:10.1101/2021.03.18.436040>, some new ones are also included.
