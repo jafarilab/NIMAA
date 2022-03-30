@@ -30,7 +30,7 @@
 
 ## New vignette
 
-* The current vignette was updated based on new functions and arguments. 
+* The current vignette describes the concept of **edge prediction** based on new functions and arguments. In other words, validation of network clusters using ground truth and validation of edge prediction based on the benchmark is now clearer to utilize in the nominal data mining analysis pipeline.
 
 ## Bug fixes
 
