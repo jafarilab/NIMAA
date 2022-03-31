@@ -95,7 +95,7 @@ knitr::include_graphics("vignettes/Column_wise_arrangement.png")
 
 The `findCluster()` function implements seven widely used network clustering algorithms, with the option of preprocessing the input incidence matrix following the projecting of the bipartite network into unipartite networks. Also, internal and external measurements can be used to compare clustering algorithms. Details can be found in the package vignette and help manual.
 
-```{r findcluster 1, eval=TRUE, fig.height = 7, fig.width = 7, fig.align = "center"}
+```{r findcluster, eval=TRUE, fig.height = 7, fig.width = 7, fig.align = "center"}
 cls <- findCluster(
   sub_matrices$Rectangular_element_max,
   part = 1,

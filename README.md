@@ -76,9 +76,9 @@ plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.display = T)
 
 <img src="man/figures/README-plotBipartite-1.png" width="100%" style="display: block; margin: auto;" />
 
-    #> IGRAPH e129e7c UNWB 650 47636 -- 
+    #> IGRAPH 47887a3 UNWB 650 47636 -- 
     #> + attr: name (v/c), type (v/l), shape (v/c), color (v/c), weight (e/n)
-    #> + edges from e129e7c (vertex names):
+    #> + edges from 47887a3 (vertex names):
     #>  [1] Alisertib (MLN8237)      --11-00261 Barasertib (AZD1152-HQPA)--11-00261
     #>  [3] Bortezomib (Velcade)     --11-00261 Canertinib (CI-1033)     --11-00261
     #>  [5] Crenolanib               --11-00261 CYT387                   --11-00261
@@ -106,7 +106,7 @@ sub_matrices <- extractSubMatrix(
   print_skim = FALSE
   )
 #> binmatnest2.temperature 
-#>                20.12034 
+#>                 20.1224 
 #> Size of Square:   96 rows x  96 columns 
 #> Size of Rectangular_element_max:      87 rows x  140 columns
 ```
@@ -145,7 +145,7 @@ cls <- findCluster(
 #> |coverage     | 0.9200411| 0.5866393| 1.0000000|  1.0000000|     0.5806783|   0.5866393|
 ```
 
-<img src="man/figures/README-findcluster 1-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-findcluster-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Predicting edge in bipartite network
 
