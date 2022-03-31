@@ -28,7 +28,7 @@ beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
 
 # do clustering
 cls <- findCluster(beatAML_incidence_matrix,
-  dim = 1, method = c('infomap','walktrap'),
+  part = 1, method = c('infomap','walktrap'),
   normalization = FALSE, rm_weak_edges = TRUE,
   comparison = FALSE)
 

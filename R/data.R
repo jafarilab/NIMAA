@@ -21,7 +21,7 @@
 #' \item{\code{herb}}{Scientific Latin names of available herbs in TCM database}
 #' \item{\code{pubchem_id}}{unique compound id (CID) of ingredients based on PubChem database for available \code{herb} in TCMID database}
 #' }
-#' @source Huang, L., Xie, D., Yu, Y., Liu, H., Shi, Y., Shi, T., & Wen, C. (2018). TCMID 2.0: a comprehensive resource for TCM. Nucleic acids research, 46(D1), D1117–D1120. \url{http://www.megabionet.org/tcmid/}
+#' @source Huang, L., Xie, D., Yu, Y., Liu, H., Shi, Y., Shi, T., & Wen, C. (2018). TCMID 2.0: a comprehensive resource for TCM. Nucleic acids research, 46(D1), D1117–D1120. \url{https://academic.oup.com/nar/article/46/D1/D1117/4584630}
 "herbIngredient"
 
 #' drugComb
