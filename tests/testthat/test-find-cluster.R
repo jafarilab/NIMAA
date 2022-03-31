@@ -11,5 +11,5 @@ test_that("find cluster works", {
        comparison = TRUE
     )
   expect_equal(names(V(cls$graph)), c("a", "b", "c", "d", "e"))
-  expect_equal(E(cls$graph)$weight, rep(1, 10))
+  expect_equal(E(cls$graph)$weight, rep(1, 4))
 })
