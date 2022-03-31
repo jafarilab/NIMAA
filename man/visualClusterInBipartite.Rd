@@ -50,7 +50,7 @@ part = 2, comparison = FALSE)
 
 visualClusterInBipartite(data = beatAML_data,
 community_left = cls2$leading_eigen,
-community_right = cls$fast_greedy,
+community_right = cls1$fast_greedy,
 name_left = 'patient_id',
 name_right = 'inhibitor')
 }
