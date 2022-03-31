@@ -12,7 +12,7 @@ A tibble with two variables:
 }
 }
 \source{
-Huang, L., Xie, D., Yu, Y., Liu, H., Shi, Y., Shi, T., & Wen, C. (2018). TCMID 2.0: a comprehensive resource for TCM. Nucleic acids research, 46(D1), D1117–D1120. \url{http://www.megabionet.org/tcmid/}
+Huang, L., Xie, D., Yu, Y., Liu, H., Shi, Y., Shi, T., & Wen, C. (2018). TCMID 2.0: a comprehensive resource for TCM. Nucleic acids research, 46(D1), D1117–D1120. \url{https://academic.oup.com/nar/article/46/D1/D1117/4584630}
 }
 \usage{
 herbIngredient
