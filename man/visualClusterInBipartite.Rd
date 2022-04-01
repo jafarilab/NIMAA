@@ -24,14 +24,14 @@ visualClusterInBipartite(
 \item{name_right}{A string value, the name of right community.}
 }
 \value{
-A customized Sankey plot with a data frame containing plotting data.
+A customized Sankey plot with a data frame containing the cluster pairwise relationship with the sum of weight values in the weighted bipartite network.
 }
 \description{
 The Sankey diagram is used to depict the connections between clusters within each part of the bipartite network. The display is also interactive, and by grouping nodes within each cluster as "summary" nodes, this function emphasizes how clusters of each part are connected together.
 }
 \examples{
 # load part of the beatAML data
-beatAML_data <- NIMAA::beatAML
+beatAML_data <- NIMAA::beatAML[1:1000,]
 
 # convert to incidence matrix
 beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)

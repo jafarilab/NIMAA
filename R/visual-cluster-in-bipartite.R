@@ -8,7 +8,7 @@
 #' @param name_left A string value, the name of left community.
 #' @param name_right A string value, the name of right community.
 #'
-#' @return A customized Sankey plot with a data frame containing plotting data.
+#' @return A customized Sankey plot with a data frame containing the cluster pairwise relationship with the sum of weight values in the weighted bipartite network.
 #' @seealso \code{\link[plotly]{plot_ly}}
 #'
 #' @importFrom  dplyr inner_join group_by summarize
@@ -17,7 +17,7 @@
 #'
 #' @examples
 #' # load part of the beatAML data
-#' beatAML_data <- NIMAA::beatAML
+#' beatAML_data <- NIMAA::beatAML[1:1000,]
 #'
 #' # convert to incidence matrix
 #' beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
