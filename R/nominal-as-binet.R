@@ -13,23 +13,23 @@
 #' @export
 #'
 #' @examples
-#' # generate an edge list without numeric value
+#' # generate a data frame with two nominal variables without numeric values
 #' el1 <- data.frame(
-#'   Part1 = c("d", "e", "e", "b", "a", "a"),
-#'   Part2 = c("J", "N", "O", "R", "R", "L")
+#'   nominal_var_1 = c("d", "e", "e", "b", "a", "a"),
+#'   nominal_var_2 = c("J", "N", "O", "R", "R", "L")
 #' )
 #'
-#' # generate an edge list with numeric value
+#' # generate a data frame with two nominal variables with numeric values
 #' el2 <- data.frame(
-#'   Part1 = c("d", "e", "e", "b", "a", "a"),
-#'   Part2 = c("J", "N", "O", "R", "R", "L"),
-#'   Value = c(4, 5, 5, 8, 7, 7)
+#'   nominal_var_1 = c("d", "e", "e", "b", "a", "a"),
+#'   nominal_var_2 = c("J", "N", "O", "R", "R", "L"),
+#'   numeric_val = c(4, 5, 5, 8, 7, 7)
 #' )
 #'
-#' # run el2IncMatrix() to convert the edge list to the incidence matrix
-#' inc_mat1 <- el2IncMatrix(el1)
-#' inc_mat2 <- el2IncMatrix(el2)
-el2IncMatrix <- function(el, index_nominal = c(1, 2), # el = edgelist; 2 = to; IncMatrix = Incidence Matrix.
+#' # run nominalAsBinet() to convert the edge list to the incidence matrix
+#' inc_mat1 <- nominalAsBinet(el1)
+#' inc_mat2 <- nominalAsBinet(el2)
+nominalAsBinet <- function(el, index_nominal = c(1, 2), # nominal = nominal data; Binet = bipartite network.
                          index_numeric = 3,
                          print_skim = FALSE) {
   cn <- colnames(el)
