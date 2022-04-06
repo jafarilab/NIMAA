@@ -20,7 +20,7 @@
 #' beatAML_data <- NIMAA::beatAML[1:1000,]
 #'
 #' # convert to incidence matrix
-#' beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
+#' beatAML_incidence_matrix <- nominalAsBinet(beatAML_data)
 #'
 #' # extract the Recetengular_element_max submatrix
 #' sub_matrices <- extractSubMatrix(beatAML_incidence_matrix,
