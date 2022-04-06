@@ -18,7 +18,7 @@
 #' beatAML_data <- NIMAA::beatAML[1:10000,]
 #'
 #' # convert to incidence matrix
-#' beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
+#' beatAML_incidence_matrix <- nominalAsBinet(beatAML_data)
 #'
 #' # plot with the interactive bipartite network
 #'

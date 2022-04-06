@@ -52,7 +52,7 @@ This function converts the incidence matrix into an igraph object and provides n
 beatAML_data <- NIMAA::beatAML[1:10000,]
 
 # convert to incidence matrix
-beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
+beatAML_incidence_matrix <- nominalAsBinet(beatAML_data)
 
 # plot with the vertex label showing
 plotBipartite(inc_mat = beatAML_incidence_matrix, vertex.label.display = TRUE)
