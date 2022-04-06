@@ -43,6 +43,7 @@ el2 <- data.frame(
 # run nominalAsBinet() to convert the edge list to the incidence matrix
 inc_mat1 <- nominalAsBinet(el1)
 inc_mat2 <- nominalAsBinet(el2)
+
 }
 \seealso{
 \code{\link[tidyr]{pivot_wider}},
