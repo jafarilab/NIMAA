@@ -2,7 +2,7 @@
 % Please edit documentation in R/validate-cluster.R
 \name{validateCluster}
 \alias{validateCluster}
-\title{Validate the clusters in a projected network based on additional external measures.}
+\title{Validate the cluster analysis in a projected network based on additional external measures.}
 \usage{
 validateCluster(community, extra_feature, dist_mat)
 }

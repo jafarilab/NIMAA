@@ -4,7 +4,7 @@
 #'
 #' @details This function mainly converts data in the form of edge list into matrix data. It also returns the incidence matrix object, the dimensions and proportion of missing values, as well as the matrix's image for visualization.
 #'
-#' @seealso \code{\link{el2IncMatrix}}
+#' @seealso \code{\link{nominalAsBinet}}
 #'
 #' @param x A data frame containing at least 2 nominal columns and an optional numeric column.
 #' @param index_nominal  A vector made up of two numbers that serve as nominal columns. The first value indicates the incidence matrix's row name, while the second value represents the incidence matrix's column name. It is c (1,2) by default, which implies that the first column in the x data frame is the incidence matrix's row, and the second column in the x data frame is the incidence matrix's column.
@@ -65,7 +65,7 @@ plotInput <- function(x,
 
   # convert input dataframe to incidence matrix
   x <- as.data.frame(x)
-  inc_mat <- el2IncMatrix(el = x, index_nominal = index_nominal, index_numeric = index_numeric, print_skim = print_skim)
+  inc_mat <- nominalAsBinet(el = x, index_nominal = index_nominal, index_numeric = index_numeric, print_skim = print_skim)
 
   col_size <- nrow(unique(x[index_nominal[1]]))
   row_size <- nrow(unique(x[index_nominal[2]]))

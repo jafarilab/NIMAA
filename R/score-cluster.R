@@ -1,12 +1,12 @@
-#' Score the clusters in a projected network based on additional internal measures.
-#' @description This function provides additional internal cluster validity measures such as entropy and coverage. The concept of scoring is according to the weight fraction of all intra-cluster edges relative to the total weight of all edges in the graph. This function requires the community object, igraph object and distance matrix returned by \code{\link{findCluster}} to analyze.
+#' Score the cluster analysis in a projected network based on additional internal measures.
+#' @description This function provides additional internal cluster validity measures such as entropy and coverage. The concept of scoring is according to the weight fraction of all intra-cluster edges relative to the total weights of all edges in the graph. This function requires the community object, igraph object and distance matrix returned by \code{\link{findCluster}} to analyze.
 #'
 #' @seealso \code{\link[fpc]{cluster.stats}}, \code{\link{findCluster}}
 #' @param community An igraph community object.
 #' @param graph An igraph graph object.
 #' @param dist_mat A matrix containing the distance of nodes in the network. This matrix can be retrieved by the output of \code{\link{findCluster}} to analyze.
 #'
-#' @return A list of various scores.
+#' @return A list containing internal cluster validity scores.
 #'
 #' @import fpc
 #' @import igraph

@@ -42,11 +42,11 @@ beatAML_data <- NIMAA::beatAML
 ```
 
 ### 1.1 Plotting the original data
-The `plotInput()` function prints some information about the incidence matrix derived from input data, such as its dimensions and the proportion of missing values, as well as the image of the matrix. It also returns the incidence matrix object.
+The `plotIncMatrix()` function prints some information about the incidence matrix derived from input data, such as its dimensions and the proportion of missing values, as well as the image of the matrix. It also returns the incidence matrix object.
 
 NB: To keep the size of vignette small enough for CRAN rules, we won't output the interactive figure here.
-```{r plotInput function, results='asis'}
-beatAML_incidence_matrix <- plotInput(
+```{r plotIncMatrix function, results='asis'}
+beatAML_incidence_matrix <- plotIncMatrix(
   x = beatAML_data, # original data with 3 columns
   index_nominal = c(2,1), # the first two columns are nominal data
   index_numeric = 3,  # the third column is numeric data

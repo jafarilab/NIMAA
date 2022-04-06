@@ -1,4 +1,20 @@
-# NIMAA 0.2
+# NIMAA 0.2.1
+
+## New verbs
+
+* `plotIncMatrix` is the new name of the function previously known as `plotInput`.
+
+* `nominalAsBinet` is the new name of the function previously known as `el2IncMatrix`.
+
+## Minor improvments
+
+* The `readme` and `vignette` files are now updated to the latest modifications.
+
+* The manual help page of the `nominalAsBinet` is modified to better describe the function.
+
+* A few typographical and writing problems have been corrected throughout all of the related documents.
+
+# NIMAA 0.2.0
 
 * Added a `NEWS.md` file to track changes to the package.
 

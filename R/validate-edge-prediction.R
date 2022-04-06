@@ -23,7 +23,7 @@
 #' # do clustering
 #' cls <- findCluster(beatAML_incidence_matrix, part = 1)
 #'
-#' # predict the edges by imputation the wights
+#' # predict the edges by imputation the weights
 #' imputed_beatAML <- predictEdge(beatAML_incidence_matrix)
 #'
 #' # validate the edge prediction

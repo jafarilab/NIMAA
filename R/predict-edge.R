@@ -2,7 +2,7 @@
 #'
 #' @description This function utilizes several data imputation methods in order to predict the existence of a link between two nodes by imputing the edges' weight in a weighted bipartite network of nominal data.
 #'
-#' @details This function performs a variety of numerical imputation according to the user's input, and returns a list of imputed data matrices based on each method separately, such as `median` which replaces the missing values with the median of each rows (observations), `knn` is the method in package \code{bnstruct}, `als` and `svd` are methods from \code{softImpute} package, `CA`, `PCA` and `FAMD` are from \code{missMDA} package, others are from the \code{mice} package.
+#' @details This function performs a variety of numerical imputations according to the user's input, and returns a list of imputed data matrices based on each method separately, such as `median` which replaces the missing values with the median of each rows (observations), and `knn` which uses the k-Nearest Neighbour algorithm to impute missing values.
 #'
 #' @seealso \code{\link[bnstruct]{knn.impute}},
 #'   \code{\link[softImpute]{softImpute}}, \code{\link[missMDA]{imputeCA}},
@@ -28,7 +28,7 @@
 #' # convert to incidence matrix
 #' beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
 #'
-#' # predict the edges by imputation the wights
+#' # predict the edges by imputation the weights
 #' predictEdge(beatAML_incidence_matrix)
 predictEdge <- function(inc_mat,
                                method = c("svd", "median", "als", "CA")) {

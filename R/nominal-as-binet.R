@@ -1,10 +1,10 @@
-#' Convert Edge list to Incidence Matrix
-#' @description This function converts data in the edge list format to an incidence matrix. An edge list is typically a data frame with two (or three) columns representing starting and ending nodes (or with a possible numerical relationship). The elements in the incidence matrix are the binary or numeric values of the pairwise relationships.
+#' Convert nominal data to a bipartite network
+#' @description This function converts nominal data, which is represented in a data frame format as an edge list, to a bipartite network in the incidence matrix format. Nominal data is typically a data frame with two (or three) columns representing two nominal variables labels that NIMAA considers as starting and ending nodes (labels) in an edge list (or with a numeric value for each pairwise relationship of labels). The elements in the incidence matrix are the binary or numeric values of the pairwise relationships.
 #' @param el A data frame or matrix object as an edge list.
-#' @param index_nominal  A vector with two values represents the indices for the nominal columns. The first value indicates the row objects and the second value indicates the column objects in the incidence matrix output.
-#' @param index_numeric An integer, the index for numeric values. This is value for selecting the column which contains the numeric values of pairwise relationship. This column is used for missing value investigation and imputation steps.
+#' @param index_nominal  A vector with two values represents the indices for the columns containing nominal variables. The first value indicates the row objects and the second value indicates the column objects in the incidence matrix output.
+#' @param index_numeric An integer, the index for numeric values. This is the value used to pick the column containing the numeric values corresponding to the pairwise relationship of nominal variable labels. This column is used for missing value investigation and imputation steps.
 #' @param print_skim A logical value, If \code{TRUE}, then the function prints \code{\link[skimr]{skim}} information in console.
-#' @return The incidence matrix.
+#' @return The incidence matrix representing the corresponding bipartite network. If `print_skim` set to `TRUE`, a summary of the matrix is also provided.
 #' @seealso \code{\link[tidyr]{pivot_wider}},
 #'   \code{\link[tibble]{column_to_rownames}}
 #' @importFrom tidyr pivot_wider
