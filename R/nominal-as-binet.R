@@ -26,10 +26,10 @@
 #'   Value = c(4, 5, 5, 8, 7, 7)
 #' )
 #'
-#' # run el2IncMatrix() to convert the edge list to the incidence matrix
-#' inc_mat1 <- el2IncMatrix(el1)
-#' inc_mat2 <- el2IncMatrix(el2)
-el2IncMatrix <- function(el, index_nominal = c(1, 2), # el = edgelist; 2 = to; IncMatrix = Incidence Matrix.
+#' # run nominalAsBinet() to convert the edge list to the incidence matrix
+#' inc_mat1 <- nominalAsBinet(el1)
+#' inc_mat2 <- nominalAsBinet(el2)
+nominalAsBinet <- function(el, index_nominal = c(1, 2), # nominal = nominal data; Binet = bipartite network.
                          index_numeric = 3,
                          print_skim = FALSE) {
   cn <- colnames(el)
