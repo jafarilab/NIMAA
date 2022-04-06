@@ -26,9 +26,9 @@
 #' beatAML_data <- NIMAA::beatAML[1:1000,]
 #'
 #' # visualize the input dataset
-#' beatAML_incidence_matrix <- plotInput(beatAML_data,
+#' beatAML_incidence_matrix <- plotIncMatrix(beatAML_data,
 #' index_numeric= 3)
-plotInput <- function(x,
+plotIncMatrix <- function(x,
                       index_nominal = c(1, 2),
                       index_numeric = NULL,
                       palette = "Blues",
