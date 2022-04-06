@@ -29,7 +29,7 @@
 #' beatAML_data <- NIMAA::beatAML[1:10000,]
 #'
 #' # convert to incidence matrix
-#' beatAML_incidence_matrix <- el2IncMatrix(beatAML_data)
+#' beatAML_incidence_matrix <- nominalAsBinet(beatAML_data)
 #'
 #' # extract submatrices with non-missing values
 #' sub_matrices <- extractSubMatrix(beatAML_incidence_matrix, col.vars = "patient_id",
