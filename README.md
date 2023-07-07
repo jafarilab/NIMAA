@@ -4,7 +4,7 @@
 # NIMAA <a href='https://github.com/jafarilab/NIMAA'><img src="man/figures/logo.png" align="right" height="139"/></a>
 
 <!-- badges: start -->
-
+ 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/NIMAA)](https://cran.r-project.org/package=NIMAA)
 [![GitHub
