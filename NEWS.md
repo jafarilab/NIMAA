@@ -1,3 +1,7 @@
+# NIMAA 0.2.2
+
+* Fixed Rd cross-reference NOTE reported by CRAN (updated `scale_fill_distiller` link).
+
 # NIMAA 0.2.1
 
 ## New verbs
