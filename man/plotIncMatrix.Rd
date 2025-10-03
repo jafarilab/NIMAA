@@ -21,7 +21,7 @@ plotIncMatrix(
 
 \item{index_numeric}{An integer, the index of a numeric variable. This is the value used to select the column that contains weight score values for pairwise relationships, and it is used to fill the elements of the incidence matrix. These values are also utilized for investigating missing data and predicting edges via imputation.}
 
-\item{palette}{A string or number. Color palette used for the heat map. By default, it sets to "Blues". (Find more option in the manual of \code{\link[ggplot2]{scale_fill_distiller()}}).}
+\item{palette}{A string or number. Color palette used for the heat map. By default, it sets to "Blues". (Find more option in the manual of \code{\link[ggplot2:scale_brewer]{ggplot2::scale_fill_distiller()}}).}
 
 \item{verbose}{A logical value, If it is set to \code{TRUE}, the plot is saved as the .png file in the working directory. By default, it is set to \code{FALSE}.}
 

@@ -2,8 +2,27 @@
 % Please edit documentation in R/NIMAA-package.R
 \docType{package}
 \name{NIMAA}
+\alias{NIMAA-package}
 \alias{NIMAA}
 \title{NIMAA: A package for Nominal Data Mining Analysis.}
 \description{
 The NIMAA package contains 13 main functions that together provide a pipeline for nominal data mining. This package also includes four datasets that can be used to perform various nominal data mining analyses.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/jafarilab/NIMAA}
+  \item Report bugs at \url{https://github.com/jafarilab/NIMAA/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Mohieddin Jafari \email{mohieddin.jafari@helsinki.fi}
+
+Authors:
+\itemize{
+  \item Cheng Chen \email{cheng.chen@helsinki.fi}
+  \item Zangene Ehsan \email{ehsan.zangene@helsinki.fi}
+}
+
 }
