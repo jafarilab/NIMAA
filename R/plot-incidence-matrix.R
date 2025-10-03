@@ -9,7 +9,7 @@
 #' @param x A data frame containing at least 2 nominal columns and an optional numeric column.
 #' @param index_nominal  A vector made up of two numbers that serve as nominal columns. The first value indicates the incidence matrix's row name, while the second value represents the incidence matrix's column name. It is c (1,2) by default, which implies that the first column in the x data frame is the incidence matrix's row, and the second column in the x data frame is the incidence matrix's column.
 #' @param index_numeric An integer, the index of a numeric variable. This is the value used to select the column that contains weight score values for pairwise relationships, and it is used to fill the elements of the incidence matrix. These values are also utilized for investigating missing data and predicting edges via imputation.
-#' @param palette A string or number. Color palette used for the heat map. By default, it sets to "Blues". (Find more option in the manual of [scale_fill_distiller()]).
+#' @param palette A string or number. Color palette used for the heat map. By default, it sets to "Blues". (Find more option in the manual of [ggplot2::scale_fill_distiller()]).
 #' @param verbose A logical value, If it is set to \code{TRUE}, the plot is saved as the .png file in the working directory. By default, it is set to \code{FALSE}.
 #' @param plot_weight A logical value, If it is set to \code{TRUE}, the plot is displayed with the corresponding colors based on weight scores, otherwise the binary matrix image is displayed. By default, it is set to \code{FALSE}.
 #' @param print_skim A logical value, If \code{TRUE}, then the function prints \code{\link[skimr]{skim}} information in console.
